@@ -9,4 +9,4 @@ To start project:
 3) after installation, type "npm start"
 
 To build project: 
-1)  open terminal and type "npm install"
+1)  open terminal and type "npm run build"
