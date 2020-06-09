@@ -1,5 +1,7 @@
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Webpack = require('webpack');
 
 module.exports = {
     context: path.join(__dirname, 'src'),
@@ -14,8 +16,16 @@ module.exports = {
         extensions: ['.js', '.jsx']
     },
 
+    plugins: [
+      new CleanWebpackPlugin(),
+      new HtmlWebpackPlugin({
+        template: './index.html'
+      }),
+    ],
+
     module: {
-        rules: [{
+      rules: [
+        {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: {
@@ -28,14 +38,18 @@ module.exports = {
               plugins: ['@babel/plugin-proposal-class-properties']
             }
           }
-        }]
-      },
-
-    watch: false,
-
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: './index.html'
-        })
-    ]
+        },
+        {
+          test: /\.s?css$/i,
+          use: [
+            'sass-loader',
+            'style-loader', 
+            'css-loader', 
+          ]
+        }
+      ]
+    },
 }
+
+   
+
