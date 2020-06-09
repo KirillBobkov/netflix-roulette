@@ -1,0 +1,34 @@
+{
+  "name": "netflix-roulette",
+  "version": "1.0.0",
+  "description": "The idea is to create a single page application, which will allow users to\r search the Movies DB database.",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.epam.com/kirill_bobkov/netflix-roulette.git"
+  },
+  "author": "Kirill Bobkov",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "webpack": "^4.43.0"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^4.3.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.1.14",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.6.0",
+    "react-redux": "^6.0.0",
+    "react-router": "^4.3.1",
+    "redux": "^4.0.0"
+  }
+}
