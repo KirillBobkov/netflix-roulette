@@ -20,8 +20,8 @@ export default function App() {
    return ( 
    <>
     <Hello1/>
-    <Hello1/>
-    <Hello1/>
+    <Hello2/>
+    <Hello3/>
    </>
    );
 }   
