@@ -8,6 +8,10 @@
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
+  "jest": {
+    "bail": true,
+    "testRegex": "((\\.|/*.)(test))\\.js?$"
+  },
   "repository": {
     "type": "git",
     "url": "https://git.epam.com/kirill_bobkov/netflix-roulette.git"
