@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "The idea is to create a single page application, which will allow users to\r search the Movies DB database.",
   "scripts": {
-    "start": "webpack-dev-server --env.NODE_ENV=development --open --config webpack.dev.js",
-    "build": "webpack --env.NODE_ENV=production --config webpack.prod.js",
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "set NODE_ENV=production && webpack --config webpack.prod.js",
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
