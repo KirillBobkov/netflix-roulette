@@ -8,7 +8,7 @@ module.exports = {
     entry: './index.js',
 
     output: {
-        filename: 'bundle.js',
+        filename: '[name].[contenthash].js',
         path: path.join(__dirname, 'dist'),
     },
 
