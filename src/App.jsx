@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.scss';
 
 function Hello1() {
   return React.createElement('div', null, `Привет, Мир!`);
