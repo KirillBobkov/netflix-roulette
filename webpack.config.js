@@ -1,28 +1,57 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Webpack = require('webpack');
 
-module.exports = {
-    context: path.join(__dirname, 'src'),
-    entry: './index.js',
+const isDev = process.env.NODE_ENV === 'development';
+const modeName = process.env.NODE_ENV;
 
+const cssLoaders = (extension) => {
+  const loaderConfig = [
+      {
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          hmr: isDev,
+          reloadAll: true
+        }
+      },
+      'css-loader', 
+  ];
+
+  extension && loaderConfig.push(extension);
+  return loaderConfig;
+}
+
+module.exports = {
+    mode: modeName,
+    context: path.join(__dirname, 'src'),
+    entry: {
+      main: ['@babel/polyfill', './index.js']
+    },
     output: {
-        filename: '[name].[contenthash].js',
+        filename: '[name].[hash].js',
         path: path.join(__dirname, 'dist'),
     },
-
     resolve: {
         extensions: ['.js', '.jsx']
     },
-
+    devtool: isDev ? 'source-map' : '',
+    devServer: {
+      port: 4000,
+      hot: isDev
+    },
     plugins: [
+      new Webpack.optimize.ModuleConcatenationPlugin(),
       new CleanWebpackPlugin(),
+      new MiniCssExtractPlugin({
+        filename: '[name].[hash].css'
+      }),
       new HtmlWebpackPlugin({
-        template: './index.html'
+        template: './index.html',
+        collapse: !isDev
       }),
     ],
-
     module: {
       rules: [
         {
@@ -40,12 +69,12 @@ module.exports = {
           }
         },
         {
-          test: /\.s?css$/i,
-          use: [
-            'sass-loader',
-            'style-loader', 
-            'css-loader', 
-          ]
+          test: /\.css$/,
+          use: cssLoaders()
+        },
+        {
+          test: /\.scss$/,
+          use: cssLoaders('sass-loader')
         },
         {
           test: /\.(ico|jpg|jpeg|png|gif|svg|ttf|woff|woff2)(\?.*)?$/,
