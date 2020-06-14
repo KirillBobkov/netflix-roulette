@@ -6,8 +6,8 @@ export default ({ index, info }) => (
        <p className='movies__poster'>
            <img 
                 src={`posters/${index + 1}.png`} 
-                width='300'
-                height='400' 
+                width='260'
+                height='365' 
                 alt={info.name} 
            />
         </p>

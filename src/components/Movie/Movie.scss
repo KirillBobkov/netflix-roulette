@@ -1,9 +1,9 @@
 .movies {
 
     &__item {
-        margin-bottom: 50px;
-        width: 300px;
-        margin-right: 30px;
+        margin-bottom: 40px;
+        width: 260px;
+        margin-right: 43px;
 
         &:nth-child(3n) {
             margin-right: 0px;
@@ -11,13 +11,13 @@
     }
 
     &__poster {
-        margin-bottom: 10px;
+        margin-bottom: 17px;
     }
 
     &__title {
         display: block;
         font-size: 14px;
-        margin-bottom: 10px;
+        margin-bottom: 10px;    
     }
 
     &__description {
@@ -26,16 +26,16 @@
 
     &__gengre {
         display: block;
-        font-size: 10px;
+        font-size: 11px;
         color: #8f8f8f;
     }
 
     &__year {
         position: absolute;
         top: 0;
-        right: 0;
+        right: 2px;
         font-size: 10px;
-        padding: 4px 10px;
+        padding: 4px 13px;
         border: 1px solid #8f8f8f;
         border-radius: 3px;
         color: #8f8f8f;

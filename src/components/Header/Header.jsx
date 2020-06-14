@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.scss';
-import headerBackground from '../assets/images/headerBackground.png';
+import headerBackground from '../../assets/images/headerBackground.png';
 
 export default (props) => (
   <header style={{ backgroundImage: `url('${headerBackground}')`}}>
