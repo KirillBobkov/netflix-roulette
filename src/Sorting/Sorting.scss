@@ -1,0 +1,22 @@
+    
+    .sorting {
+        background-color: #555555;
+        padding: 15px 0;
+    
+        &__container {
+            width: 960px;
+            margin: 0 auto;
+            display: inline-block;
+            text-align: right;
+        }
+
+        &__sort-description {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+    }
+
+    

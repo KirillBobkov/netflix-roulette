@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 const modeName = process.env.NODE_ENV;
@@ -51,6 +52,11 @@ module.exports = {
         template: './index.html',
         collapse: !isDev
       }),
+      // new CopyWebpackPlugin({
+      //   patterns: [
+      //     { from: path.resolve(__dirname, 'src/images'), to: 'images' }
+      //   ],
+      // }),
     ],
     module: {
       rules: [
@@ -78,12 +84,7 @@ module.exports = {
         },
         {
           test: /\.(ico|jpg|jpeg|png|gif|svg|ttf|woff|woff2)(\?.*)?$/,
-          use: {
-            loader: 'file-loader',
-            options: {
-              name: '[path][name].[ext]'
-            }
-          }
+          use: 'file-loader'
         }
       ]
     },

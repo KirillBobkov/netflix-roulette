@@ -1,28 +1,19 @@
 import React from 'react';
 import './App.scss';
-
-function Hello1() {
-  return React.createElement('div', null, `Привет, Мир!`);
-}
-
-class Hello2 extends React.Component {
-  render() {
-    return <div> Привет, Мир!</div>;
-  }
-}
-
-class Hello3 extends React.PureComponent {
-  render() {
-    return <div> Привет, Мир!</div>;
-  }
-}
+import Header from './Header';
+import Main from './Main';
+import ToolBar  from './Toolbar';
+import Sorting  from './Sorting';
 
 export default function App() {
-   return ( 
-   <>
-    <Hello1/>
-    <Hello2/>
-    <Hello3/>
-   </>
+   return (
+      <>
+         <Header> 
+            <ToolBar />
+         </Header>
+         <Main>
+            <Sorting/>
+         </Main>
+      </>
    );
 }   
