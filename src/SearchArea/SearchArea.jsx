@@ -1,8 +1,9 @@
 import React from 'react';
 import { Input, Button } from '../primitives';
 
-export default function SearchArea() {
-  return (
+export default class SearchArea extends React.PureComponent {
+  render() {
+    return (
         <div className='toolbar__search'>
             <Input  
               className='toolbar__input'
@@ -13,5 +14,6 @@ export default function SearchArea() {
               text={'Search'}  
             />
         </div>
-  );
+    );
+  }
 }

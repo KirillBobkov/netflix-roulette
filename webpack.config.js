@@ -44,7 +44,7 @@ module.exports = {
     },
     plugins: [
       new Webpack.optimize.ModuleConcatenationPlugin(),
-      new CleanWebpackPlugin(),
+      // new CleanWebpackPlugin(),
       new MiniCssExtractPlugin({
         filename: '[name].[hash].css'
       }),
@@ -52,11 +52,11 @@ module.exports = {
         template: './index.html',
         collapse: !isDev
       }),
-      // new CopyWebpackPlugin({
-      //   patterns: [
-      //     { from: path.resolve(__dirname, 'src/images'), to: 'images' }
-      //   ],
-      // }),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: path.resolve(__dirname, 'src/assets/images/posters'), to: 'posters' }
+        ],
+      }),
     ],
     module: {
       rules: [
