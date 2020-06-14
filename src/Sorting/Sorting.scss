@@ -7,7 +7,8 @@
             width: 770px;
             padding: 15px 0;
             margin: 0 auto;
-            text-align: right;
+            display: flex;
+            justify-content: space-between;
         }
 
         &__sort-description {
@@ -16,6 +17,13 @@
             font-size: 12px;
             text-transform: uppercase;
             color: #ffffff;
+        }
+
+        &__match-movies {
+            font-size: 12px;
+            line-height: 12px;
+            font-family: 'Monseratt-Bold', sans-serif;
+            align-self: center;
         }
     }
 
