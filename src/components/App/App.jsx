@@ -7,19 +7,21 @@ import Sorting from '../Sorting';
 import Movies from '../Movies';
 import Footer from '../Footer';
 import MainPage from '../../pages/MainPage';
+import ErrorBoundary from '../ErrorBoundary';
 
 export default () => (
-   <>
-      <MainPage>
-         <Header> 
-            <ToolBar />
-         </Header>
-         <Main>
-            <Sorting/>
-            <Movies/>
-         </Main>
-         <Footer/>
-      </MainPage>
-      {/* <MoviePage /> prepared for task 5*/} 
-   </>
-); 
+  <ErrorBoundary>
+    <MainPage>
+      <Header>
+        <ToolBar />
+      </Header>
+      <Main>
+        <Sorting />
+        <Movies />
+      </Main>
+      <Footer />
+    </MainPage>
+
+    {/* <MoviePage /> prepared for task 5 */}
+  </ErrorBoundary>
+);
