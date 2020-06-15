@@ -46,6 +46,7 @@ module.exports = {
     port: 4000,
     hot: isDev
   },
+  watch: true,
   plugins: [
     new Webpack.optimize.ModuleConcatenationPlugin(),
     new CleanWebpackPlugin(),

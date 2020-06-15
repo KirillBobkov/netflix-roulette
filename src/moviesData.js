@@ -35,4 +35,4 @@ export const movies =  [
         year: 1994,
         id: 3534677869796
     },
-]
+];

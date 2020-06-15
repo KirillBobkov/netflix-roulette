@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import './Input.scss';
 import React from 'react';
 
