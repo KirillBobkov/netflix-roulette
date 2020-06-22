@@ -1,0 +1,21 @@
+.header {
+    background-image: url('../../assets/images/headerBackground.png');
+
+    &__container {
+        margin: 0 auto;
+        height: 318px;
+        background-size: cover;
+        width: 960px;    
+    }
+  
+    &__title {
+        color: #F65261;
+        font-size: 16px;
+        line-height: 16px;
+        padding: 19px 47px 52px 48px;
+
+        &--bold {
+           font-family: 'Monseratt-Bold', sans-serif;
+        }
+    }
+}

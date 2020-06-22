@@ -1,0 +1,10 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["standard-react"],
+  "rules": {
+    "semi": [1, "always"],
+    "space-before-function-paren": 0
+  }
+}
+
+
