@@ -4,7 +4,7 @@ import { Header } from '../Header';
 import { Main } from '../Main';
 import { Toolbar } from '../Toolbar';
 import { Sorting } from '../Sorting';
-import { Movies } from '../Movies';
+import { MoviesListContainer } from '../Movies';
 import { Footer } from '../Footer';
 import { MainPage } from '../../pages/MainPage';
 import { ErrorBoundary } from '../ErrorBoundary';
@@ -17,7 +17,7 @@ export const App = () => (
       </Header>
       <Main>
         <Sorting />
-        <Movies />
+        <MoviesListContainer />
       </Main>
       <Footer />
     </MainPage>

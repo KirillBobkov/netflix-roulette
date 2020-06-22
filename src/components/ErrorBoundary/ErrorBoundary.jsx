@@ -3,30 +3,38 @@ import PropTypes from 'prop-types';
 import './ErrorBoundary.scss';
 
 export class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  static defaultProps = {
+    children: null
+  };
+
+  state = {
       hasError: false,
       message: 'Something went wrong'
-    };
-  }
+  };   
 
   static getDerivedStateFromError({ message }) {
     return { hasError: true, message };
   }
 
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div className='error'>
-          <span className='error__message'>
-            {this.state.message}
-          </span>
-        </div>);
-    }
+  renderFallbackUI = () => {
+           const {message} = this.state;
+           return (
+             <div className='error'>
+               <span className='error__message'>
+                 {message}
+               </span>
+             </div>
+           );
+       }
 
-    return this.props.children;
-  }
+  render() {
+     const { hasError } = this.state;
+     const { children } = this.props;
+
+     return hasError
+          ? this.renderFallbackUI()
+          : children;
+  };
 }
 
 ErrorBoundary.propTypes = {
