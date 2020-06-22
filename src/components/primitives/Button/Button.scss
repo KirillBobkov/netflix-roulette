@@ -1,0 +1,35 @@
+.button {
+    color: #ffffff;
+    border: none;
+    outline: 1px solid transparent;
+    text-transform: uppercase;
+    padding: 6px 17px;
+    background-color: #272727b7;  
+
+        &--search {
+            border-radius: 3px;
+            background: #F65261;
+            padding: 15px 15px 13px;
+            width: 188px;
+            margin-left: 10px;
+            font-size: 16px;
+            line-height: 16px;
+        }
+
+        &--choosen {
+            background: #F65261;
+            padding: 6px 17px;
+            font-size: 12px;
+        }
+
+        &--left-border {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        &--right-border {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+}
