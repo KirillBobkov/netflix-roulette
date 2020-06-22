@@ -1,9 +1,9 @@
 import React from 'react';
 import { movies } from '../../moviesData';
-import Movie from '../Movie';
+import { Movie } from '../Movie';
 import './Movies.scss';
 
-export default class Movies extends React.PureComponent {
+export class Movies extends React.PureComponent {
   constructor(props) {
     super(props);
     this.moviesList = movies.map((movie, index) =>

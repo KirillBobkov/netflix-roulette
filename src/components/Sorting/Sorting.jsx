@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../primitives';
 import './Sorting.scss';
 
-export default class Sorting extends React.PureComponent {
+export class Sorting extends React.PureComponent {
   render() {
     return (
       <div className='sorting'>

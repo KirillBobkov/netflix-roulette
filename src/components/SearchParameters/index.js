@@ -1,1 +1,1 @@
-export { default } from './SearchParameters';
+export * from './SearchParameters';

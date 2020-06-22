@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.scss';
-import Header from '../Header';
-import Main from '../Main';
-import ToolBar from '../Toolbar';
-import Sorting from '../Sorting';
-import Movies from '../Movies';
-import Footer from '../Footer';
-import MainPage from '../../pages/MainPage';
-import ErrorBoundary from '../ErrorBoundary';
+import { Header } from '../Header';
+import { Main } from '../Main';
+import { Toolbar } from '../Toolbar';
+import { Sorting } from '../Sorting';
+import { Movies } from '../Movies';
+import { Footer } from '../Footer';
+import { MainPage } from '../../pages/MainPage';
+import { ErrorBoundary } from '../ErrorBoundary';
 
-export default () => (
+export const App = () => (
   <ErrorBoundary>
     <MainPage>
       <Header>
-        <ToolBar />
+        <Toolbar />
       </Header>
       <Main>
         <Sorting />

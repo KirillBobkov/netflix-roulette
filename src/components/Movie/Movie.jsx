@@ -2,7 +2,7 @@
 import React from 'react';
 import './Movie.scss';
 
-export default ({ index, info }) => (
+export const Movie = ({ index, info }) => (
   <li className='movies__item'>
     <p className='movies__poster'>
       <img 
