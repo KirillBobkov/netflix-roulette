@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Movie.scss';
 
 export const Movie = ({ index, info }) => (
@@ -28,3 +28,12 @@ export const Movie = ({ index, info }) => (
     </p>
   </li>
 );
+
+Movie.propTypes = {
+  index: PropTypes.number,
+  info: PropTypes.shape({
+    name: PropTypes.string,
+    gengre: PropTypes.string,
+    year: PropTypes.number
+  })
+};

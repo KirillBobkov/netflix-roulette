@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Header.scss';
 
 export const Header = (props) => (
@@ -13,3 +13,7 @@ export const Header = (props) => (
     </div>
   </header>
 );
+
+Header.propTypes = {
+  children: PropTypes.node
+};
