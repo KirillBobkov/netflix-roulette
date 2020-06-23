@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 const getMovies = () => Promise.resolve(moviesDTO);
 
 //Get data from server
-
 class MoviesData extends React.Component {
     state = { movies: [] }
 
@@ -21,7 +20,6 @@ class MoviesData extends React.Component {
 
     render() {
         const { movies } = this.state;
-
         return this.props.render({ movies });
     }
 }
@@ -31,7 +29,6 @@ MoviesData.propTypes = {
 };
 
 //Create a node list from movies array
-
 const MoviesItems = ({ movies }) => {
     return movies.map(
         (movie, index) =>
@@ -40,9 +37,8 @@ const MoviesItems = ({ movies }) => {
 };
 
 //Render movies or return fallback message
-
 const MoviesList = ({ movies }) => {
-    const hasMovies = Boolean(Array.isArray(movies) && movies.length);
+    const hasMovies = !Boolean(Array.isArray(movies) && movies.length);
  
     return (
       <div className='movies'>
