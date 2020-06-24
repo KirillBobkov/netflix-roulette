@@ -13,8 +13,7 @@ describe('Movie component', () => {
             year: 2003,
             id: 4689453234888769
         };
-
-        index = 1; 
+        index = 1;     
     });
 
     it('should be render correctly', () => {
@@ -26,4 +25,22 @@ describe('Movie component', () => {
         const component = mount(<Movie key={movie.id} index={index} info={movie} />);
         expect(component).toMatchSnapshot();
     });
-})
+
+    it('renders a year of movie', () => {
+        const component = mount(<Movie key={movie.id} index={index} info={movie} />);
+        const year = component.find('.movies__year');
+        expect(year.text()).toEqual('2003');
+    });
+
+    it('renders a gengre of movie', () => {
+        const component = mount(<Movie key={movie.id} index={index} info={movie} />);
+        const year = component.find('.movies__gengre');
+        expect(year.text()).toEqual('Action & Adventure');
+    });
+
+    it('renders a title of movie', () => {
+        const component = mount(<Movie key={movie.id} index={index} info={movie} />);
+        const year = component.find('.movies__title');
+        expect(year.text()).toEqual('Bohemian Rhapsody');
+    });
+});
