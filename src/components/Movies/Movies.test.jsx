@@ -1,5 +1,5 @@
 import React from 'react';
-import { Movies, getMovies, MoviesItems } from './Movies';
+import { getMovies, MoviesItems, MoviesList, MoviesData, MoviesListContainer } from './Movies';
 import { shallow, mount } from 'enzyme';
 
     
@@ -13,10 +13,8 @@ describe('getMovies fetch service', () => {
 });   
 
 describe('MoviesItems component', () => {
-
     it('should be render movies correctly', () => {
         expect.assertions(1);
-
         return getMovies().then(movies => {
             const component = mount(<MoviesItems movies={movies} />); 
             expect(component).toMatchSnapshot();
@@ -24,3 +22,20 @@ describe('MoviesItems component', () => {
     }); 
 
 }); 
+
+describe('MoviesData component', () => {
+    it('should be render movies correctly', () => {
+        const component = mount(<MoviesData render={MoviesList} />);
+
+        expect(component).toMatchSnapshot();
+    }); 
+}); 
+
+describe('MoviesListContainer component', () => {
+    it('should be render movies correctly', () => {
+        const component = mount(<MoviesListContainer />);
+
+        expect(component).toMatchSnapshot();
+    }); 
+}); 
+
