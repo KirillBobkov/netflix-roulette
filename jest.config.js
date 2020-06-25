@@ -7,7 +7,8 @@ module.exports = {
     collectCoverageFrom: [
       "**/src/**/*.jsx",
       "!**/node_modules/**",
-      "!**/vendor/**"
+      "!**/vendor/**",
+      "!**/cypress/**",
     ],
-   testRegex: "(\\.|/)(test|spec)\\.(js|jsx)$",
+   testRegex: "(\\.|/)(test)\\.(js|jsx)$",
 };
