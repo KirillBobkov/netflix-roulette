@@ -38,7 +38,7 @@ export const MoviesItems = ({ movies }) => {
 
 //Render movies or return fallback message
 export const MoviesList = ({ movies }) => {
-    const hasMovies = !Boolean(Array.isArray(movies) && movies.length);
+    const hasMovies = Boolean(Array.isArray(movies) && movies.length);
  
     return (
       <div className='movies'>
