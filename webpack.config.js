@@ -47,6 +47,7 @@ module.exports = {
     hot: isDev
   },
   watch: true,
+  
   plugins: [
     new Webpack.optimize.ModuleConcatenationPlugin(),
     new CleanWebpackPlugin(),
@@ -76,7 +77,9 @@ module.exports = {
                 ['@babel/preset-react'],
                 ['@babel/preset-env']
               ],
-              plugins: ['@babel/plugin-proposal-class-properties']
+              plugins: [
+              '@babel/plugin-proposal-class-properties'
+              ]
             }
           },
           {

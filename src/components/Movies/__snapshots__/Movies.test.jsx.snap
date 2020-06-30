@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviesData component should be render movies correctly 1`] = `ReactWrapper {}`;
+
+exports[`MoviesItems component should be render movies correctly 1`] = `ReactWrapper {}`;
+
+exports[`MoviesListContainer component should be render movies correctly 1`] = `ReactWrapper {}`;

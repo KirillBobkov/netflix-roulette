@@ -7,11 +7,11 @@ export class SearchParameters extends React.PureComponent {
       <div className='toolbar__search-parameters'>
         <span className='toolbar__search-description'>Search By</span>
         <Button 
-          className='button button--choosen button--left-border'
+          className='button--choosen button--left-border'
           text='Title'
         />
         <Button 
-          className='button button--right-border'
+          className='button--right-border'
           text='Gengre'
         />
       </div>

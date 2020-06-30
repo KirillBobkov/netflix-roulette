@@ -12,11 +12,11 @@ export class Sorting extends React.PureComponent {
           <p>
             <span className='sorting__sort-description'>Sort by</span>
             <Button
-              className='button button--choosen button--left-border'
+              className='button--choosen button--left-border'
               text='Release date'
             />
             <Button
-              className='button button--right-border'
+              className='button--right-border'
               text='Rating'
             />
           </p>
