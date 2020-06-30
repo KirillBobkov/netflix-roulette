@@ -4,11 +4,10 @@ import { Movie } from '../Movie';
 import './Movies.scss';
 import PropTypes from 'prop-types';
 
-const getMovies = () => Promise.resolve(moviesDTO);
+export const getMovies = () => Promise.resolve(moviesDTO);
 
 //Get data from server
-
-class MoviesData extends React.Component {
+export class MoviesData extends React.Component {
     state = { movies: [] }
 
     componentDidMount() {
@@ -21,7 +20,6 @@ class MoviesData extends React.Component {
 
     render() {
         const { movies } = this.state;
-
         return this.props.render({ movies });
     }
 }
@@ -31,8 +29,7 @@ MoviesData.propTypes = {
 };
 
 //Create a node list from movies array
-
-const MoviesItems = ({ movies }) => {
+export const MoviesItems = ({ movies }) => {
     return movies.map(
         (movie, index) =>
           <Movie key={movie.id} index={index} info={movie} />
@@ -40,8 +37,7 @@ const MoviesItems = ({ movies }) => {
 };
 
 //Render movies or return fallback message
-
-const MoviesList = ({ movies }) => {
+export const MoviesList = ({ movies }) => {
     const hasMovies = Boolean(Array.isArray(movies) && movies.length);
  
     return (

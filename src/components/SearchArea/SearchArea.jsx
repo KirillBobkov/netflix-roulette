@@ -10,7 +10,7 @@ export class SearchArea extends React.PureComponent {
           placeholder='Search'
         />
         <Button 
-          className='button button--search'
+          className='button--search'
           text='Search'
         />
       </div>
