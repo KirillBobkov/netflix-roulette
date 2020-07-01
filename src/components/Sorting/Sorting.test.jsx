@@ -10,13 +10,13 @@ describe('Sorting component', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('renders title of Sorting', () => {
+    it('should render title of Sorting', () => {
         const component = mount(<Sorting />);
 
         expect(component.exists('.button')).toEqual(true);
     });
  
-    it('renders sorting description', () => {
+    it('should render sorting description', () => {
         const component = mount(<Sorting />);
         const sortDescription = component.find('.sorting__sort-description');
 

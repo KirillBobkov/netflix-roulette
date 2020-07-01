@@ -26,19 +26,19 @@ describe('Movie component', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('renders a year of movie', () => {
+    it('should render a year of movie', () => {
         const component = mount(<Movie key={movie.id} index={index} info={movie} />);
         const year = component.find('.movies__year');
         expect(year.text()).toEqual('2003');
     });
 
-    it('renders a gengre of movie', () => {
+    it('should render a gengre of movie', () => {
         const component = mount(<Movie key={movie.id} index={index} info={movie} />);
         const year = component.find('.movies__gengre');
         expect(year.text()).toEqual('Action & Adventure');
     });
 
-    it('renders a title of movie', () => {
+    it('should render a title of movie', () => {
         const component = mount(<Movie key={movie.id} index={index} info={movie} />);
         const year = component.find('.movies__title');
         expect(year.text()).toEqual('Bohemian Rhapsody');

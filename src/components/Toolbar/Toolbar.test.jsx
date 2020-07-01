@@ -10,7 +10,7 @@ describe('Toolbar component', () => {
         expect(component).toMatchSnapshot();
     });
  
-    it('renders Toolbar title', () => {
+    it('should render Toolbar title', () => {
         const component = mount(<Toolbar />);
         const sortDescription = component.find('.toolbar__title');
 

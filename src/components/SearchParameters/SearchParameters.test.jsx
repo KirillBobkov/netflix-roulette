@@ -10,7 +10,7 @@ describe('SearchParameters component', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('renders title of SearchParameters', () => {
+    it('should check that title of SearchParameters is rendered', () => {
         const component = mount(<SearchParameters />);
 
         expect(component.exists('.button')).toEqual(true);

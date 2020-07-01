@@ -4,7 +4,7 @@ import { shallow, mount } from 'enzyme';
 
     
 describe('getMovies fetch service', () => {
-    it('method getMovies return promise', () => {
+    it('should check that method getMovies() return promise', () => {
         expect.assertions(1);
         return getMovies().then(movies => {
             expect(movies.length).toBeGreaterThan(1);

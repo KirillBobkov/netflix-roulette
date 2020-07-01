@@ -20,7 +20,7 @@ describe('Button component', () => {
     });
 
 
-    it('check inner text of Button', () => {
+    it('should check that inner text of Button', () => {
         const component = mount(<Button className={config.class} text={config.text} />);
 
         expect(component.text()).toEqual('Search');

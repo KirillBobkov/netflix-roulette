@@ -20,7 +20,7 @@ describe('Input component', () => {
     });
 
 
-    it('check rendered html', () => {
+    it('should check that rendered html is correct', () => {
         const component = mount(<Input className={config.class} placeholder={config.placeholder} value={config.value} />);
 
         expect(component.html()).toBe('<input class=\"input toolbar__input\" placeholder=\"Search\" value=\"Kill Bill\">');

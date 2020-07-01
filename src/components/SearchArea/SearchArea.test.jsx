@@ -10,7 +10,7 @@ describe('SearchArea component', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('renders title of SearchArea', () => {
+    it('should check that title of SearchArea is rendered', () => {
         const component = mount(<SearchArea />);
 
         expect(component.exists('.input')).toEqual(true);

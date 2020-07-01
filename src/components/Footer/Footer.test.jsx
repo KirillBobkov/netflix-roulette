@@ -10,7 +10,7 @@ describe('Movie component', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('renders title of Footer', () => {
+    it('should render title of Footer', () => {
         const component = mount(<Footer />);
         const footer = component.find('.footer__title');
 

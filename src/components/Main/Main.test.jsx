@@ -10,7 +10,7 @@ describe('Main component', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('Component contains class ".main"', () => {
+    it('should check that Component contains class ".main"', () => {
         const component = mount(<Main />);
 
         expect(component.exists('.main')).toEqual(true);

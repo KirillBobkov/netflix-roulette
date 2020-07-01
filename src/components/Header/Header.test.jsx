@@ -10,7 +10,7 @@ describe('Header component', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('renders title of Header', () => {
+    it('should render title of Header', () => {
         const component = mount(<Header />);
         const footer = component.find('.header__title');
 
