@@ -29,17 +29,6 @@ export default (state = initialState, action) => {
       return [...state.sort((movieA, movieB) => movieA.vote_average - movieB.vote_average)];
     }
 
-    case SORT_BY_RATING: {
-      return [...state.sort((movieA, movieB) => movieA.vote_average - movieB.vote_average)];
-    }
-
-    case SEARCH_MOVIES: {
-      const newState = [...state];
-      return newState.filter(item => item.title
-        .toLowerCase()
-        .includes(action.payload.toLowerCase()));
-    }
-
     case SEARCH_MOVIES_BY_TITLE: {
       const newState = [...state];
       return newState.filter(item => item.title

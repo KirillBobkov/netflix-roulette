@@ -9,12 +9,14 @@ import Toolbar from './Toolbar';
 describe('Toolbar component', () => {
     const initialState = movies;
     const mockStore = configureStore();
-    const mountWithStore = component => mount(<Provider store={store}> {component} </Provider>);
+    
     let store, 
-    wrapperToolbar;
+    wrapperToolbar,
+    mountWithStore;
     
     beforeAll(()=>{
       store = mockStore(initialState);
+      mountWithStore = component => mount(<Provider store={store}> {component} </Provider>);
       wrapperToolbar = mountWithStore(<Toolbar />);
     });
     
