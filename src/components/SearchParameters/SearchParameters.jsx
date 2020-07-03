@@ -4,21 +4,22 @@ import PropTypes from 'prop-types';
 
 export class SearchParameters extends React.PureComponent {
   render() {
-    const choosenSearchByTitleClassName = this.props.searchByTitleMode ? 'button--choosen' : '';
-    const choosenSearchByGenreClassName = !this.props.searchByTitleMode ? 'button--choosen' : '';
+    const { searchByTitleMode, handleSearchByTitle, handleSearchByGenre } = this.props;
+    const searchByTitleClassName = searchByTitleMode ? 'button--choosen' : '';
+    const searchByGenreClassName = !searchByTitleMode ? 'button--choosen' : '';
     
     return (
       <div className='toolbar__search-parameters'>
         <span className='toolbar__search-description'>Search By</span>
         <Button 
-          className={`${choosenSearchByTitleClassName} button--left-border`}
+          className={`${searchByTitleClassName} button--left-border`}
           text='Title'
-          onClick={this.props.handleSearchByTitle}
+          onClick={handleSearchByTitle}
         />
         <Button 
-          className={`${choosenSearchByGenreClassName} button--right-border`}
+          className={`${searchByGenreClassName} button--right-border`}
           text='Gengre'
-          onClick={this.props.handleSearchByGenre}
+          onClick={handleSearchByGenre}
         />
       </div>
       );

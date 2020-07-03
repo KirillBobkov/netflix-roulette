@@ -13,24 +13,27 @@ class Toolbar extends React.Component {
   }
 
   onHandleSearchByTitle = () => {
-    if (!this.state.searchByTitleMode) {
-      this.setState({ searchByTitleMode: !this.state.searchByTitleMode });
+    const { searchByTitleMode } = this.state;
+    if (!searchByTitleMode) {
+      this.setState({ searchByTitleMode: !searchByTitleMode });
     }
   }
 
   onHandleSearchByGenre = () => {
-    if (this.state.searchByTitleMode) {
-      this.setState({ searchByTitleMode: !this.state.searchByTitleMode });
+    const { searchByTitleMode } = this.state;
+    if (searchByTitleMode) {
+      this.setState({ searchByTitleMode: !searchByTitleMode });
     }
   }
 
   onHandleSearchMovies = () => {
-    const { inputSearchValue } = this.state;
+    const { inputSearchValue, searchByTitleMode } = this.state;
+    const { searchMoviesByTitle, searchMoviesByGenre  } = this.props;
   
     if (inputSearchValue) {
-      this.state.searchByTitleMode 
-      ? this.props.searchMoviesByTitle(inputSearchValue) 
-      : this.props.searchMoviesByGenre(inputSearchValue);
+      searchByTitleMode 
+      ? searchMoviesByTitle(inputSearchValue) 
+      : searchMoviesByGenre(inputSearchValue);
       
       this.setState({
         inputSearchValue: ''
@@ -46,25 +49,27 @@ class Toolbar extends React.Component {
   }
 
   onHandleReset = () => {
+    const { resetAllParameters } = this.props;
     this.setState({
       inputSearchValue: ''
     });
-
-    this.props.resetAllParameters();
+    resetAllParameters();
   }
  
   render() {
+    const { inputSearchValue, searchByTitleMode } = this.state;
+
     return (
       <div className='toolbar'>
         <h2 className='toolbar__title'>Find your movie</h2>
         <SearchArea 
-          inputSearchValue={this.state.inputSearchValue} 
+          inputSearchValue={inputSearchValue} 
           handleInputChange={this.onHandleInputChange} 
           handleSearchMovies={this.onHandleSearchMovies}
           handleReset={this.onHandleReset}
         />
         <SearchParameters 
-          searchByTitleMode={this.state.searchByTitleMode} 
+          searchByTitleMode={searchByTitleMode} 
           handleSearchByTitle={this.onHandleSearchByTitle} 
           handleSearchByGenre={this.onHandleSearchByGenre}
         />

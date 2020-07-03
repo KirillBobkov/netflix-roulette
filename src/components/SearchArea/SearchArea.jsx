@@ -4,23 +4,30 @@ import PropTypes from 'prop-types';
 
 export class SearchArea extends React.PureComponent {
   render() {
+    const { 
+      handleInputChange, 
+      inputSearchValue, 
+      handleReset, 
+      handleSearchMovies 
+    } = this.props;
+
     return (
       <div className='toolbar__search'>
         <Input  
           className='toolbar__input'
           placeholder='Search'
-          onChange={this.props.handleInputChange}
-          value={this.props.inputSearchValue}
+          onChange={handleInputChange}
+          value={inputSearchValue}
         />
         <Button 
           className='button--reset'
           text='reset'
-          onClick={this.props.handleReset}
+          onClick={handleReset}
         />
         <Button 
           className='button--search'
           text='Search'
-          onClick={this.props.handleSearchMovies}
+          onClick={handleSearchMovies}
         />
       </div>
     );

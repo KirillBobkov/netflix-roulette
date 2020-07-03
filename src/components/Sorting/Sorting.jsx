@@ -9,22 +9,25 @@ class Sorting extends React.PureComponent {
   state = { checkedSortingByDate: null };
  
   handleSortByDate = () => {
-    if (!this.state.checkedSortingByDate) {
+    const { checkedSortingByDate } = this.state;
+    if (!checkedSortingByDate) {
       this.props.sortByDate();
-      this.setState({ checkedSortingByDate: !this.state.checkedSortingByDate });
+      this.setState({ checkedSortingByDate: !checkedSortingByDate });
     }
   }
 
   handleSortByRating = () => {
-    if (this.state.checkedSortingByDate) {
+    const { checkedSortingByDate } = this.state;
+    if (checkedSortingByDate) {
       this.props.sortByRating();
-      this.setState({ checkedSortingByDate: !this.state.checkedSortingByDate });
+      this.setState({ checkedSortingByDate: !checkedSortingByDate });
     }
   }
 
   render() {
-    const choosenDateClassName = this.state.checkedSortingByDate ? 'button--choosen' : '';
-    const choosenRatingClassName = !this.state.checkedSortingByDate ? 'button--choosen' : '';
+    const { checkedSortingByDate } = this.state;
+    const dateClassName = checkedSortingByDate ? 'button--choosen' : '';
+    const ratingClassName = !checkedSortingByDate ? 'button--choosen' : '';
     const { list } = this.props;
     
 
@@ -36,12 +39,12 @@ class Sorting extends React.PureComponent {
           <p>
             <span className='sorting__sort-description'>Sort by</span>
             <Button
-              className={`${choosenDateClassName} button--left-border`}
+              className={`${dateClassName} button--left-border`}
               text='Release date'
               onClick={this.handleSortByDate}
             />
             <Button
-              className={`${choosenRatingClassName} button--right-border`}
+              className={`${ratingClassName} button--right-border`}
               text='Rating'
               onClick={this.handleSortByRating}
             />

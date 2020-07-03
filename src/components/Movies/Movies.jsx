@@ -15,7 +15,7 @@ class MoviesData extends React.Component {
               list: data.data.data
             };
             const { fillStore } = this.props;
-              fillStore(fetchedData);
+            fillStore(fetchedData);
           })
           .catch(err => console.info('catch', err));
     }
