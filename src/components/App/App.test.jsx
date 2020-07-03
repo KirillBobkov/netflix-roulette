@@ -1,16 +1,22 @@
 import React from 'react';
 import { App } from './App';
 import { shallow } from 'enzyme';
-import { Footer } from '../Footer';
+import configureStore from 'redux-mock-store';
+import { movies } from '../../utils/testData';
+
 
 describe('App component', () => {
-    it('should be render correctly', () => {
-        const component = shallow(<App />);
-        expect(component).toMatchSnapshot();
+    const initialState = movies;
+    const mockStore = configureStore();
+    let store, container;
+    
+    beforeEach(()=>{
+      store = mockStore(initialState);
+      container = shallow(<App store={store} /> );
     });
-
-    it('should contain Footer component', () => {
-      const component = shallow(<App />);
-      expect(component.contains(<Footer />)).toEqual(true);
+  
+    it('should be render correctly', () => {
+      expect(container).toMatchSnapshot();
     });
 });
+

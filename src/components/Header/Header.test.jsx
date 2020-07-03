@@ -3,17 +3,20 @@ import { Header } from './Header';
 import { shallow, mount } from 'enzyme';
 
 describe('Header component', () => {
+    let componentShallowed,
+        componentMounted;
+
+    beforeAll(() => {
+        componentShallowed = shallow(<Header /> );
+        componentMounted = mount(<Header /> );
+    });
 
     it('should be render correctly', () => {
-        const component = shallow(<Header />);
-
-        expect(component).toMatchSnapshot();
+        expect(componentShallowed).toMatchSnapshot();
     });
 
     it('should render title of Header', () => {
-        const component = mount(<Header />);
-        const footer = component.find('.header__title');
-
+        const footer = componentMounted.find('.header__title');
         expect(footer.text()).toEqual('netflixroulette');
     });
 });

@@ -1,41 +1,50 @@
 import React from 'react';
-import { getMovies, MoviesItems, MoviesList, MoviesData, MoviesListContainer } from './Movies';
-import { shallow, mount } from 'enzyme';
+import { MoviesItems, MoviesList, MoviesDataWrapper, MoviesListContainer } from './Movies';
+import { mount } from 'enzyme';
+import { getMovies } from '../../utils';
+import { Provider } from 'react-redux';
+import { movies } from '../../utils/testData';
+import configureStore from 'redux-mock-store';
 
+describe('Movies component', () => {
+    const initialState = movies;
+    const mockStore = configureStore();
+    const mountWithStore = component => mount(<Provider store={store}> {component} </Provider>);
+    let store, 
+        wrapperMoviesListContainer, 
+        wrapperMoviesDataWrapper, 
+        wrapperMoviesItems;
     
-describe('getMovies fetch service', () => {
-    it('should check that method getMovies() return promise', () => {
-        expect.assertions(1);
-        return getMovies().then(movies => {
-            expect(movies.length).toBeGreaterThan(1);
-        });
+    beforeAll(()=>{
+      store = mockStore(initialState);
+      wrapperMoviesListContainer = mountWithStore(<MoviesListContainer />);
+      wrapperMoviesDataWrapper = mountWithStore(<MoviesDataWrapper render={MoviesList} />);
+      wrapperMoviesItems =  mountWithStore(<MoviesItems movies={movies} />);
+    });
+    
+    it('should be render MoviesDataWrapper correctly', () => {
+        expect(wrapperMoviesDataWrapper).toMatchSnapshot();
+    }); 
+
+    it('should be render MoviesListContainer correctly', () => {
+        expect(wrapperMoviesListContainer).toMatchSnapshot();
+    }); 
+
+    it('should be render movies correctly', () => {
+        expect(wrapperMoviesItems).toMatchSnapshot();
     }); 
 });   
 
-describe('MoviesItems component', () => {
-    it('should be render movies correctly', () => {
+describe('getMovie fetch service', () => {
+    it('should check that method getMovies() return promise', async () => {
         expect.assertions(1);
-        return getMovies().then(movies => {
-            const component = mount(<MoviesItems movies={movies} />); 
-            expect(component).toMatchSnapshot();
-        }); 
-    }); 
 
-}); 
+        const data = await getMovies();
+        const movies = data.data.data;
 
-describe('MoviesData component', () => {
-    it('should be render movies correctly', () => {
-        const component = mount(<MoviesData render={MoviesList} />);
-
-        expect(component).toMatchSnapshot();
+        expect(movies.length).toBeGreaterThan(1);
     }); 
 }); 
 
-describe('MoviesListContainer component', () => {
-    it('should be render movies correctly', () => {
-        const component = mount(<MoviesListContainer />);
 
-        expect(component).toMatchSnapshot();
-    }); 
-}); 
 

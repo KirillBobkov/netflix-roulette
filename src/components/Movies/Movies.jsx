@@ -26,14 +26,11 @@ class MoviesData extends React.Component {
 
 const mapStateToProps = state => ({ movies: state });
 const mapDispatchToProps = { fillStore };
-const MoviesDataWrapper = connect(mapStateToProps, mapDispatchToProps)(MoviesData);
+export const MoviesDataWrapper = connect(mapStateToProps, mapDispatchToProps)(MoviesData);
 
 //Create a node list from movies array
 export const MoviesItems = ({ movies }) => {
-    return movies.map(
-        (movie) =>
-          <Movie key={movie.id} movie={movie} />
-    );
+    return movies.map((movie) => <Movie key={movie.id} movie={movie} />);
 };
 
 //Render movies or return fallback message

@@ -3,7 +3,10 @@ import { Input } from './Input';
 import { shallow, mount } from 'enzyme';
 
 describe('Input component', () => {
-    let config = {};
+    let config, 
+        handleChange,
+        componentShallowed,
+        componentMounted;
 
     beforeAll(() => {
         config = {
@@ -11,27 +14,21 @@ describe('Input component', () => {
             placeholder: 'Search',
             value: 'Kill Bill'
         };
+        handleChange = jest.fn();
+        componentShallowed = shallow(<Input className={config.class} placeholder={config.placeholder} value={config.value} onChange={handleChange} />);
+        componentMounted = mount(<Input className={config.class} placeholder={config.placeholder} value={config.value} onChange={handleChange} />);
     }); 
 
     it('should be render correctly', () => {
-        const component = shallow(<Input className={config.class} placeholder={config.placeholder} />);
-
-        expect(component).toMatchSnapshot();
+        expect(componentShallowed).toMatchSnapshot();
     });
-
 
     it('should check that rendered html is correct', () => {
-        const component = mount(<Input className={config.class} placeholder={config.placeholder} value={config.value} />);
-
-        expect(component.html()).toBe('<input class=\"input toolbar__input\" placeholder=\"Search\" value=\"Kill Bill\">');
+        expect(componentMounted.html()).toBe('<input class=\"input toolbar__input\" placeholder=\"Search\" value=\"Kill Bill\">');
     });
 
-
     it('should be call onClick', () => {
-        const handleChange = jest.fn();
-        const component = mount(<Input className={config.class} placeholder={config.placeholder} onChange={handleChange} />);
-       
-        component.simulate('change');
+        componentMounted.simulate('change');
         expect(handleChange).toHaveBeenCalled();
     });
 });

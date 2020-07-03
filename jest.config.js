@@ -1,4 +1,5 @@
 module.exports = {
+    bail: true,
     setupFiles: ['<rootDir>/setupTests.js'],
     transform: {
           "^.+\\.(js|jsx|ts)$": "babel-jest",
