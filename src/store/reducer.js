@@ -7,41 +7,54 @@ import {
   SEARCH_MOVIES_BY_GENRE,
   RESET_ALL_PARAMETERS
 } from './actions';
+import { movies } from '../utils/testData';
 
 let initialState = [];
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case FILL_STORE: {
-      initialState = [...action.payload];
-      return [...action.payload];
+      const newState = { ...action.payload };
+      newState.list = Array.from(newState.list);
+      initialState = { ...newState };
+      return { ...newState };
     }
 
     case SORT_BY_DATE: {
-      return [...state.sort((movieA, movieB) => {
+      const newState = { ...state };
+      newState.list = Array.from(newState.list);
+      newState.list.sort((movieA, movieB) => {
         const movieADate = new Date(movieA.release_date);
         const movieBDate = new Date(movieB.release_date);
         return movieADate - movieBDate;
-      })];
+      });
+      return newState;
     }
 
     case SORT_BY_RATING: {
-      return [...state.sort((movieA, movieB) => movieA.vote_average - movieB.vote_average)];
+      const newState = { ...state };
+      newState.list = Array.from(newState.list);
+      newState.list.sort((movieA, movieB) => movieA.vote_count - movieB.vote_count);
+      return newState;
     }
 
     case SEARCH_MOVIES_BY_TITLE: {
-      const newState = [...state];
-      return newState.filter(item => item.title
+      const newState = { ...state };
+      newState.list = Array.from(newState.list);
+      newState.list = newState.list.filter(item => item.title
         .toLowerCase()
         .includes(action.payload.toLowerCase()));
+      return newState;
     }
 
     case SEARCH_MOVIES_BY_GENRE: {
-      const newState = [...state];
-      return newState.filter(item => item.genres
+      const newState = { ...state };
+      newState.list = Array.from(newState.list);
+      newState.list = newState.list.filter(item => item.genres
         .toString()
         .toLowerCase()
         .includes(action.payload.toLowerCase()));
+      return newState;
     }
 
     case RESET_ALL_PARAMETERS: {

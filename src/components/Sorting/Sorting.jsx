@@ -6,22 +6,18 @@ import PropTypes from 'prop-types';
 import { sortByDate, sortByRating } from '../../store';
 
 class Sorting extends React.PureComponent {
-  state = {
-    checkedSortingByDate: true
-  }
+  state = { checkedSortingByDate: null };
  
   handleSortByDate = () => {
-    this.props.sortByDate();
-
     if (!this.state.checkedSortingByDate) {
+      this.props.sortByDate();
       this.setState({ checkedSortingByDate: !this.state.checkedSortingByDate });
     }
   }
 
   handleSortByRating = () => {
-    this.props.sortByRating();
-
     if (this.state.checkedSortingByDate) {
+      this.props.sortByRating();
       this.setState({ checkedSortingByDate: !this.state.checkedSortingByDate });
     }
   }
@@ -29,11 +25,13 @@ class Sorting extends React.PureComponent {
   render() {
     const choosenDateClassName = this.state.checkedSortingByDate ? 'button--choosen' : '';
     const choosenRatingClassName = !this.state.checkedSortingByDate ? 'button--choosen' : '';
+    const { list } = this.props;
+    
 
     return (
       <div className='sorting'>
         <div className='sorting__container'>
-          <span className='sorting__match-movies'>{this.props.movies.length} movies found</span>
+          <span className='sorting__match-movies'>{list && list.length} movies found</span>
 
           <p>
             <span className='sorting__sort-description'>Sort by</span>
@@ -57,9 +55,8 @@ class Sorting extends React.PureComponent {
 Sorting.propTypes = {
   sortByDate: PropTypes.func,
   sortByRating: PropTypes.func,
-  movies:  PropTypes.array
+  list:  PropTypes.array
 };
-
-const mapStateToProps = state => ({ movies: state });
+const mapStateToProps = state => ({ list: state.list });
 const mapDispatchToProps = { sortByDate, sortByRating };
 export default connect(mapStateToProps, mapDispatchToProps)(Sorting);
