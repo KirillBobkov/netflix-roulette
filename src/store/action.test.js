@@ -18,15 +18,13 @@ import { fillStore,
 } from '../store';
 
 import { getMovies } from '../utils';
-import { movies } from '../utils/testData'
+import { movies } from '../utils/testData';
 
 describe('actions', () => {
 
-  it('should create an action to add a category', async () => {
+  it('should create an action to fill the store', () => {
     expect.assertions(1);
-    const data  = await getMovies();
-    const movies = data.data.data;
-    expect(fillStore(movies).payload.length).toBeGreaterThan(5);
+    expect(fillStore(movies).payload.list.length).toBeGreaterThan(5);
   });
 
   it('should create an action to sort movies by date', () => {

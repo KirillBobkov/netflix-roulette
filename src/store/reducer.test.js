@@ -41,7 +41,7 @@ describe('reducer', () => {
             payload: 'Wreck-It Ralph'
         };
         const result = reducer(initialState, action);
-        expect(result.length).toBe(1);
+        expect(result.list.length).toBe(1);
     });
 
     it('should return found movies by genre', () => {
@@ -50,7 +50,7 @@ describe('reducer', () => {
             payload: 'Animation'
         };
         const result = reducer(initialState, action);
-        expect(result.length).toBe(2);
+        expect(result.list.length).toBe(2);
     });
 
     it('should return initial list of movies', () => {

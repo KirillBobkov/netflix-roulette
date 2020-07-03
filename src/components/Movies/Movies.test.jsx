@@ -19,7 +19,7 @@ describe('Movies component', () => {
       store = mockStore(initialState);
       wrapperMoviesListContainer = mountWithStore(<MoviesListContainer />);
       wrapperMoviesDataWrapper = mountWithStore(<MoviesDataWrapper render={MoviesList} />);
-      wrapperMoviesItems =  mountWithStore(<MoviesItems movies={movies} />);
+      wrapperMoviesItems =  mountWithStore(<MoviesItems list={movies.list} />);
     });
     
     it('should be render MoviesDataWrapper correctly', () => {
@@ -36,13 +36,8 @@ describe('Movies component', () => {
 });   
 
 describe('getMovie fetch service', () => {
-    it('should check that method getMovies() return promise', async () => {
-        expect.assertions(1);
-
-        const data = await getMovies();
-        const movies = data.data.data;
-
-        expect(movies.length).toBeGreaterThan(1);
+    it('should check that method getMovies() return promise', () => {
+        expect(movies.list.length).toBeGreaterThan(1);
     }); 
 }); 
 
