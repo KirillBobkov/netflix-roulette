@@ -26,42 +26,4 @@ describe('actions', () => {
     expect.assertions(1);
     expect(fillStore(movies).payload.list.length).toBeGreaterThan(5);
   });
-
-  it('should create an action to sort movies by date', () => {
-    const expectedAction = {
-      type: SORT_BY_DATE
-    };
-    expect(sortByDate()).toEqual(expectedAction);
-  });
-  
-  it('should create an action to sort movies by rating', () => {
-    const expectedAction = {
-      type: SORT_BY_RATING
-    };
-    expect(sortByRating()).toEqual(expectedAction);
-  });
-
-  it('should create an action to search movies by title', () => {
-    const expectedAction = {
-      type: SEARCH_MOVIES_BY_TITLE,
-      payload: 'Gemini'
-    };
-    expect(searchMoviesByTitle('Gemini')).toEqual(expectedAction);
-  });
-
-  it('should create an action to search movies by genre', () => {
-    const expectedAction = {
-      type: SEARCH_MOVIES_BY_GENRE,
-      payload: 'Crime'
-    };
-    expect(searchMoviesByGenre('Crime')).toEqual(expectedAction);
-  });
-
-  it('should create an action to reset all parameters', () => {
-    const expectedAction = {
-      type: RESET_ALL_PARAMETERS
-    };
-    expect(resetAllParameters()).toEqual(expectedAction);
-  });
-  
 });

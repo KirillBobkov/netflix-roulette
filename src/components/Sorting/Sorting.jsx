@@ -3,24 +3,29 @@ import { Button } from '../primitives';
 import './Sorting.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sortByDate, sortByRating } from '../../store';
+import { fillStore } from '../../store';
+import { getMoviesSortedByDate, getMoviesSortedByRating, fetchAndStore } from '../../utils';
 
 class Sorting extends React.PureComponent {
-  state = { checkedSortingByDate: null };
+  state = { checkedSortingByDate: true };
  
   handleSortByDate = () => {
     const { checkedSortingByDate } = this.state;
+    const { fillStore } = this.props;
+
     if (!checkedSortingByDate) {
-      this.props.sortByDate();
       this.setState({ checkedSortingByDate: !checkedSortingByDate });
+      fetchAndStore( getMoviesSortedByDate(), fillStore );
     }
   }
 
   handleSortByRating = () => {
     const { checkedSortingByDate } = this.state;
+    const { fillStore } = this.props;
+
     if (checkedSortingByDate) {
-      this.props.sortByRating();
       this.setState({ checkedSortingByDate: !checkedSortingByDate });
+      fetchAndStore( getMoviesSortedByRating(), fillStore );
     }
   }
 
@@ -29,7 +34,6 @@ class Sorting extends React.PureComponent {
     const dateClassName = checkedSortingByDate ? 'button--choosen' : '';
     const ratingClassName = !checkedSortingByDate ? 'button--choosen' : '';
     const { list } = this.props;
-    
 
     return (
       <div className='sorting'>
@@ -56,10 +60,9 @@ class Sorting extends React.PureComponent {
 }
 
 Sorting.propTypes = {
-  sortByDate: PropTypes.func,
-  sortByRating: PropTypes.func,
+  fillStore: PropTypes.func,
   list:  PropTypes.array
 };
 const mapStateToProps = state => ({ list: state.list });
-const mapDispatchToProps = { sortByDate, sortByRating };
+const mapDispatchToProps = { fillStore };
 export default connect(mapStateToProps, mapDispatchToProps)(Sorting);

@@ -2,9 +2,11 @@ import React from 'react';
 import { SearchArea } from '../SearchArea';
 import { SearchParameters } from '../SearchParameters';
 import './Toolbar.scss';
-import { searchMoviesByGenre, searchMoviesByTitle, resetAllParameters } from '../../store';
+import {  fillStore } from '../../store';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { getMoviesBySearch, getMovies } from '../../utils';
+import { fetchAndStore } from '../../utils';
 
 class Toolbar extends React.Component {
   state = {
@@ -28,33 +30,26 @@ class Toolbar extends React.Component {
 
   onHandleSearchMovies = () => {
     const { inputSearchValue, searchByTitleMode } = this.state;
-    const { searchMoviesByTitle, searchMoviesByGenre  } = this.props;
-  
+    const { fillStore } = this.props;
+    
     if (inputSearchValue) {
       searchByTitleMode 
-      ? searchMoviesByTitle(inputSearchValue) 
-      : searchMoviesByGenre(inputSearchValue);
-      
-      this.setState({
-        inputSearchValue: ''
-      });
+      ? fetchAndStore( getMoviesBySearch('title', inputSearchValue), fillStore )
+      : fetchAndStore( getMoviesBySearch('genres', inputSearchValue), fillStore );
+      this.setState({ inputSearchValue: '' });
     }
   }
   
   onHandleInputChange = (event) => {
     const { value } = event.target;
-    this.setState({
-      inputSearchValue: value
-    });
+    this.setState({ inputSearchValue: value });
   }
 
   onHandleReset = () => {
-    const { resetAllParameters } = this.props;
-    this.setState({
-      inputSearchValue: ''
-    });
-    resetAllParameters();
-  }
+    const { fillStore } = this.props;
+    this.setState({ inputSearchValue: '' });
+    fetchAndStore( getMovies(), fillStore );
+  };
  
   render() {
     const { inputSearchValue, searchByTitleMode } = this.state;
@@ -79,11 +74,9 @@ class Toolbar extends React.Component {
 }
 
 const mapStateToProps = state => ({ movies: state });
-const mapDispatchToProps = { resetAllParameters, searchMoviesByGenre, searchMoviesByTitle };
+const mapDispatchToProps = { fillStore };
 export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);
 
 Toolbar.propTypes = {
-  searchMoviesByTitle: PropTypes.func,
-  searchMoviesByGenre: PropTypes.func,
-  resetAllParameters: PropTypes.func
+  fillStore: PropTypes.func
 };
