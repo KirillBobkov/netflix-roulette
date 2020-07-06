@@ -4,36 +4,30 @@ import './Sorting.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fillStore } from '../../store';
-import { getMoviesSortedByDate, getMoviesSortedByRating, fetchAndStore } from '../../utils';
+import { fetchAndStore, getMovies } from '../../utils';
 
 class Sorting extends React.PureComponent {
-  state = { checkedSortingByDate: true };
- 
-  handleSortByDate = () => {
-    const { checkedSortingByDate } = this.state;
-    const { fillStore } = this.props;
 
-    if (!checkedSortingByDate) {
-      this.setState({ checkedSortingByDate: !checkedSortingByDate });
-      fetchAndStore( getMoviesSortedByDate(), fillStore );
-    }
-  }
+  handleSortBy = () => {
+    const { fillStore, filter: { searchBy, search } } = this.props;
+    let { filter: { sortBy } }  = this.props;
 
-  handleSortByRating = () => {
-    const { checkedSortingByDate } = this.state;
-    const { fillStore } = this.props;
+    sortBy === "release_date" ? sortBy = "vote_average" : sortBy = "release_date";
 
-    if (checkedSortingByDate) {
-      this.setState({ checkedSortingByDate: !checkedSortingByDate });
-      fetchAndStore( getMoviesSortedByRating(), fillStore );
-    }
+    fetchAndStore( getMovies, {
+        sortBy: sortBy,
+        sortOrder: "asc",
+        searchBy: searchBy,
+        search: search
+      }, fillStore 
+    );
   }
 
   render() {
-    const { checkedSortingByDate } = this.state;
-    const dateClassName = checkedSortingByDate ? 'button--choosen' : '';
-    const ratingClassName = !checkedSortingByDate ? 'button--choosen' : '';
-    const { list } = this.props;
+    const { list, filter: { sortBy } } = this.props;
+    const sortByDate = sortBy === "release_date";
+    const dateClassName = sortByDate ? 'button--choosen' : '';
+    const ratingClassName = !sortByDate ? 'button--choosen' : '';
 
     return (
       <div className='sorting'>
@@ -45,12 +39,12 @@ class Sorting extends React.PureComponent {
             <Button
               className={`${dateClassName} button--left-border`}
               text='Release date'
-              onClick={this.handleSortByDate}
+              onClick={this.handleSortBy}
             />
             <Button
               className={`${ratingClassName} button--right-border`}
               text='Rating'
-              onClick={this.handleSortByRating}
+              onClick={this.handleSortBy}
             />
           </p>
         </div>
@@ -61,8 +55,13 @@ class Sorting extends React.PureComponent {
 
 Sorting.propTypes = {
   fillStore: PropTypes.func,
-  list:  PropTypes.array
+  list:  PropTypes.array,
+  filter: PropTypes.shape({
+    sortBy: PropTypes.string,
+    searchBy: PropTypes.string,
+    search: PropTypes.string
+  })
 };
-const mapStateToProps = state => ({ list: state.list });
+const mapStateToProps = state => ({ list: state.list, filter: state.filter  });
 const mapDispatchToProps = { fillStore };
 export default connect(mapStateToProps, mapDispatchToProps)(Sorting);

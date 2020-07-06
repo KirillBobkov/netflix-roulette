@@ -5,45 +5,16 @@ const api = axios.create({
     responseType: "json"
 });
 
-export const getMovies = () => {
+export const getMovies = (params = { 
+    sortBy: "release_date", 
+    sortOrder: "asc", 
+    searchBy: "title" 
+}) => {
     return api.get('/movies', {
-        params: {
-          sortBy: "release_date",
-          sortOrder: "asc",
-          searchBy: "title"
-        }
-      });
+        params
+    });
 };
 
-export const getMoviesSortedByDate = () => {
-    return api.get('/movies', {
-        params: {
-          sortBy: "release_date",
-          sortOrder: "asc",
-          searchBy: "title"
-        }
-      });
-};
 
-export const getMoviesSortedByRating = () => {
-    return api.get('/movies', {
-        params: {
-          sortBy: "vote_average",
-          sortOrder: "asc",
-          searchBy: "title"
-        }
-      });
-};
-
-export const getMoviesBySearch = (searchType, value) => {
-    return api.get('/movies', {
-        params: {
-          sortBy: "vote_average",
-          sortOrder: "asc",
-          searchBy: searchType,
-          search: value
-        }
-      });
-}; 
 
 
