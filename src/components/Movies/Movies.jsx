@@ -3,21 +3,15 @@ import { Movie } from '../Movie';
 import './Movies.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { sortByDate, fillStore } from '../../store';
+import { fillStore } from '../../store';
 import { getMovies } from '../../utils';
+import { fetchAndStore } from '../../utils';
 
 //Get data from server
 class MoviesData extends React.Component {
     componentDidMount() { 
-      getMovies()
-          .then(data => {
-            const fetchedData = {
-              list: data.data.data
-            };
-            const { fillStore } = this.props;
-            fillStore(fetchedData);
-          })
-          .catch(err => console.info('catch', err));
+      const { fillStore } = this.props;
+      fetchAndStore( getMovies(), fillStore );
     }
 
     render() {
