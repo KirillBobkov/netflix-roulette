@@ -14,12 +14,12 @@ class Sorting extends React.PureComponent {
 
     sortBy === "release_date" ? sortBy = "vote_average" : sortBy = "release_date";
 
-    fetchAndStore( getMovies, {
+    fetchAndStore( getMovies({
         sortBy: sortBy,
         sortOrder: "asc",
         searchBy: searchBy,
         search: search
-      }, fillStore 
+      }), fillStore 
     );
   }
 

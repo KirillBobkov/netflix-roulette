@@ -11,11 +11,12 @@ import { fetchAndStore } from '../../utils';
 class MoviesData extends React.Component {
     componentDidMount() { 
       const { fillStore } = this.props;
-      fetchAndStore( getMovies, {
+      
+      fetchAndStore( getMovies({
         sortBy: "release_date",
         sortOrder: "asc",
         searchBy: "title"
-      }, fillStore );
+      }), fillStore );
     }
 
     render() {

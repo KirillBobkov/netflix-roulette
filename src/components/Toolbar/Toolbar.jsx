@@ -2,7 +2,7 @@ import React from 'react';
 import { SearchArea } from '../SearchArea';
 import { SearchParameters } from '../SearchParameters';
 import './Toolbar.scss';
-import {  fillStore, setFilterParams } from '../../store';
+import {  fillStore } from '../../store';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getMovies } from '../../utils';
@@ -20,12 +20,12 @@ class Toolbar extends React.Component {
 
     searchBy === "title" ? searchBy = "genres" : searchBy = "title";
     
-    fetchAndStore( getMovies, {
+    fetchAndStore( getMovies({
         sortBy: sortBy,
         sortOrder: "asc",
         searchBy: searchBy,
         search: inputSearchValue
-    }, fillStore );
+    }), fillStore );
   }
 
   onHandleSearchMovies = () => {
@@ -33,12 +33,12 @@ class Toolbar extends React.Component {
     const { fillStore, filter: { searchBy, sortBy } } = this.props;
     
     if (inputSearchValue) {
-      fetchAndStore( getMovies, {
+      fetchAndStore( getMovies({
           sortBy: sortBy,
           sortOrder: "asc",
           searchBy: searchBy,
           search: inputSearchValue
-        }, fillStore );
+        }), fillStore );
     }
   }
   
@@ -51,12 +51,12 @@ class Toolbar extends React.Component {
     const { fillStore } = this.props;
     this.setState({ inputSearchValue: '' });
 
-    fetchAndStore( getMovies, {
+    fetchAndStore( getMovies({
       sortBy: "release_date",
       sortOrder: "asc",
       searchBy: "title",
       search: ''
-    }, fillStore );
+    }), fillStore );
   };
  
   render() {
@@ -84,7 +84,7 @@ class Toolbar extends React.Component {
 }
 
 const mapStateToProps = state => ({ movies: state, filter: state.filter  });
-const mapDispatchToProps = { fillStore, setFilterParams };
+const mapDispatchToProps = { fillStore };
 export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);
 
 Toolbar.propTypes = {
