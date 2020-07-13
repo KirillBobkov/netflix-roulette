@@ -1,12 +1,24 @@
 import React from 'react';
 import { Button } from '../primitives';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { setSearchBy } from '../../store';
 
-export class SearchParameters extends React.PureComponent {
+class SearchParameters extends React.Component {
+  
+  handleSearchBy = (event) => {
+    const searchBy = event.target.innerHTML.toLowerCase();
+    const { setSearchBy } = this.props;
+
+    setSearchBy(searchBy);
+  }
+
   render() {
-    const { searchByTitleMode, handleSearchByTitle, handleSearchByGenre } = this.props;
+    const { filter: { searchBy } } = this.props;
+    const searchByTitleMode = searchBy === 'title';
     const searchByTitleClassName = searchByTitleMode ? 'button--choosen' : '';
     const searchByGenreClassName = !searchByTitleMode ? 'button--choosen' : '';
+
     
     return (
       <div className='toolbar__search-parameters'>
@@ -14,22 +26,29 @@ export class SearchParameters extends React.PureComponent {
         <Button 
           className={`${searchByTitleClassName} button--left-border`}
           text='Title'
-          onClick={handleSearchByTitle}
+          onClick={this.handleSearchBy}
         />
         <Button 
           className={`${searchByGenreClassName} button--right-border`}
-          text='Gengre'
-          onClick={handleSearchByGenre}
+          text='Genres'
+          onClick={this.handleSearchBy}
         />
       </div>
       );
   }
 }
 
+const mapStateToProps = state => ({  filter: state.filter  });
+const mapDispatchToProps = { setSearchBy };
+export default connect(mapStateToProps, mapDispatchToProps)(SearchParameters);
+
 SearchParameters.propTypes = {
-  handleSearchByTitle: PropTypes.func,
-  handleSearchByGenre: PropTypes.func,
-  searchByTitleMode: PropTypes.bool
+  setSearchBy: PropTypes.func,
+  filter: PropTypes.shape({
+    sortBy: PropTypes.string,
+    searchBy: PropTypes.string,
+    search: PropTypes.string
+  })
 };
 
 

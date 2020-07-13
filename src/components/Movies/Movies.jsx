@@ -3,20 +3,18 @@ import { Movie } from '../Movie';
 import './Movies.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fillStore } from '../../store';
+import { setMovies, fetchMovies } from '../../store';
 import { getMovies } from '../../utils';
-import { fetchAndStore } from '../../utils';
 
 //Get data from server
 class MoviesData extends React.Component {
     componentDidMount() { 
-      const { fillStore } = this.props;
-      
-      fetchAndStore( getMovies({
+      const { setMovies } = this.props;
+      fetchMovies({
         sortBy: "release_date",
         sortOrder: "asc",
         searchBy: "title"
-      }), fillStore );
+      }, setMovies);
     }
 
     render() {
@@ -26,7 +24,7 @@ class MoviesData extends React.Component {
 }
 
 const mapStateToProps = state => ({ list: state.list });
-const mapDispatchToProps = { fillStore };
+const mapDispatchToProps = { setMovies };
 export const MoviesDataWrapper = connect(mapStateToProps, mapDispatchToProps)(MoviesData);
 
 //Create a node list from movies array
@@ -63,7 +61,7 @@ MoviesList.propTypes = {
 
 MoviesData.propTypes = {
   render: PropTypes.func,
-  fillStore: PropTypes.func,
+  setMovies: PropTypes.func,
   list: PropTypes.array
 };
 

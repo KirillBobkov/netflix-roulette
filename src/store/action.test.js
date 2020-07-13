@@ -9,7 +9,7 @@ import {
   RESET_ALL_PARAMETERS
 } from './actions';
 
-import { fillStore, 
+import { setMovies, 
   sortByDate,
   sortByRating,
   searchMoviesByTitle,
@@ -24,6 +24,6 @@ describe('actions', () => {
 
   it('should create an action to fill the store', () => {
     expect.assertions(1);
-    expect(fillStore(movies).payload.list.length).toBeGreaterThan(5);
+    expect(setMovies(movies).payload.list.length).toBeGreaterThan(5);
   });
 });

@@ -3,23 +3,22 @@ import { Button } from '../primitives';
 import './Sorting.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fillStore } from '../../store';
-import { fetchAndStore, getMovies } from '../../utils';
+import { setMovies, fetchMovies } from '../../store';
+import { getMovies } from '../../utils';
 
 class Sorting extends React.PureComponent {
 
   handleSortBy = () => {
-    const { fillStore, filter: { searchBy, search } } = this.props;
+    const { setMovies, filter: { searchBy, search } } = this.props;
     let { filter: { sortBy } }  = this.props;
+    let sortByParam = sortBy === "release_date" ? "vote_average" : "release_date";
 
-    sortBy === "release_date" ? sortBy = "vote_average" : sortBy = "release_date";
-
-    fetchAndStore( getMovies({
-        sortBy: sortBy,
+    fetchMovies({
+        sortBy: sortByParam,
         sortOrder: "asc",
-        searchBy: searchBy,
-        search: search
-      }), fillStore 
+        searchBy,
+        search,
+      }, setMovies 
     );
   }
 
@@ -54,7 +53,7 @@ class Sorting extends React.PureComponent {
 }
 
 Sorting.propTypes = {
-  fillStore: PropTypes.func,
+  setMovies: PropTypes.func,
   list:  PropTypes.array,
   filter: PropTypes.shape({
     sortBy: PropTypes.string,
@@ -63,5 +62,5 @@ Sorting.propTypes = {
   })
 };
 const mapStateToProps = state => ({ list: state.list, filter: state.filter  });
-const mapDispatchToProps = { fillStore };
+const mapDispatchToProps = { setMovies };
 export default connect(mapStateToProps, mapDispatchToProps)(Sorting);

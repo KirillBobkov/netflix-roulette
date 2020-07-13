@@ -2,92 +2,70 @@ import React from 'react';
 import { SearchArea } from '../SearchArea';
 import { SearchParameters } from '../SearchParameters';
 import './Toolbar.scss';
-import {  fillStore } from '../../store';
+import {  setMovies,fetchMovies } from '../../store';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getMovies } from '../../utils';
-import { fetchAndStore } from '../../utils';
 
 class Toolbar extends React.Component {
   state = {
     inputSearchValue: '',
   }
 
-  onHandleSearchBy = () => {
+  handleSearchMovies = () => {
     const { inputSearchValue } = this.state;
-    const { fillStore, filter: { sortBy } } = this.props;
-    let { filter: { searchBy } } = this.props;
-
-    searchBy === "title" ? searchBy = "genres" : searchBy = "title";
-    
-    fetchAndStore( getMovies({
-        sortBy: sortBy,
-        sortOrder: "asc",
-        searchBy: searchBy,
-        search: inputSearchValue
-    }), fillStore );
-  }
-
-  onHandleSearchMovies = () => {
-    const { inputSearchValue } = this.state;
-    const { fillStore, filter: { searchBy, sortBy } } = this.props;
+    const { setMovies, filter: { searchBy, sortBy } } = this.props;
     
     if (inputSearchValue) {
-      fetchAndStore( getMovies({
-          sortBy: sortBy,
+      fetchMovies({
+          sortBy,
           sortOrder: "asc",
-          searchBy: searchBy,
+          searchBy,
           search: inputSearchValue
-        }), fillStore );
+        }, setMovies );
     }
   }
   
-  onHandleInputChange = (event) => {
+  handleInputChange = (event) => {
     const { value } = event.target;
     this.setState({ inputSearchValue: value });
   }
 
-  onHandleReset = () => {
-    const { fillStore } = this.props;
+  handleReset = () => {
+    const { setMovies } = this.props;
     this.setState({ inputSearchValue: '' });
 
-    fetchAndStore( getMovies({
+    fetchMovies({
       sortBy: "release_date",
       sortOrder: "asc",
       searchBy: "title",
       search: ''
-    }), fillStore );
+    }, setMovies);
   };
  
   render() {
     const { inputSearchValue } = this.state;
-    const { filter: { searchBy } } = this.props;
-    const searchByTitleMode = searchBy === "title";
 
     return (
       <div className='toolbar'>
         <h2 className='toolbar__title'>Find your movie</h2>
         <SearchArea 
           inputSearchValue={inputSearchValue} 
-          handleInputChange={this.onHandleInputChange} 
-          handleSearchMovies={this.onHandleSearchMovies}
-          handleReset={this.onHandleReset}
+          handleInputChange={this.handleInputChange} 
+          handleSearchMovies={this.handleSearchMovies}
+          handleReset={this.handleReset}
         />
-        <SearchParameters 
-          searchByTitleMode={searchByTitleMode} 
-          handleSearchByTitle={this.onHandleSearchBy} 
-          handleSearchByGenre={this.onHandleSearchBy}
-        />
+        <SearchParameters />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({ movies: state, filter: state.filter  });
-const mapDispatchToProps = { fillStore };
+const mapDispatchToProps = { setMovies };
 export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);
 
 Toolbar.propTypes = {
-  fillStore: PropTypes.func,
+  setMovies: PropTypes.func,
   filter: PropTypes.object
 };
