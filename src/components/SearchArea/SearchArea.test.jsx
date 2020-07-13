@@ -3,17 +3,19 @@ import { SearchArea } from './SearchArea';
 import { shallow, mount } from 'enzyme';
 
 describe('SearchArea component', () => {
+    let componentShallowed, componentMounted;
 
-    it('should be render correctly', () => {
-        const component = shallow(<SearchArea />);
-
-        expect(component).toMatchSnapshot();
+    beforeAll(() => {
+        componentShallowed = shallow(<SearchArea />);
+        componentMounted = mount(<SearchArea />);
     });
 
-    it('renders title of SearchArea', () => {
-        const component = mount(<SearchArea />);
+    it('should be render correctly', () => {
+        expect(componentShallowed).toMatchSnapshot();
+    });
 
-        expect(component.exists('.input')).toEqual(true);
-        expect(component.exists('.button')).toEqual(true);
+    it('should check that  SearchArea contains input and button', () => {
+        expect(componentMounted.exists('.input')).toEqual(true);
+        expect(componentMounted.exists('.button')).toEqual(true);
     });
 });

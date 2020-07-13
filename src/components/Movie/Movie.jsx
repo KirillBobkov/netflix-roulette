@@ -1,39 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Movie.scss';
+import { getYear } from '../../utils';
 
-export const Movie = ({ index, info }) => (
+export const Movie = ({ movie }) => (
   <li className='movies__item'>
     <p className='movies__poster'>
       <img 
-        src={`posters/${index + 1}.png`} 
+        src={movie.poster_path} 
         width='260'
         height='365' 
-        alt={info.name}
+        alt={movie.title}
       />
     </p>
 
     <p className='movies__description'>
       <span className='movies__title'>
-        {info.name}
+        {movie.title}
       </span>
 
       <span className='movies__gengre'>
-        {info.gengre}
+        {movie.genres.length && movie.genres.join(', ')}
       </span>
 
       <span className='movies__year'>
-        {info.year}
+        {getYear(movie.release_date)}
       </span>
     </p>
   </li>
 );
 
 Movie.propTypes = {
-  index: PropTypes.number,
-  info: PropTypes.shape({
-    name: PropTypes.string,
-    gengre: PropTypes.string,
-    year: PropTypes.number
+  movie: PropTypes.shape({
+    poster_path: PropTypes.string,
+    title: PropTypes.string,
+    genres: PropTypes.array,
+    release_date: PropTypes.string
   })
 };

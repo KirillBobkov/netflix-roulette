@@ -1,1 +1,1 @@
-export * from './SearchArea';
+export { SearchArea } from './SearchArea';

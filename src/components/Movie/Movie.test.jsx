@@ -4,43 +4,50 @@ import { shallow, mount } from 'enzyme';
 
 describe('Movie component', () => {
     let movie;
-    let index;
+    let componentMovie;
 
     beforeAll(() => {
         movie = {
-            name: 'Bohemian Rhapsody',
-            gengre: 'Action & Adventure',
-            year: 2003,
-            id: 4689453234888769
-        };
-        index = 1;     
+            id: 321612,
+            title: "Beauty and the Beast",
+            tagline: "Be our guest.",
+            vote_average: 6.8,
+            vote_count: 7861,
+            release_date: "2017-03-16",
+            poster_path: "https://image.tmdb.org/t/p/w500/tWqifoYuwLETmmasnGHO7xBjEtt.jpg",
+            overview: "A live-action adaptation of Disney's version of the classic tale of a cursed prince and a beautiful young woman who helps him break the spell.",
+            budget: 160000000,
+            revenue: 1263521126,
+            genres:[
+               "Family",
+               "Fantasy",
+               "Romance"
+            ],
+            runtime: 129
+         };    
+         componentMovie = mount(<Movie key={movie.id} movie={movie} />);
     });
 
     it('should be render correctly', () => {
-        const component = shallow(<Movie key={movie.id} index={index} info={movie} />);
-        expect(component).toMatchSnapshot();
+        expect(componentMovie).toMatchSnapshot();
     });
 
     it('should be render correctly with childs', () => {
-        const component = mount(<Movie key={movie.id} index={index} info={movie} />);
-        expect(component).toMatchSnapshot();
+        expect(componentMovie).toMatchSnapshot();
     });
 
-    it('renders a year of movie', () => {
-        const component = mount(<Movie key={movie.id} index={index} info={movie} />);
-        const year = component.find('.movies__year');
-        expect(year.text()).toEqual('2003');
+    it('should render a year of movie', () => {
+        const year = componentMovie.find('.movies__year');
+        expect(year.text()).toEqual('2017');
     });
 
-    it('renders a gengre of movie', () => {
-        const component = mount(<Movie key={movie.id} index={index} info={movie} />);
-        const year = component.find('.movies__gengre');
-        expect(year.text()).toEqual('Action & Adventure');
+    it('should render a gengre of movie', () => {
+        const genre = componentMovie.find('.movies__gengre');
+        expect(genre.text()).toEqual('Family, Fantasy, Romance');
     });
 
-    it('renders a title of movie', () => {
-        const component = mount(<Movie key={movie.id} index={index} info={movie} />);
-        const year = component.find('.movies__title');
-        expect(year.text()).toEqual('Bohemian Rhapsody');
+    it('should render a title of movie', () => {
+        const title = componentMovie.find('.movies__title');
+        expect(title.text()).toEqual('Beauty and the Beast');
     });
 });

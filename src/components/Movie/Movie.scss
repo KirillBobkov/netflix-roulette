@@ -10,13 +10,16 @@
     }
 
     &__poster {
+        width: 260px;
+        height: 365px;
         margin-bottom: 17px;
     }
 
     &__title {
         display: block;
         font-size: 14px;
-        margin-bottom: 10px;    
+        margin-bottom: 10px;  
+        width: 205px;  
     }
 
     &__description {
