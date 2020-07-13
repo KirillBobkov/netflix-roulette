@@ -3,16 +3,18 @@ import { SearchParameters } from './SearchParameters';
 import { shallow, mount } from 'enzyme';
 
 describe('SearchParameters component', () => {
+    let componentShallowed, componentMounted;
 
-    it('should be render correctly', () => {
-        const component = shallow(<SearchParameters />);
-
-        expect(component).toMatchSnapshot();
+    beforeAll(() => {
+        componentShallowed = shallow(<SearchParameters />);
+        componentMounted = mount(<SearchParameters />);
     });
 
-    it('renders title of SearchParameters', () => {
-        const component = mount(<SearchParameters />);
+    it('should be render correctly', () => {
+        expect(componentShallowed).toMatchSnapshot();
+    });
 
-        expect(component.exists('.button')).toEqual(true);
+    it('should check that title of SearchParameters is rendered', () => {
+        expect(componentMounted.exists('.button')).toEqual(true);
     });
 });

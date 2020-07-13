@@ -5,13 +5,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "test": "jest --coverage",
+    "test": "jest --coverage --updateSnapshot",
     "test:watch": "npm test -- --watch",
     "cypress": "cypress open"
-  },
-  "jest": {
-    "bail": true,
-    "testRegex": "((\\.|/*.)(test))\\.js?$"
   },
   "repository": {
     "type": "git",
@@ -20,16 +16,21 @@
   "author": "Kirill Bobkov",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1",
     "normalize.css": "^8.0.1",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
     "webpack": "^4.43.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.10.4",
     "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.10.4",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^26.1.0",
     "babel-loader": "^8.0.4",
@@ -62,6 +63,7 @@
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
     "redux": "^4.0.0",
+    "redux-mock-store": "^1.5.4",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
     "terser-webpack-plugin": "^3.0.4",

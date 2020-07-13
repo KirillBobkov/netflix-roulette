@@ -1,54 +1,56 @@
 import React from 'react';
-import {movies as moviesDTO} from '../../moviesData';
 import { Movie } from '../Movie';
 import './Movies.scss';
 import PropTypes from 'prop-types';
-
-export const getMovies = () => Promise.resolve(moviesDTO);
+import { connect } from 'react-redux';
+import { fillStore } from '../../store';
+import { getMovies } from '../../utils';
+import { fetchAndStore } from '../../utils';
 
 //Get data from server
-export class MoviesData extends React.Component {
-    state = { movies: [] }
-
-    componentDidMount() {
-      getMovies()
-          .then(movies => {
-              this.setState({movies});
-          })
-          .catch(err => console.info('catch', err));
+class MoviesData extends React.Component {
+    componentDidMount() { 
+      const { fillStore } = this.props;
+      
+      fetchAndStore( getMovies({
+        sortBy: "release_date",
+        sortOrder: "asc",
+        searchBy: "title"
+      }), fillStore );
     }
 
     render() {
-        const { movies } = this.state;
-        return this.props.render({ movies });
+        const { list, render } = this.props;
+        return render({ list });
     }
 }
 
-MoviesData.propTypes = {
-  render: PropTypes.func.isRequired
-};
+const mapStateToProps = state => ({ list: state.list });
+const mapDispatchToProps = { fillStore };
+export const MoviesDataWrapper = connect(mapStateToProps, mapDispatchToProps)(MoviesData);
 
 //Create a node list from movies array
-export const MoviesItems = ({ movies }) => {
-    return movies.map(
-        (movie, index) =>
-          <Movie key={movie.id} index={index} info={movie} />
-    );
+export const MoviesItems = ({ list }) => {
+    return list.map((movie) => <Movie key={movie.id} movie={movie} />);
 };
 
 //Render movies or return fallback message
-export const MoviesList = ({ movies }) => {
-    const hasMovies = Boolean(Array.isArray(movies) && movies.length);
- 
+export const MoviesList = ({ list }) => {
+    const hasMovies = Boolean(list && Array.isArray(list) && list.length);
+
     return (
       <div className='movies'>
         <ul className='movies__container'>
           {hasMovies
-              ? <MoviesItems movies={movies} />
-              : <div>No movies found</div>}
+              ? <MoviesItems list={list} />
+              : null}
         </ul>
       </div>
     );
+};
+
+export const MoviesListContainer = () => {
+  return  (<MoviesDataWrapper render={MoviesList} />);
 };
 
 MoviesList.defaultProps = {
@@ -56,9 +58,12 @@ MoviesList.defaultProps = {
 };
 
 MoviesList.propTypes = {
-  movies: PropTypes.array
+  list: PropTypes.array
 };
 
-export const MoviesListContainer = () => {
-   return  (<MoviesData render={MoviesList} />);
+MoviesData.propTypes = {
+  render: PropTypes.func,
+  fillStore: PropTypes.func,
+  list: PropTypes.array
 };
+

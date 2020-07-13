@@ -1,4 +1,8 @@
 module.exports ={
+  "plugins": [
+    
+  ],
+
     presets: [
         ["@babel/preset-env", {
           "useBuiltIns": "entry"
@@ -15,6 +19,11 @@ module.exports ={
               '@babel/plugin-proposal-class-properties',
               'babel-plugin-transform-es2015-modules-commonjs',
               'babel-plugin-dynamic-import-node',
+              ["@babel/plugin-transform-runtime",
+                {
+                  "regenerator": true
+                }
+              ]
             ],
           },
       }

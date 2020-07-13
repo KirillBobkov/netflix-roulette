@@ -3,16 +3,19 @@ import { Main } from './Main';
 import { shallow, mount } from 'enzyme';
 
 describe('Main component', () => {
-
-    it('should be render correctly', () => {
-        const component = shallow(<Main />);
-
-        expect(component).toMatchSnapshot();
+    let componentShallowed,
+        componentMounted;
+    
+    beforeAll(() => {
+        componentShallowed = shallow(<Main /> );
+        componentMounted = mount(<Main /> );
     });
 
-    it('Component contains class ".main"', () => {
-        const component = mount(<Main />);
+    it('should be render correctly', () => {
+        expect(componentShallowed).toMatchSnapshot();
+    });
 
-        expect(component.exists('.main')).toEqual(true);
+    it('should check that Component contains class ".main"', () => {
+        expect(componentMounted.exists('.main')).toEqual(true);
     });
 });
