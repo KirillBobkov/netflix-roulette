@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { setSearchBy } from '../../store';
 
 class SearchParameters extends React.Component {
-  
   handleSearchBy = (event) => {
     const searchBy = event.target.innerHTML.toLowerCase();
     const { setSearchBy } = this.props;
@@ -19,7 +18,6 @@ class SearchParameters extends React.Component {
     const searchByTitleClassName = searchByTitleMode ? 'button--choosen' : '';
     const searchByGenreClassName = !searchByTitleMode ? 'button--choosen' : '';
 
-    
     return (
       <div className='toolbar__search-parameters'>
         <span className='toolbar__search-description'>Search By</span>

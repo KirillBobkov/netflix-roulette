@@ -1,4 +1,4 @@
-import { getMovies } from '../utils'
+import { getMovies } from '../utils';
 export const SET_MOVIES = 'SET_MOVIE';
 export const SET_SEARCH_BY = 'SET_SEARCH_BY';
 
