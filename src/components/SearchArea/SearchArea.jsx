@@ -43,7 +43,6 @@ class SearchArea extends React.PureComponent {
 
   render() {
     const { inputSearchValue } = this.state;
-
     return (
       <div className='toolbar__search'>
         <Input  

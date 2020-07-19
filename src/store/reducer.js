@@ -8,8 +8,11 @@ let initialState = [];
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_MOVIES: {
+      console.log(state);
+     
       const newState = { ...action.payload };
       newState.list = Array.from(newState.list);
+      console.log(newState);
       return newState;
     }
 

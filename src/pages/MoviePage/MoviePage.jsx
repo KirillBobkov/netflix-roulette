@@ -1,20 +1,25 @@
 import React from 'react';
 import { Header } from '../../components/Header';
 import { Main } from '../../components/Main';
-import { Toolbar } from '../../components/Toolbar';
-import { Sorting } from '../../components/Sorting';
 import { MoviesListWrapper } from '../../components/Movies';
 import { Footer } from '../../components/Footer';
+import { MovieInfo } from '../../components/MovieInfo';
+import PropTypes from 'prop-types';
 
-export const MainPage = () => (
+export const MoviePage = (props) => (
   <>
     <Header>
-      <Toolbar />
+      <MovieInfo id={props.movieId} />
     </Header>
     <Main>
-      <Sorting />
       <MoviesListWrapper />
     </Main>
     <Footer />
   </>
 );
+
+MoviePage.propTypes = {
+  movieId: PropTypes.string,
+};
+
+

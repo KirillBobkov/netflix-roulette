@@ -6,40 +6,40 @@ import { getYear } from '../../utils';
 
 const MovieInfo = (props) => {
   const { movie } = props;
-  // const year = getYear(movie.release_date);
+  console.log(props);
+  const year = getYear(movie.release_date);
 
   return (
     <div className='header__movie'>
       <p className='header__movie-poster'>
-        <img src={movie.poster_path}  width='260'
-          height='365'  alt=""/>
+        <img
+          src={movie.poster_path} width='260'
+          height='365' alt={movie.title}
+        />
       </p>
-      <p className='header__movie-info'>
-  <h1 className='header__movie-title'>{movie.title}</h1>
+      <div className='header__movie-info'>
+        <h1 className='header__movie-title'>{movie.title}
           <span className='header__movie-rating'>{movie.vote_average}</span>
-          <p className='header__movie-nomination'>{movie.tagline}</p>
-          <p className='header__movie-details'>
-            <span className='header__movie-year'>
-              &nbsp;
-            </span>
-            year &nbsp;&emsp;
-            <span className='header__movie-length'>
-              {movie.runtime} &nbsp;
-            </span>
-            min
-          </p>
-          <p className='header__movie-description'>
-            {movie.overview}
-          </p>
-      </p>
+        </h1>
+       
+        <p className='header__movie-nomination'>{movie.tagline}</p>
+        <p className='header__movie-details'>
+          <span className='header__movie-year'>{year}&nbsp;</span>year &emsp;
+          <span className='header__movie-length'>{movie.runtime}&nbsp;</span>min
+        </p>
+        <p className='header__movie-description'>
+          {movie.overview}
+        </p>
+      </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state.list);
   return {
     state,
-    movie: state.list.filter(item => item.id.toString() === ownProps.match.params.id)[0]
+    movie: state.list.filter(item => item.id === Number(ownProps.id))[0]
   };
 };
 
@@ -49,6 +49,10 @@ MovieInfo.propTypes = {
   movie: PropTypes.shape({
     poster_path: PropTypes.string,
     title: PropTypes.string,
+    tagline: PropTypes.string,
+    runtime: PropTypes.number,
+    vote_average: PropTypes.number,
+    overview: PropTypes.string,
     genres: PropTypes.array,
     release_date: PropTypes.string
   })
