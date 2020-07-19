@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Movie.scss';
 import { getYear } from '../../utils';
+import { BrowserRouter, Route, Router, Link, Switch, Redirect } from 'react-router-dom'
 
 export const Movie = ({ movie }) => (
+  
   <li className='movies__item'>
+    <Link to={`/film/${movie.id}`}>
     <p className='movies__poster'>
       <img 
         src={movie.poster_path} 
@@ -27,6 +30,7 @@ export const Movie = ({ movie }) => (
         {getYear(movie.release_date)}
       </span>
     </p>
+    </Link>
   </li>
 );
 

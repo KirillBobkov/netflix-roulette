@@ -29,7 +29,8 @@ export const MoviesDataWrapper = connect(mapStateToProps, mapDispatchToProps)(Mo
 
 //Create a node list from movies array
 export const MoviesItems = ({ list }) => {
-    return list.map((movie) => <Movie key={movie.id} movie={movie} />);
+    
+      return list.map((movie) => <Movie key={movie.id} movie={movie} /> );
 };
 
 //Render movies or return fallback message
@@ -41,7 +42,7 @@ export const MoviesList = ({ list }) => {
         <ul className='movies__container'>
           {hasMovies
               ? <MoviesItems list={list} />
-              : null}
+              : <li>No movies found</li>}
         </ul>
       </div>
     );
