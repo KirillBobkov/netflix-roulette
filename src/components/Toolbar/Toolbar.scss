@@ -32,6 +32,10 @@
     &__input {
         width: 570px;
         padding: 14px;
-        background-color: #272727b7;
+        background-color: #272727b7;         
+
+        &--full-width {
+            width: 100%;
+        }
     }
 }

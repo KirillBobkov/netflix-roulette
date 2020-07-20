@@ -4,16 +4,39 @@ import PropTypes from 'prop-types';
 import {  setMovies, fetchMovies } from '../../store';
 import { connect } from 'react-redux';
 import { getMovies } from '../../utils';
+import { history } from '../../utils/history';
 
 class SearchArea extends React.PureComponent {
   state = {
     inputSearchValue: '',
   }
 
+  componentDidMount() {
+    const { inputSearchValue } = this.state;
+    const { isSearchPage, setMovies, filter: { searchBy, sortBy } } = this.props;
+
+    if (isSearchPage) {
+      const path = window.location.pathname.split('/');
+      const query = path[path.length - 1];
+  
+      this.setState({ inputSearchValue: query });
+  
+      fetchMovies({
+        sortBy,
+        sortOrder: "asc",
+        searchBy,
+        search: query
+      }, setMovies );
+    }
+  }
+
   handleSearchMovies = () => {
     const { inputSearchValue } = this.state;
     const { setMovies, filter: { searchBy, sortBy } } = this.props;
     
+    const uri = encodeURI(inputSearchValue);
+    history.push(`/search/${uri}`);
+
     if (inputSearchValue) {
       fetchMovies({
           sortBy,
@@ -26,41 +49,41 @@ class SearchArea extends React.PureComponent {
   
   handleInputChange = (event) => {
     const { value } = event.target;
+   
     this.setState({ inputSearchValue: value });
   }
 
-  handleReset = () => {
-    const { setMovies } = this.props;
-    this.setState({ inputSearchValue: '' });
 
-    fetchMovies({
-      sortBy: "release_date",
-      sortOrder: "asc",
-      searchBy: "title",
-      search: ''
-    }, setMovies);
-  };
 
   render() {
     const { inputSearchValue } = this.state;
+    const { isSearchPage } = this.props;
+    let inputClassnames = isSearchPage 
+    ? 'toolbar__input toolbar__input--full-width' 
+    : 'toolbar__input';
+
     return (
       <div className='toolbar__search'>
         <Input  
-          className='toolbar__input'
+          className={inputClassnames}
           placeholder='Search'
           onChange={this.handleInputChange}
           value={inputSearchValue}
         />
-        <Button 
-          className='button--reset'
-          text='reset'
-          onClick={this.handleReset}
-        />
-        <Button 
-          className='button--search'
-          text='Search'
-          onClick={this.handleSearchMovies}
-        />
+        
+        {isSearchPage 
+          ? 
+            <Button 
+              className='button--search-icon'
+              text=''
+              onClick={this.handleSearchMovies}
+            />
+          : 
+            <Button 
+              className='button--search'
+              text='Search'
+              onClick={this.handleSearchMovies}
+            />}
       </div>
     );
   }
@@ -68,10 +91,11 @@ class SearchArea extends React.PureComponent {
 
 SearchArea.propTypes = {
   setMovies: PropTypes.func,
-  filter: PropTypes.object
+  filter: PropTypes.object,
+  isSearchPage: PropTypes.bool
 };
 
-const mapStateToProps = state => ({ movies: state, filter: state.filter  });
+const mapStateToProps = state => ({ movies: state, filter: state.filter, isSearchPage: window.location.pathname.includes('search')  });
 const mapDispatchToProps = { setMovies };
 export default connect(mapStateToProps, mapDispatchToProps)(SearchArea);
 

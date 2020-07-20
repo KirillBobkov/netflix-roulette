@@ -3,16 +3,22 @@ import {
   SET_SEARCH_BY
 } from './actions';
 
-let initialState = [];
+let initialState = {
+    list: [],
+    filter: {
+      sortBy: "release_date",
+      sortOrder: "asc",
+      searchBy: "title",
+      search: ''
+    }
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_MOVIES: {
-      console.log(state);
-     
+    case SET_MOVIES: { 
+  
       const newState = { ...action.payload };
       newState.list = Array.from(newState.list);
-      console.log(newState);
       return newState;
     }
 

@@ -6,7 +6,6 @@ import { getYear } from '../../utils';
 
 const MovieInfo = (props) => {
   const { movie } = props;
-  console.log(props);
   const year = getYear(movie.release_date);
 
   return (
