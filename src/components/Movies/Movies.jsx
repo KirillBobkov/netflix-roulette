@@ -3,22 +3,22 @@ import { Movie } from '../Movie';
 import './Movies.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setMovies, fetchMovies } from '../../store';
+import { fetchMovies } from '../../store';
 
 //Get data from server
 class MoviesData extends React.PureComponent {
 
     // BY DEFAULT MAIN PAGE WITH MOVIES IS EMPTY
-    
+
     // componentDidMount() { 
-    //   const { setMovies, isMainPage } = this.props;
+    //   const { fetchDataMovies, isMainPage } = this.props;
       
     //   if (isMainPage) {
-    //     fetchMovies({
+    //     fetchDataMovies({
     //       sortBy: "release_date",
     //       sortOrder: "asc",
     //       searchBy: "title"
-    //     }, setMovies );
+    //     });
     //   }
     // }
 
@@ -29,7 +29,13 @@ class MoviesData extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({ list: state.list, isMainPage: window.location.pathname.includes('movie') });
-const mapDispatchToProps = { setMovies };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchDataMovies: (config) => dispatch(fetchMovies(config))
+  };
+};
+
 export const MoviesDataWrapper = connect(mapStateToProps, mapDispatchToProps)(MoviesData);
 
 //Create a node list from movies array
@@ -66,7 +72,7 @@ MoviesList.propTypes = {
 
 MoviesData.propTypes = {
   render: PropTypes.func,
-  setMovies: PropTypes.func,
-  isMainPage: PropTypes.bool,
+  // fetchDataMovies: PropTypes.func,
+  // isMainPage: PropTypes.bool,
   list: PropTypes.array
 };

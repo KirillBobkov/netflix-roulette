@@ -26,13 +26,13 @@ const MovieInfo = (props) => {
         <p className='header__movie-details'>
           {year 
             ? <span>
-                <span className='header__movie-year'>{year}&nbsp;</span>year &emsp;
+              <span className='header__movie-year'>{year}&nbsp;</span>year &emsp;
               </span>
             : null}
          
           {movie.runtime
             ? <span>
-                <span className='header__movie-length'>{movie.runtime}&nbsp;</span>min
+              <span className='header__movie-length'>{movie.runtime}&nbsp;</span>min
               </span>
             : null}
         </p>
@@ -45,10 +45,9 @@ const MovieInfo = (props) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state.list);
   return {
     state,
-    movie: state.list.filter(item => item.id === Number(ownProps.id))[0]
+    movie: state.list.find(item => item.id === Number(ownProps.id))
   };
 };
 

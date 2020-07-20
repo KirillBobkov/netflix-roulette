@@ -1,6 +1,8 @@
 import {
   SET_MOVIES,
-  SET_SEARCH_BY
+  SET_SEARCH_BY,
+  OPEN_SPINNER,
+  CLOSE_SPINNER
 } from './actions';
 
 let initialState = {
@@ -16,7 +18,6 @@ let initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_MOVIES: { 
-  
       const newState = { ...action.payload };
       newState.list = Array.from(newState.list);
       return newState;
@@ -31,6 +32,14 @@ export default (state = initialState, action) => {
       };
 
       return { ...state, filter: newFilter};
+    }
+
+    case OPEN_SPINNER: {
+      return { ...state, spinner: true};
+    }
+
+    case CLOSE_SPINNER: {
+      return { ...state, spinner: false};
     }
 
     default: 

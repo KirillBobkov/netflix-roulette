@@ -9,17 +9,16 @@ import { getMovies } from '../../utils';
 class Sorting extends React.PureComponent {
 
   handleSortBy = () => {
-    const { setMovies, filter: { searchBy, search } } = this.props;
+    const { fetchDataMovies, filter: { searchBy, search } } = this.props;
     let { filter: { sortBy } }  = this.props;
     let sortByParam = sortBy === "release_date" ? "vote_average" : "release_date";
 
-    fetchMovies({
+    fetchDataMovies({
         sortBy: sortByParam,
         sortOrder: "asc",
         searchBy,
         search,
-      }, setMovies 
-    );
+      });
   }
 
   renderMoviePageUI() {
@@ -73,7 +72,7 @@ class Sorting extends React.PureComponent {
 }
 
 Sorting.propTypes = {
-  setMovies: PropTypes.func,
+  fetchDataMovies: PropTypes.func,
   isMoviePage: PropTypes.bool,
   list:  PropTypes.array,
   filter: PropTypes.shape({
@@ -82,6 +81,13 @@ Sorting.propTypes = {
     search: PropTypes.string
   })
 };
+
 const mapStateToProps = state => ({ list: state.list, filter: state.filter, isMoviePage: window.location.pathname.includes('film')  });
-const mapDispatchToProps = { setMovies };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchDataMovies: (config) => dispatch(fetchMovies(config))
+  };
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(Sorting);

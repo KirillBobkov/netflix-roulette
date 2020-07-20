@@ -4,6 +4,7 @@ import './App.scss';
 import { MainPage, MoviePage, SearchPage, NotFound } from '../../pages';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { Switch, Route } from "react-router-dom";
+import { Spinner } from '../Spinner';
 
 export const App = () => (
   <ErrorBoundary>
@@ -13,6 +14,8 @@ export const App = () => (
       <Route path='/search/:query' render={route => <SearchPage search={route.match.params.query} />} />
       <Route component={NotFound} />
     </Switch>
+   
+    <Spinner />
   </ErrorBoundary>
   );
 

@@ -3,7 +3,6 @@ import { Input, Button } from '../primitives';
 import PropTypes from 'prop-types';
 import {  setMovies, fetchMovies } from '../../store';
 import { connect } from 'react-redux';
-import { getMovies } from '../../utils';
 import { history } from '../../utils/history';
 
 class SearchArea extends React.PureComponent {
@@ -13,7 +12,7 @@ class SearchArea extends React.PureComponent {
 
   componentDidMount() {
     const { inputSearchValue } = this.state;
-    const { isSearchPage, setMovies, filter: { searchBy, sortBy } } = this.props;
+    const { isSearchPage, fetchDataMovies, filter: { searchBy, sortBy } } = this.props;
 
     if (isSearchPage) {
       const path = window.location.pathname.split('/');
@@ -21,29 +20,29 @@ class SearchArea extends React.PureComponent {
   
       this.setState({ inputSearchValue: query });
   
-      fetchMovies({
+      fetchDataMovies({
         sortBy,
         sortOrder: "asc",
         searchBy,
         search: query
-      }, setMovies );
+      });
     }
   }
 
   handleSearchMovies = () => {
     const { inputSearchValue } = this.state;
-    const { setMovies, filter: { searchBy, sortBy } } = this.props;
+    const { fetchDataMovies, filter: { searchBy, sortBy } } = this.props;
     
     const uri = encodeURI(inputSearchValue);
     history.push(`/search/${uri}`);
 
     if (inputSearchValue) {
-      fetchMovies({
+      fetchDataMovies({
           sortBy,
           sortOrder: "asc",
           searchBy,
           search: inputSearchValue
-        }, setMovies );
+        } );
     }
   }
   
@@ -90,12 +89,17 @@ class SearchArea extends React.PureComponent {
 }
 
 SearchArea.propTypes = {
-  setMovies: PropTypes.func,
+  fetchDataMovies: PropTypes.func,
   filter: PropTypes.object,
   isSearchPage: PropTypes.bool
 };
 
 const mapStateToProps = state => ({ movies: state, filter: state.filter, isSearchPage: window.location.pathname.includes('search')  });
-const mapDispatchToProps = { setMovies };
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchDataMovies: (config) => dispatch(fetchMovies(config))
+  };
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(SearchArea);
 
