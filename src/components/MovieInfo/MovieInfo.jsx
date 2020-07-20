@@ -6,6 +6,7 @@ import { getYear } from '../../utils';
 
 const MovieInfo = (props) => {
   const { movie } = props;
+
   const year = getYear(movie.release_date);
 
   return (
@@ -23,8 +24,17 @@ const MovieInfo = (props) => {
        
         <p className='header__movie-nomination'>{movie.tagline}</p>
         <p className='header__movie-details'>
-          <span className='header__movie-year'>{year}&nbsp;</span>year &emsp;
-          <span className='header__movie-length'>{movie.runtime}&nbsp;</span>min
+          {year 
+            ? <span>
+                <span className='header__movie-year'>{year}&nbsp;</span>year &emsp;
+              </span>
+            : null}
+         
+          {movie.runtime
+            ? <span>
+                <span className='header__movie-length'>{movie.runtime}&nbsp;</span>min
+              </span>
+            : null}
         </p>
         <p className='header__movie-description'>
           {movie.overview}
