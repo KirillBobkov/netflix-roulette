@@ -13,7 +13,6 @@ class SearchParameters extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { filter: { searchBy } } = this.props;
     const searchByTitleMode = searchBy === 'title';
     const searchByTitleClassName = searchByTitleMode ? 'button--choosen' : '';

@@ -16,7 +16,6 @@ class MovieInfo extends React.PureComponent {
   }
 
   render() {
-    console.log(this.props);
     const { movie } = this.props;
     const year = getYear(movie.release_date);
 

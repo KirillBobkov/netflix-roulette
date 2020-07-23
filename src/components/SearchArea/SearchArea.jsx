@@ -4,20 +4,24 @@ import PropTypes from 'prop-types';
 import { fetchMovies } from '../../store/actions/movieActions';
 import { connect } from 'react-redux';
 import { history } from '../../utils/history';
+import { withRouter } from 'react-router-dom';
 
 class SearchArea extends React.PureComponent {
   state = {
     inputSearchValue: '',
   }
-
+  
   componentDidMount() {
-    const { inputSearchValue } = this.state;
-    const { isSearchPage, fetchDataMovies, filter: { searchBy, sortBy } } = this.props;
+    const { 
+      isSearchPage, 
+      fetchDataMovies, 
+      filter: { searchBy, sortBy }, 
+      match: {  
+        params: { query } 
+      } 
+    } = this.props;
 
     if (isSearchPage) {
-      const path = window.location.pathname.split('/');
-      const query = path[path.length - 1];
-  
       this.setState({ inputSearchValue: query });
   
       fetchDataMovies({
@@ -51,8 +55,6 @@ class SearchArea extends React.PureComponent {
    
     this.setState({ inputSearchValue: value });
   }
-
-
 
   render() {
     const { inputSearchValue } = this.state;
@@ -91,13 +93,23 @@ class SearchArea extends React.PureComponent {
 SearchArea.propTypes = {
   fetchDataMovies: PropTypes.func,
   filter: PropTypes.object,
+  match: PropTypes.object,
   isSearchPage: PropTypes.bool
 };
 
-const mapStateToProps = state => ({ movies: state, filter: state.filter, isSearchPage: window.location.pathname.includes('search')  });
+const mapStateToProps = (state, ownProps) => {
+  const { filter } = state;
+
+  return { 
+    filter, 
+    isSearchPage: ownProps.match.path.includes('search'),
+    isMainPage: ownProps.match.path.includes('movie')  
+  };
+};
+  
 const mapDispatchToProps = dispatch => ({
   fetchDataMovies: (config) => dispatch(fetchMovies(config))
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchArea);
+export default withRouter ( connect(mapStateToProps, mapDispatchToProps)(SearchArea) );
 
