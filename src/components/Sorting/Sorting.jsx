@@ -4,6 +4,7 @@ import './Sorting.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchMovies } from '../../store/actions/movieActions';
+import { withRouter } from 'react-router-dom';
 
 class Sorting extends React.PureComponent {
 
@@ -81,12 +82,18 @@ Sorting.propTypes = {
   })
 };
 
-const mapStateToProps = state => ({ list: state.list, filter: state.filter, isMoviePage: window.location.pathname.includes('film')  });
+const mapStateToProps = (state, ownProps) => { 
+  const { list, filter } = state;
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchDataMovies: (config) => dispatch(fetchMovies(config))
-  };
+  return { 
+    list, 
+    filter, 
+    isMoviePage: Boolean(ownProps.match.params.id) };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sorting);
+const mapDispatchToProps = dispatch => ({
+    fetchDataMovies: (config) => dispatch(fetchMovies(config))
+});
+
+export default withRouter( connect(mapStateToProps, mapDispatchToProps)(Sorting) );
+

@@ -13,13 +13,11 @@ class MoviesData extends React.PureComponent {
     // componentDidMount() { 
     //   const { fetchDataMovies, isMainPage } = this.props;
       
-    //   if (isMainPage) {
-    //     fetchDataMovies({
-    //       sortBy: "release_date",
-    //       sortOrder: "asc",
-    //       searchBy: "title"
-    //     });
-    //   }
+    //   fetchDataMovies({
+    //     sortBy: "release_date",
+    //     sortOrder: "asc",
+    //     searchBy: "title"
+    //   });
     // }
 
     render() {
@@ -28,13 +26,14 @@ class MoviesData extends React.PureComponent {
     }
 }
 
-const mapStateToProps = state => ({ list: state.list, isMainPage: window.location.pathname.includes('movie') });
+const mapStateToProps = (state, ownProps) => { 
+  return { list: state.list };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchDataMovies: (config) => dispatch(fetchMovies(config))
-  };
 };
+
+const mapDispatchToProps = dispatch => ({
+    fetchDataMovies: (config) => dispatch(fetchMovies(config))
+});
 
 export const MoviesDataWrapper = connect(mapStateToProps, mapDispatchToProps)(MoviesData);
 

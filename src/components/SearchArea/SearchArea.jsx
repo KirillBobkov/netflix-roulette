@@ -95,11 +95,9 @@ SearchArea.propTypes = {
 };
 
 const mapStateToProps = state => ({ movies: state, filter: state.filter, isSearchPage: window.location.pathname.includes('search')  });
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchDataMovies: (config) => dispatch(fetchMovies(config))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  fetchDataMovies: (config) => dispatch(fetchMovies(config))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchArea);
 

@@ -5,12 +5,11 @@ import { MoviesListContainer } from '../../components/Movies';
 import { Footer } from '../../components/Footer';
 import { Sorting } from '../../components/Sorting';
 import { MovieInfo } from '../../components/MovieInfo';
-import PropTypes from 'prop-types';
 
 export const MoviePage = (props) => (
   <>
     <Header>
-      <MovieInfo id={props.movieId} />
+      <MovieInfo />
     </Header>
     <Main>
       <Sorting />
@@ -20,8 +19,5 @@ export const MoviePage = (props) => (
   </>
 );
 
-MoviePage.propTypes = {
-  movieId: PropTypes.string,
-};
 
 

@@ -10,8 +10,8 @@ export const App = () => (
   <ErrorBoundary>
     <Switch>
       <Route exact path='/movies' component={MainPage} />
-      <Route path='/film/:id' render={route => <MoviePage movieId={route.match.params.id} />} />
-      <Route path='/search/:query' render={route => <SearchPage search={route.match.params.query} />} />
+      <Route path='/film/:id' component={MoviePage} />
+      <Route path='/search/:query' component={SearchPage} />
       <Route component={NotFound} />
     </Switch>
    

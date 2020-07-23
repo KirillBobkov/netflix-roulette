@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './MovieInfo.scss';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { getYear, getImage } from '../../utils';
 
 class MovieInfo extends React.PureComponent {
@@ -15,6 +16,7 @@ class MovieInfo extends React.PureComponent {
   }
 
   render() {
+    console.log(this.props);
     const { movie } = this.props;
     const year = getYear(movie.release_date);
 
@@ -55,13 +57,19 @@ class MovieInfo extends React.PureComponent {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  const { 
+    match: { 
+      params: { id }
+    }
+  } = ownProps;
+
   return {
     state,
-    movie: state.list.find(item => item.id === Number(ownProps.id))
+    movie: state.list.find(item => item.id === Number(id))
   };
 };
 
-export default connect(mapStateToProps, null)(MovieInfo);
+export default withRouter( connect(mapStateToProps, null)(MovieInfo) );
 
 MovieInfo.propTypes = {
   movie: PropTypes.shape({
