@@ -7,7 +7,7 @@ import {
   SEARCH_MOVIES_BY_TITLE,
   SEARCH_MOVIES_BY_GENRE,
   RESET_ALL_PARAMETERS
-} from './actions';
+} from './movieActions';
 
 import { setMovies, 
   sortByDate,

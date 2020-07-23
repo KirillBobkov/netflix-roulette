@@ -3,7 +3,7 @@ import { Movie } from '../Movie';
 import './Movies.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchMovies } from '../../store';
+import { fetchMovies } from '../../store/actions/movieActions';
 
 //Get data from server
 class MoviesData extends React.PureComponent {

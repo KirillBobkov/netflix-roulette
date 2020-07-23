@@ -31,11 +31,11 @@ class Spinner extends Component {
     }
 }
 
-const mapDispatchToProps = state => ({
+const mapStateToProps = state => ({
     isOpen: state.spinner
 });
 
-export default connect(mapDispatchToProps, null)(Spinner);
+export default connect(mapStateToProps, null)(Spinner);
 
 Spinner.propTypes = {
     isOpen: PropTypes.bool

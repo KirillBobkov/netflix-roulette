@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getYear, getImage } from '../../utils';
 
 class MovieInfo extends React.PureComponent {
-  state = { source: 'https://via.placeholder.com/260x365/000000?text=Image+has+not+loaded' }
+  state = { source: 'https://via.placeholder.com/260x365/000000?text=Image+has+not+found' }
 
   componentDidMount() {
     const { movie: { poster_path } } = this.props;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../primitives';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setSearchBy } from '../../store';
+import { setSearchBy } from '../../store/actions/filterActions';
 
 class SearchParameters extends React.Component {
   handleSearchBy = (event) => {
@@ -13,6 +13,7 @@ class SearchParameters extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const { filter: { searchBy } } = this.props;
     const searchByTitleMode = searchBy === 'title';
     const searchByTitleClassName = searchByTitleMode ? 'button--choosen' : '';
@@ -36,7 +37,7 @@ class SearchParameters extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({  filter: state.filter  });
+const mapStateToProps = state => ({ filter: state.filter  });
 const mapDispatchToProps = { setSearchBy };
 export default connect(mapStateToProps, mapDispatchToProps)(SearchParameters);
 

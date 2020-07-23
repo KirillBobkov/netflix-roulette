@@ -3,8 +3,7 @@ import { Button } from '../primitives';
 import './Sorting.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setMovies, fetchMovies } from '../../store';
-import { getMovies } from '../../utils';
+import { fetchMovies } from '../../store/actions/movieActions';
 
 class Sorting extends React.PureComponent {
 

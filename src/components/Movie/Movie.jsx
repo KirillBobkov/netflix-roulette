@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Movie.scss';
 import { getYear, getImage } from '../../utils';
-import { BrowserRouter, Route, Router, Link, Switch, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export class Movie extends React.Component {
   state = { source: 'https://via.placeholder.com/260x365/000000?text=Image+has+not+loaded' }

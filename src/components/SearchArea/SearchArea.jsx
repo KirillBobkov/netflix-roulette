@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Button } from '../primitives';
 import PropTypes from 'prop-types';
-import {  setMovies, fetchMovies } from '../../store';
+import { fetchMovies } from '../../store/actions/movieActions';
 import { connect } from 'react-redux';
 import { history } from '../../utils/history';
 
