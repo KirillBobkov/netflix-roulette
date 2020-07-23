@@ -10,7 +10,7 @@ class SearchArea extends React.PureComponent {
   state = {
     inputSearchValue: '',
   }
-  
+
   componentDidMount() {
     const { 
       isSearchPage, 
@@ -102,8 +102,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return { 
     filter, 
-    isSearchPage: ownProps.match.path.includes('search'),
-    isMainPage: ownProps.match.path.includes('movie')  
+    isSearchPage: ownProps.match.path.includes('search')
   };
 };
   

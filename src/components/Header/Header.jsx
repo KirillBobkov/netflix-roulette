@@ -4,11 +4,13 @@ import './Header.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { clearMovies } from '../../store/actions/movieActions';
+import { clearFilter } from '../../store/actions/filterActions';
 
 const Header = (props) => {
 
   const handleClearMovies = () => {
-    props.returnToInitialStore();
+    props.clearMoviesList();
+    props.clearFilter();
   };
 
   return (
@@ -26,7 +28,8 @@ const Header = (props) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    returnToInitialStore: () => dispatch(clearMovies())
+  clearMoviesList: () => dispatch(clearMovies()),
+  clearFilter: () => dispatch(clearFilter())
 });
 
 
@@ -34,5 +37,6 @@ export default connect(null, mapDispatchToProps)(Header);
 
 Header.propTypes = {
   children: PropTypes.node,
-  returnToInitialStore: PropTypes.func
+  clearMoviesList: PropTypes.func,
+  clearFilter: PropTypes.fuc
 };

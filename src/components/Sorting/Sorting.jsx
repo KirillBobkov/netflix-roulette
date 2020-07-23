@@ -9,8 +9,7 @@ import { withRouter } from 'react-router-dom';
 class Sorting extends React.PureComponent {
 
   handleSortBy = () => {
-    const { fetchDataMovies, filter: { searchBy, search } } = this.props;
-    let { filter: { sortBy } }  = this.props;
+    const { fetchDataMovies, filter: { searchBy, search, sortBy } } = this.props;
     let sortByParam = sortBy === "release_date" ? "vote_average" : "release_date";
 
     fetchDataMovies({

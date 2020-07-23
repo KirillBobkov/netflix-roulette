@@ -1,4 +1,4 @@
-import { SET_SEARCH_BY, SET_NEW_FILTER } from '../actions/filterActions';
+import { SET_SEARCH_BY, SET_NEW_FILTER, CLEAR_FILTER } from '../actions/filterActions';
   
   let initialState = {
     sortBy: "release_date",
@@ -25,6 +25,10 @@ import { SET_SEARCH_BY, SET_NEW_FILTER } from '../actions/filterActions';
       case SET_NEW_FILTER: {
         const newFilter = { ...action.payload };
         return { ...state, ...newFilter };
+      }
+
+      case CLEAR_FILTER: {
+        return initialState;
       }
   
       default: 
