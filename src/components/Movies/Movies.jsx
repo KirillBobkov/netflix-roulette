@@ -3,21 +3,22 @@ import { Movie } from '../Movie';
 import './Movies.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fillStore } from '../../store';
-import { getMovies } from '../../utils';
-import { fetchAndStore } from '../../utils';
+import { fetchMovies } from '../../store/actions/movieActions';
 
 //Get data from server
-class MoviesData extends React.Component {
-    componentDidMount() { 
-      const { fillStore } = this.props;
+class MoviesData extends React.PureComponent {
+
+    // BY DEFAULT MAIN PAGE WITH MOVIES IS EMPTY
+
+    // componentDidMount() { 
+    //   const { fetchDataMovies, isMainPage } = this.props;
       
-      fetchAndStore( getMovies({
-        sortBy: "release_date",
-        sortOrder: "asc",
-        searchBy: "title"
-      }), fillStore );
-    }
+    //   fetchDataMovies({
+    //     sortBy: "release_date",
+    //     sortOrder: "asc",
+    //     searchBy: "title"
+    //   });
+    // }
 
     render() {
         const { list, render } = this.props;
@@ -25,8 +26,15 @@ class MoviesData extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ list: state.list });
-const mapDispatchToProps = { fillStore };
+const mapStateToProps = (state, ownProps) => { 
+  return { list: state.list };
+
+};
+
+const mapDispatchToProps = dispatch => ({
+    fetchDataMovies: (config) => dispatch(fetchMovies(config))
+});
+
 export const MoviesDataWrapper = connect(mapStateToProps, mapDispatchToProps)(MoviesData);
 
 //Create a node list from movies array
@@ -43,7 +51,7 @@ export const MoviesList = ({ list }) => {
         <ul className='movies__container'>
           {hasMovies
               ? <MoviesItems list={list} />
-              : null}
+              : <li className='movies__error'>No movies found!</li>}
         </ul>
       </div>
     );
@@ -63,7 +71,7 @@ MoviesList.propTypes = {
 
 MoviesData.propTypes = {
   render: PropTypes.func,
-  fillStore: PropTypes.func,
+  // fetchDataMovies: PropTypes.func,
+  // isMainPage: PropTypes.bool,
   list: PropTypes.array
 };
-

@@ -3,27 +3,36 @@ import { Button } from '../primitives';
 import './Sorting.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fillStore } from '../../store';
-import { fetchAndStore, getMovies } from '../../utils';
+import { fetchMovies } from '../../store/actions/movieActions';
+import { withRouter } from 'react-router-dom';
 
 class Sorting extends React.PureComponent {
 
   handleSortBy = () => {
-    const { fillStore, filter: { searchBy, search } } = this.props;
-    let { filter: { sortBy } }  = this.props;
+    const { fetchDataMovies, filter: { searchBy, search, sortBy } } = this.props;
+    let sortByParam = sortBy === "release_date" ? "vote_average" : "release_date";
 
-    sortBy === "release_date" ? sortBy = "vote_average" : sortBy = "release_date";
-
-    fetchAndStore( getMovies({
-        sortBy: sortBy,
+    fetchDataMovies({
+        sortBy: sortByParam,
         sortOrder: "asc",
-        searchBy: searchBy,
-        search: search
-      }), fillStore 
+        searchBy,
+        search,
+      });
+  }
+
+  renderMoviePageUI() {
+    const { list, filter: { searchBy } } = this.props;
+
+    return (
+      <div className='sorting'>
+        <div className='sorting__container'>
+          <span className='sorting__match-movies'>Filtered by {searchBy}</span>
+        </div>
+      </div>
     );
   }
 
-  render() {
+  renderMainPageUI() {
     const { list, filter: { sortBy } } = this.props;
     const sortByDate = sortBy === "release_date";
     const dateClassName = sortByDate ? 'button--choosen' : '';
@@ -51,10 +60,19 @@ class Sorting extends React.PureComponent {
       </div>
     );
   }
+
+  render() {
+    const { isMoviePage } = this.props;
+  
+    return isMoviePage
+    ? this.renderMoviePageUI()
+    : this.renderMainPageUI();
+  }
 }
 
 Sorting.propTypes = {
-  fillStore: PropTypes.func,
+  fetchDataMovies: PropTypes.func,
+  isMoviePage: PropTypes.bool,
   list:  PropTypes.array,
   filter: PropTypes.shape({
     sortBy: PropTypes.string,
@@ -62,6 +80,19 @@ Sorting.propTypes = {
     search: PropTypes.string
   })
 };
-const mapStateToProps = state => ({ list: state.list, filter: state.filter  });
-const mapDispatchToProps = { fillStore };
-export default connect(mapStateToProps, mapDispatchToProps)(Sorting);
+
+const mapStateToProps = (state, ownProps) => { 
+  const { list, filter } = state;
+
+  return { 
+    list, 
+    filter, 
+    isMoviePage: Boolean(ownProps.match.params.id) };
+};
+
+const mapDispatchToProps = dispatch => ({
+    fetchDataMovies: (config) => dispatch(fetchMovies(config))
+});
+
+export default withRouter( connect(mapStateToProps, mapDispatchToProps)(Sorting) );
+
