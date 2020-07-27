@@ -1,13 +1,13 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const isDev = process.env.NODE_ENV === 'development';
 const modeName = process.env.NODE_ENV;
+const isDev = process.env.NODE_ENV === 'development';
 
 const cssLoaders = (extension) => {
   const loaderConfig = [
@@ -27,45 +27,32 @@ const cssLoaders = (extension) => {
 
 module.exports = {
   mode: modeName,
-  optimization: {
-    minimizer: [new TerserPlugin()]
+
+   output: {
+    filename: 'js/[name].js',
+    path: path.resolve('./public'),
   },
-  context: path.join(__dirname, 'src'),
-  entry: {
-    main: ['@babel/polyfill', './index.js']
-  },
-  output: {
-    filename: '[name].[hash].js',
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/'
-  },
+
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
-  devtool: isDev ? 'source-map' : '',
-  devServer: {
-    port: 4000,
-    hot: isDev,
-    historyApiFallback: true
-  },
-  watch: true,
   
   plugins: [
+    isDev ? new Webpack.NamedModulesPlugin() : new Webpack.HashedModuleIdsPlugin(),
     new Webpack.optimize.ModuleConcatenationPlugin(),
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css'
-    }),
-    new HtmlWebpackPlugin({
-      template: './index.html',
-      collapse: !isDev
+      filename: '[name].css'
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: path.resolve(__dirname, 'src/assets/images/posters'), to: 'posters' }
+        { from: 'src/assets/images/posters', to: './public/posters' }
       ]
     })
-  ],
+  ].filter(Boolean),
+
   module: {
     rules: [
       {
@@ -76,11 +63,11 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: [
-                ['@babel/preset-react'],
-                ['@babel/preset-env']
+                '@babel/preset-react',
+                '@babel/preset-env'
               ],
               plugins: [
-              '@babel/plugin-proposal-class-properties'
+                '@babel/plugin-proposal-class-properties',
               ]
             }
           },
