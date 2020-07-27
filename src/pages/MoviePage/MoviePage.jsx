@@ -1,15 +1,15 @@
 import React from 'react';
 import { Header } from '../../components/Header';
 import { Main } from '../../components/Main';
-import { Toolbar } from '../../components/Toolbar';
-import { Sorting } from '../../components/Sorting';
 import { MoviesListContainer } from '../../components/Movies';
 import { Footer } from '../../components/Footer';
+import { Sorting } from '../../components/Sorting';
+import { MovieInfo } from '../../components/MovieInfo';
 
-export const MainPage = () => (
+export const MoviePage = (props) => (
   <>
     <Header>
-      <Toolbar />
+      <MovieInfo />
     </Header>
     <Main>
       <Sorting />
@@ -18,3 +18,6 @@ export const MainPage = () => (
     <Footer />
   </>
 );
+
+
+

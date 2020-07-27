@@ -36,7 +36,8 @@ module.exports = {
   },
   output: {
     filename: '[name].[hash].js',
-    path: path.join(__dirname, 'dist')
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -44,7 +45,8 @@ module.exports = {
   devtool: isDev ? 'source-map' : '',
   devServer: {
     port: 4000,
-    hot: isDev
+    hot: isDev,
+    historyApiFallback: true
   },
   watch: true,
   

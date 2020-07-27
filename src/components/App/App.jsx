@@ -1,13 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './App.scss';
-import { MainPage } from '../../pages/MainPage';
+import { MainPage, MoviePage, SearchPage, NotFound } from '../../pages';
 import { ErrorBoundary } from '../ErrorBoundary';
-
+import { Switch, Route } from "react-router-dom";
+import { Spinner } from '../Spinner';
 
 export const App = () => (
   <ErrorBoundary>
-    <MainPage />
-
-    {/* <MoviePage /> prepared for task 5 */}
+    <Switch>
+      <Route exact path='/movies' component={MainPage} />
+      <Route path='/film/:id' component={MoviePage} />
+      <Route path='/search/:query' component={SearchPage} />
+      <Route component={NotFound} />
+    </Switch>
+   
+    <Spinner />
   </ErrorBoundary>
-);
+  );
+

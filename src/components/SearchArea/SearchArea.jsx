@@ -1,44 +1,114 @@
 import React from 'react';
 import { Input, Button } from '../primitives';
 import PropTypes from 'prop-types';
+import { fetchMovies } from '../../store/actions/movieActions';
+import { connect } from 'react-redux';
+import { history } from '../../utils/history';
+import { withRouter } from 'react-router-dom';
 
-export class SearchArea extends React.PureComponent {
-  render() {
+class SearchArea extends React.PureComponent {
+  state = {
+    inputSearchValue: '',
+  }
+
+  componentDidMount() {
     const { 
-      handleInputChange, 
-      inputSearchValue, 
-      handleReset, 
-      handleSearchMovies 
+      isSearchPage, 
+      fetchDataMovies, 
+      filter: { searchBy, sortBy }, 
+      match: {  
+        params: { query } 
+      } 
     } = this.props;
+
+    if (isSearchPage) {
+      this.setState({ inputSearchValue: query });
+  
+      fetchDataMovies({
+        sortBy,
+        sortOrder: "asc",
+        searchBy,
+        search: query
+      });
+    }
+  }
+
+  handleSearchMovies = () => {
+    const { inputSearchValue } = this.state;
+    const { fetchDataMovies, filter: { searchBy, sortBy } } = this.props;
+    
+    const uri = encodeURI(inputSearchValue);
+    history.push(`/search/${uri}`);
+
+    if (inputSearchValue) {
+      fetchDataMovies({
+          sortBy,
+          sortOrder: "asc",
+          searchBy,
+          search: inputSearchValue
+        } );
+    }
+  }
+  
+  handleInputChange = (event) => {
+    const { value } = event.target;
+   
+    this.setState({ inputSearchValue: value });
+  }
+
+  render() {
+    const { inputSearchValue } = this.state;
+    const { isSearchPage } = this.props;
+    let inputClassnames = isSearchPage 
+    ? 'toolbar__input toolbar__input--full-width' 
+    : 'toolbar__input';
 
     return (
       <div className='toolbar__search'>
         <Input  
-          className='toolbar__input'
+          className={inputClassnames}
           placeholder='Search'
-          onChange={handleInputChange}
+          onChange={this.handleInputChange}
           value={inputSearchValue}
         />
-        <Button 
-          className='button--reset'
-          text='reset'
-          onClick={handleReset}
-        />
-        <Button 
-          className='button--search'
-          text='Search'
-          onClick={handleSearchMovies}
-        />
+        
+        {isSearchPage 
+          ? 
+            <Button 
+              className='button--search-icon'
+              text=''
+              onClick={this.handleSearchMovies}
+            />
+          : 
+            <Button 
+              className='button--search'
+              text='Search'
+              onClick={this.handleSearchMovies}
+            />}
       </div>
     );
   }
 }
 
 SearchArea.propTypes = {
-  handleSearchMovies: PropTypes.func,
-  handleInputChange: PropTypes.func,
-  handleReset: PropTypes.func,
-  inputSearchValue: PropTypes.string
+  fetchDataMovies: PropTypes.func,
+  filter: PropTypes.object,
+  match: PropTypes.object,
+  isSearchPage: PropTypes.bool
 };
 
+const mapStateToProps = (state, ownProps) => {
+  const { filter } = state;
+
+  return { 
+    filter, 
+    isSearchPage: ownProps.match.path.includes('search')
+  };
+};
+  
+const mapDispatchToProps = dispatch => ({
+  fetchDataMovies: (config) => dispatch(fetchMovies(config))
+});
+
+export default withRouter ( connect(mapStateToProps, mapDispatchToProps)(SearchArea) );
 

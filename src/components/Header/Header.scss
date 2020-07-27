@@ -3,7 +3,7 @@
 
     &__container {
         margin: 0 auto;
-        height: 318px;
+        min-height: 318px;
         background-size: cover;
         width: 960px;    
     }
@@ -12,10 +12,11 @@
         color: #F65261;
         font-size: 16px;
         line-height: 16px;
-        padding: 19px 47px 52px 48px;
+        padding: 19px 47px 20px 48px;
 
         &--bold {
            font-family: 'Monseratt-Bold', sans-serif;
         }
     }
+    
 }
