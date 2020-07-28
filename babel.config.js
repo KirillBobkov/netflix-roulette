@@ -1,4 +1,10 @@
-module.exports ={
+module.exports = {
+  plugins: [
+    ["@babel/transform-runtime", {
+      "regenerator": true
+    }]
+  ],
+  
     presets: [
         ["@babel/preset-env", {
           "useBuiltIns": "entry"

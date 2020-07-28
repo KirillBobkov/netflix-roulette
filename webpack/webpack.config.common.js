@@ -28,14 +28,8 @@ module.exports = {
     isDev ? new Webpack.NamedModulesPlugin() : new Webpack.HashedModuleIdsPlugin(),
     new Webpack.optimize.ModuleConcatenationPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: 'css/[name].css'
     }),
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: 'src/assets/images', to: './images' },
-        { from: 'src/assets/fonts', to: './fonts' },
-      ]
-    })
   ].filter(Boolean),
 
   module: {
@@ -62,8 +56,22 @@ module.exports = {
         ]
       },
       {
-        test: /\.(ico|jpg|jpeg|png|gif|svg|ttf|woff|woff2)(\?.*)?$/,
-        use: 'file-loader'
+        test: /\.(ttf|woff|woff2)(\?.*)?$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          publicPath: '/fonts/',
+          outputPath: 'fonts',
+        }
+      },
+      {
+        test: /\.(ico|png|jpe?g|gif|svg|)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          publicPath: '/images/',
+          outputPath: 'images',
+        }
       }
     ]
   }

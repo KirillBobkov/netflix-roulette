@@ -10,20 +10,21 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
-console.log(__dirname);
-
 module.exports = merge(common, {
   name: 'client',
   target: 'web',
 
   entry: [
     isDev && 'webpack-hot-middleware/client',
-    './src/client.jsx',
+    './src/clientRenderer.jsx',
   ].filter(Boolean),
 
-  plugins: [    
-    !isDev && new CleanWebpackPlugin(),
-    isDev && new webpack.HotModuleReplacementPlugin()
+  plugins: [  
+    !isDev && new CleanWebpackPlugin(),  
+    isDev && new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+    }),
   ].filter(Boolean),
 
   module: {
