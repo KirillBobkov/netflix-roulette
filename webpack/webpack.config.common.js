@@ -27,9 +27,6 @@ module.exports = {
   plugins: [
     isDev ? new Webpack.NamedModulesPlugin() : new Webpack.HashedModuleIdsPlugin(),
     new Webpack.optimize.ModuleConcatenationPlugin(),
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].css'
-    }),
   ].filter(Boolean),
 
   module: {
