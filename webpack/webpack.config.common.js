@@ -9,28 +9,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const modeName = process.env.NODE_ENV;
 const isDev = process.env.NODE_ENV === 'development';
 
-const cssLoaders = (extension) => {
-  const loaderConfig = [
-    {
-      loader: MiniCssExtractPlugin.loader,
-      options: {
-        hmr: isDev,
-        reloadAll: true
-      }
-    },
-    'css-loader'
-  ];
-
-  extension && loaderConfig.push(extension);
-  return loaderConfig;
-};
-
 module.exports = {
   mode: modeName,
 
    output: {
     filename: 'js/[name].js',
-    path: path.resolve('./public'),
+    path: path.resolve('./dist'),
   },
 
   resolve: {
@@ -48,7 +32,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'src/assets/images/posters', to: './public/posters' }
+        { from: 'src/assets/images', to: './images' },
+        { from: 'src/assets/fonts', to: './fonts' },
       ]
     })
   ].filter(Boolean),
@@ -75,14 +60,6 @@ module.exports = {
             loader: 'eslint-loader'
           }
         ]
-      },
-      {
-        test: /\.css$/,
-        use: cssLoaders()
-      },
-      {
-        test: /\.scss$/,
-        use: cssLoaders('sass-loader')
       },
       {
         test: /\.(ico|jpg|jpeg|png|gif|svg|ttf|woff|woff2)(\?.*)?$/,

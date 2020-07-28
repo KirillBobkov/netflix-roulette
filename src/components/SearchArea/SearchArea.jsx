@@ -3,7 +3,7 @@ import { Input, Button } from '../primitives';
 import PropTypes from 'prop-types';
 import { fetchMovies } from '../../store/actions/movieActions';
 import { connect } from 'react-redux';
-import { history } from '../../utils/history';
+// import { history } from '../../utils/history';
 import { withRouter } from 'react-router-dom';
 
 class SearchArea extends React.PureComponent {
@@ -38,7 +38,7 @@ class SearchArea extends React.PureComponent {
     const { fetchDataMovies, filter: { searchBy, sortBy } } = this.props;
     
     const uri = encodeURI(inputSearchValue);
-    history.push(`/search/${uri}`);
+    // history.push(`/search/${uri}`);
 
     if (inputSearchValue) {
       fetchDataMovies({

@@ -1,12 +1,8 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { App } from './components/App';
-import { store, persistor } from './store/store';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { history } from './utils/history';
 import { BrowserRouter } from "react-router-dom";
-
+import configureStore from './store/store';
 
 {/* <BrowserRouter history={history}> 
     <Provider store={store}>
@@ -16,6 +12,13 @@ import { BrowserRouter } from "react-router-dom";
     </Provider>
   </BrowserRouter> */}
 
-hydrate(
-  <div>privet</div>,
-  document.getElementById('root'));
+const store = configureStore(window.PRELOADED_STATE);
+
+const root = ( 
+  <App 
+    Router={BrowserRouter} 
+    store={store}
+  /> 
+  );
+
+hydrate(root, document.getElementById('root'));
