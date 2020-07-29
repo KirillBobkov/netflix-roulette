@@ -12,7 +12,6 @@ function renderHTML(html, preloadedState) {
           <meta charset=utf-8>
           <title>React Server Side Rendering</title>
           <link href="/css/main.css" rel="stylesheet" type="text/css">
-
         </head>
         <body>
           <div id="root">${html}</div>
