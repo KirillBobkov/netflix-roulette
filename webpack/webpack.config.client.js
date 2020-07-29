@@ -33,7 +33,7 @@ module.exports = merge(common, {
         test: /\.scss$/,
         use: [
           {
-            loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
           'sass-loader'

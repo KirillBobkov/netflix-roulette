@@ -12,13 +12,15 @@ export const setMovies = (value) => ({ type: SET_MOVIES, payload: value });
 export const clearMovies = () => ({ type: CLEAR_MOVIES, payload: {} });
 
 export function* fetchMoviesAsync(action) {
-  const response = yield call(getMovies, action.payload);
+  yield put(setLoading());
   
+  const response = yield call(getMovies, action.payload);
   const fetchedMovies = Array.from(response.data.data);
   const filterParams = response.config.params;
 
   yield put(setMovies(fetchedMovies));
   yield put(setNewFilter(filterParams));
+  yield put(setLoading());
 };
 
 export function* watchFetchMovies() {

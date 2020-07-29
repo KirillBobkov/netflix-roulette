@@ -12,14 +12,12 @@ class Sorting extends React.PureComponent {
     const { fetchMovies, filter: { searchBy, search, sortBy } } = this.props;
     let sortByParam = sortBy === "release_date" ? "vote_average" : "release_date";
 
-    // setMovies({
-    //     sortBy: sortByParam,
-    //     sortOrder: "asc",
-    //     searchBy,
-    //     search,
-    //   });
-
-    fetchMovies();
+    fetchMovies({
+      sortBy: sortByParam,
+      sortOrder: "asc",
+      searchBy,
+      search,
+    });
   }
 
   renderMoviePageUI() {
@@ -93,7 +91,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchMovies: () => dispatch(fetchMovies())
+  fetchMovies: (config) => dispatch(fetchMovies(config))
 });
 
 export default withRouter( connect(mapStateToProps, mapDispatchToProps)(Sorting) );

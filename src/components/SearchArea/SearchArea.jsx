@@ -7,11 +7,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 class SearchArea extends React.PureComponent {
-  state = {
-    inputSearchValue: '',
-  }
+  state = { inputSearchValue: '' };
 
-  componentDidMount() {
+  componentWillMount() {
     const { 
       isSearchPage, 
       fetchMovies, 
@@ -38,7 +36,7 @@ class SearchArea extends React.PureComponent {
     const { fetchMovies, filter: { searchBy, sortBy } } = this.props;
     
     const uri = encodeURI(inputSearchValue);
-    // history.push(`/search/${uri}`);
+    history.push(`/search/${uri}`);
 
     if (inputSearchValue) {
         fetchMovies({

@@ -11,7 +11,7 @@ function renderHTML(html, preloadedState) {
         <head>
           <meta charset=utf-8>
           <title>React Server Side Rendering</title>
-          ${process.env.NODE_ENV === 'development' ? '' : '<link href="/css/main.css" rel="stylesheet" type="text/css">'}
+          <link href="/css/main.css" rel="stylesheet" type="text/css">
 
         </head>
         <body>
@@ -39,11 +39,16 @@ export default function serverRenderer() {
       />
     );
 
+    store.runSaga().toPromise().then(() => {
+      const htmlString = renderToString(renderRoot());
+      const preloadedState = store.getState();
+
+      res.send(renderHTML(htmlString, preloadedState));
+    });
+
+    // Do first render, starts initial actions.
     renderToString(renderRoot());
-
-    const htmlString = renderToString(renderRoot());
-    const preloadedState = store.getState();
-
-    res.send(renderHTML(htmlString, preloadedState));
+    // When the first render is finished, send the END action to redux-saga.
+    store.close();
   };
 }

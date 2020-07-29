@@ -5,7 +5,7 @@ import './App.scss';
 import { MainPage, MoviePage, SearchPage, NotFound } from '../../pages';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { Switch, Route } from "react-router-dom";
-// import { Spinner } from '../Spinner';
+import { Spinner } from '../Spinner';
 import { hot } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 
@@ -21,7 +21,7 @@ const App = ({ Router, location, context, store }) => (
           <Route component={NotFound} />
         </Switch>
    
-        {/* <Spinner /> */}
+        <Spinner />
       </ErrorBoundary>
     </Router>
   </Provider>
