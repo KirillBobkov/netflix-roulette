@@ -29,24 +29,32 @@ export default function serverRenderer() {
     const store = configureStore();
     const context = {};
 
-    const renderRoot = () => (
+    store
+      .runSaga()
+      .toPromise()
+      .then(() => {
+        const htmlString = renderToString(
+          <App
+            context={context}
+            location={req.url}
+            Router={StaticRouter}
+            store={store}
+          />
+          );
+
+        const preloadedState = store.getState();
+        res.send(renderHTML(htmlString, preloadedState));
+    });
+
+    // Do first render, starts initial actions.
+    renderToString(
       <App
         context={context}
         location={req.url}
         Router={StaticRouter}
         store={store}
-      />
-    );
+      />);
 
-    store.runSaga().toPromise().then(() => {
-      const htmlString = renderToString(renderRoot());
-      const preloadedState = store.getState();
-
-      res.send(renderHTML(htmlString, preloadedState));
-    });
-
-    // Do first render, starts initial actions.
-    renderToString(renderRoot());
     // When the first render is finished, send the END action to redux-saga.
     store.close();
   };

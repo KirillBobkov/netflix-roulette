@@ -14,11 +14,10 @@ import configureStore from './store/store';
 
 const store = configureStore(window.PRELOADED_STATE);
 
-const root = ( 
+hydrate(
   <App 
     Router={BrowserRouter} 
     store={store}
-  /> 
-  );
-
-hydrate(root, document.getElementById('root'));
+  />, 
+  document.getElementById('root')
+);
