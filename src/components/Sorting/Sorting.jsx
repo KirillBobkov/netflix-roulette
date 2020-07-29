@@ -21,7 +21,7 @@ class Sorting extends React.PureComponent {
   }
 
   renderMoviePageUI() {
-    const { list, filter: { searchBy } } = this.props;
+    const { filter: { searchBy } } = this.props;
 
     return (
       <div className='sorting'>

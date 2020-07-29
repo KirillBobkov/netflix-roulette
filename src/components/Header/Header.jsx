@@ -38,5 +38,5 @@ export default connect(null, mapDispatchToProps)(Header);
 Header.propTypes = {
   children: PropTypes.node,
   clearMoviesList: PropTypes.func,
-  clearFilter: PropTypes.fuc
+  clearFilter: PropTypes.func
 };
