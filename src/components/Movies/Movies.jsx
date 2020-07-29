@@ -32,7 +32,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchDataMovies: (config) => dispatch(fetchMovies(config))
+  fetchMovies: () => dispatch(fetchMovies())
 });
 
 export const MoviesDataWrapper = connect(mapStateToProps, mapDispatchToProps)(MoviesData);

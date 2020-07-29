@@ -14,7 +14,7 @@ class SearchArea extends React.PureComponent {
   componentDidMount() {
     const { 
       isSearchPage, 
-      fetchDataMovies, 
+      fetchMovies, 
       filter: { searchBy, sortBy }, 
       match: {  
         params: { query } 
@@ -24,29 +24,29 @@ class SearchArea extends React.PureComponent {
     if (isSearchPage) {
       this.setState({ inputSearchValue: query });
   
-      fetchDataMovies({
-        sortBy,
-        sortOrder: "asc",
-        searchBy,
-        search: query
+      fetchMovies({
+          sortBy,
+          sortOrder: "asc",
+          searchBy,
+          search: query
       });
     }
   }
 
   handleSearchMovies = () => {
     const { inputSearchValue } = this.state;
-    const { fetchDataMovies, filter: { searchBy, sortBy } } = this.props;
+    const { fetchMovies, filter: { searchBy, sortBy } } = this.props;
     
     const uri = encodeURI(inputSearchValue);
     // history.push(`/search/${uri}`);
 
     if (inputSearchValue) {
-      fetchDataMovies({
-          sortBy,
-          sortOrder: "asc",
-          searchBy,
-          search: inputSearchValue
-        } );
+        fetchMovies({
+              sortBy,
+              sortOrder: "asc",
+              searchBy,
+              search: inputSearchValue
+        });
     }
   }
   
@@ -91,7 +91,7 @@ class SearchArea extends React.PureComponent {
 }
 
 SearchArea.propTypes = {
-  fetchDataMovies: PropTypes.func,
+  fetchMovies: PropTypes.func,
   filter: PropTypes.object,
   match: PropTypes.object,
   isSearchPage: PropTypes.bool
@@ -107,8 +107,9 @@ const mapStateToProps = (state, ownProps) => {
 };
   
 const mapDispatchToProps = dispatch => ({
-  fetchDataMovies: (config) => dispatch(fetchMovies(config))
+  fetchMovies: (config) => dispatch(fetchMovies(config))
 });
+
 
 export default withRouter ( connect(mapStateToProps, mapDispatchToProps)(SearchArea) );
 

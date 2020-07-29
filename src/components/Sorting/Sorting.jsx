@@ -9,15 +9,17 @@ import { withRouter } from 'react-router-dom';
 class Sorting extends React.PureComponent {
 
   handleSortBy = () => {
-    const { fetchDataMovies, filter: { searchBy, search, sortBy } } = this.props;
+    const { fetchMovies, filter: { searchBy, search, sortBy } } = this.props;
     let sortByParam = sortBy === "release_date" ? "vote_average" : "release_date";
 
-    fetchDataMovies({
-        sortBy: sortByParam,
-        sortOrder: "asc",
-        searchBy,
-        search,
-      });
+    // setMovies({
+    //     sortBy: sortByParam,
+    //     sortOrder: "asc",
+    //     searchBy,
+    //     search,
+    //   });
+
+    fetchMovies();
   }
 
   renderMoviePageUI() {
@@ -71,7 +73,7 @@ class Sorting extends React.PureComponent {
 }
 
 Sorting.propTypes = {
-  fetchDataMovies: PropTypes.func,
+  fetchMovies: PropTypes.func,
   isMoviePage: PropTypes.bool,
   list:  PropTypes.array,
   filter: PropTypes.shape({
@@ -91,7 +93,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchDataMovies: (config) => dispatch(fetchMovies(config))
+  fetchMovies: () => dispatch(fetchMovies())
 });
 
 export default withRouter( connect(mapStateToProps, mapDispatchToProps)(Sorting) );
