@@ -10,10 +10,19 @@ class MovieInfo extends React.PureComponent {
   state = { source: 'https://via.placeholder.com/260x365/000000?text=Image+has+not+found' }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     const { movie: { poster_path } } = this.props;
     getImage(poster_path)
       .then((url) => this.setState({ source: url }))
-      .catch((error) => console.log(error));
+      .catch((error) => this.setState(null));
+  }
+
+  componentDidUpdate() {
+    window.scrollTo(0, 0);
+    const { movie: { poster_path } } = this.props;
+    getImage(poster_path)
+      .then((url) => this.setState({ source: url }))
+      .catch((error) => this.setState(null));
   }
 
   render() {
@@ -23,9 +32,11 @@ class MovieInfo extends React.PureComponent {
     return (
       <div className='header__movie'>
         <p className='header__movie-poster'>
-          <img
-            src={this.state.source} width='260'
-            height='365' alt={movie.title}
+          <img 
+            src={this.state.source} 
+            width='260'
+            height='365' 
+            alt={movie.title}
           />
         </p>
         <div className='header__movie-info'>
