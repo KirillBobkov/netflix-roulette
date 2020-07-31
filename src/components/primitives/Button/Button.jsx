@@ -4,6 +4,7 @@ import './Button.scss';
 
 export const Button = (props) =>  (
   <button
+    type={`${props.type || 'button'}`}
     onClick={props.onClick}
     className={'button ' + `${props.className || ''}`}
     id={`${props.id || ''}`}
@@ -13,6 +14,7 @@ export const Button = (props) =>  (
 );
 
 Button.propTypes = {
+  type: PropTypes.string,
   className: PropTypes.string,
   text: PropTypes.string,
   id: PropTypes.string,

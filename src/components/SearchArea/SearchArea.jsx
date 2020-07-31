@@ -20,7 +20,8 @@ export class SearchArea extends React.PureComponent {
     }
   }
 
-  handleSearchMovies = () => {
+  handleSearchSubmit = (event) => {
+    event.preventDefault();
     const { inputSearchValue } = this.state;
     const { fetchMovies, filter: { searchBy, sortBy }, history } = this.props;
     const uri = encodeURI(inputSearchValue);
@@ -51,7 +52,10 @@ export class SearchArea extends React.PureComponent {
     : 'toolbar__input';
 
     return (
-      <div className='toolbar__search'>
+      <form 
+        className='toolbar__search' 
+        onSubmit={this.handleSearchSubmit}
+      >
         <Input  
           className={inputClassnames}
           placeholder='Search'
@@ -62,17 +66,17 @@ export class SearchArea extends React.PureComponent {
         {isSearchPage 
           ? 
             <Button 
+              type='submit'
               className='button--search-icon'
               text=''
-              onClick={this.handleSearchMovies}
             />
           : 
             <Button 
+              type='submit'
               className='button--search'
-              text='Search'
-              onClick={this.handleSearchMovies}
+              text='Search'  
             />}
-      </div>
+      </form>
     );
   }
 }
