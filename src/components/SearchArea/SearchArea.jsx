@@ -1,11 +1,9 @@
 import React from 'react';
 import { Input, Button } from '../primitives';
 import PropTypes from 'prop-types';
-import { fetchMovies } from '../../store/actions/movieActions';
-import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
 
-class SearchArea extends React.PureComponent {
+
+export class SearchArea extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { inputSearchValue: '' };
@@ -21,30 +19,6 @@ class SearchArea extends React.PureComponent {
       });
     }
   }
-
-  
-
-  // componentWillMount() {
-  //   const { 
-  //     isSearchPage, 
-  //     fetchMovies, 
-  //     filter: { searchBy, sortBy }, 
-  //     match: {  
-  //       params: { query } 
-  //     } 
-  //   } = this.props;
-
-  //   if (isSearchPage) {
-  //     this.setState({ inputSearchValue: query });
-  
-  //     fetchMovies({
-  //         sortBy,
-  //         sortOrder: "asc",
-  //         searchBy,
-  //         search: query
-  //     });
-  //   }
-  // }
 
   handleSearchMovies = () => {
     const { inputSearchValue } = this.state;
@@ -111,19 +85,5 @@ SearchArea.propTypes = {
   history: PropTypes.object
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const { filter } = state;
 
-  return { 
-    filter, 
-    isSearchPage: ownProps.match.path.includes('search')
-  };
-};
-  
-const mapDispatchToProps = dispatch => ({
-  fetchMovies: (config) => dispatch(fetchMovies(config))
-});
-
-
-export default withRouter ( connect(mapStateToProps, mapDispatchToProps)(SearchArea) );
 

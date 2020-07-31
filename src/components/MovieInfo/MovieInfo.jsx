@@ -2,11 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './MovieInfo.scss';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { getYear, getImage } from '../../utils';
 
-class MovieInfo extends React.PureComponent {
+export class MovieInfo extends React.PureComponent {
   state = { source: 'https://via.placeholder.com/260x365/000000?text=Image+has+not+found' }
 
   componentDidMount() {
@@ -14,7 +12,7 @@ class MovieInfo extends React.PureComponent {
     const { movie: { poster_path } } = this.props;
     getImage(poster_path)
       .then((url) => this.setState({ source: url }))
-      .catch((error) => this.setState(null));
+      .catch((error) => this.setState({ source:'https://via.placeholder.com/260x365/000000?text=Image+has+not+found'}));
   }
 
   componentDidUpdate() {
@@ -22,7 +20,7 @@ class MovieInfo extends React.PureComponent {
     const { movie: { poster_path } } = this.props;
     getImage(poster_path)
       .then((url) => this.setState({ source: url }))
-      .catch((error) => this.setState(null));
+      .catch((error) => this.setState({ source:'https://via.placeholder.com/260x365/000000?text=Image+has+not+found'}));
   }
 
   render() {
@@ -66,21 +64,6 @@ class MovieInfo extends React.PureComponent {
     );
   }
 };
-
-const mapStateToProps = (state, ownProps) => {
-  const { 
-    match: { 
-      params: { id }
-    }
-  } = ownProps;
-
-  return {
-    state,
-    movie: state.list.find(item => item.id === Number(id))
-  };
-};
-
-export default withRouter( connect(mapStateToProps, null)(MovieInfo) );
 
 MovieInfo.propTypes = {
   movie: PropTypes.shape({
