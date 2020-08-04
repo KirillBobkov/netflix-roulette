@@ -1,1 +1,1 @@
-export { default as SearchParameters } from './SearchParameters';
+export { default as SearchParameters } from './SearchParametersContainer';

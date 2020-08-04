@@ -26,6 +26,7 @@ export const getImage = url => {
         };
         img.src = url;
     });
+
 };
 
 

@@ -1,1 +1,1 @@
-export * from './Movies';
+export { default as MoviesList } from './MoviesContainer';

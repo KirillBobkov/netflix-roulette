@@ -1,10 +1,8 @@
 import React from 'react';
 import { Button } from '../primitives';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { setSearchBy } from '../../store/actions/filterActions';
 
-class SearchParameters extends React.Component {
+export class SearchParameters extends React.Component {
   handleSearchBy = (event) => {
     const searchBy = event.target.innerHTML.toLowerCase();
     const { setSearchBy } = this.props;
@@ -35,10 +33,6 @@ class SearchParameters extends React.Component {
       );
   }
 }
-
-const mapStateToProps = state => ({ filter: state.filter  });
-const mapDispatchToProps = { setSearchBy };
-export default connect(mapStateToProps, mapDispatchToProps)(SearchParameters);
 
 SearchParameters.propTypes = {
   setSearchBy: PropTypes.func,

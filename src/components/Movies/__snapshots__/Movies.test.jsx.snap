@@ -2,6 +2,6 @@
 
 exports[`Movies component should be render MoviesDataWrapper correctly 1`] = `ReactWrapper {}`;
 
-exports[`Movies component should be render MoviesListContainer correctly 1`] = `ReactWrapper {}`;
+exports[`Movies component should be render MoviesList correctly 1`] = `ReactWrapper {}`;
 
 exports[`Movies component should be render movies correctly 1`] = `ReactWrapper {}`;

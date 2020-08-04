@@ -1,1 +1,1 @@
-export { default as Sorting } from './Sorting';
+export { default as Sorting } from './SortingContainer';
