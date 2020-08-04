@@ -1,27 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from '../primitives';
 import './Sorting.scss';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { fetchMovies } from '../../store/actions/movieActions';
-import { withRouter } from 'react-router-dom';
 
-class Sorting extends React.PureComponent {
-
+export class Sorting extends React.PureComponent {
   handleSortBy = () => {
-    const { fetchDataMovies, filter: { searchBy, search, sortBy } } = this.props;
+    const { fetchMovies, filter: { searchBy, search, sortBy } } = this.props;
     let sortByParam = sortBy === "release_date" ? "vote_average" : "release_date";
 
-    fetchDataMovies({
-        sortBy: sortByParam,
-        sortOrder: "asc",
-        searchBy,
-        search,
-      });
+    fetchMovies({
+      sortBy: sortByParam,
+      sortOrder: "asc",
+      searchBy,
+      search,
+    });
   }
 
   renderMoviePageUI() {
-    const { list, filter: { searchBy } } = this.props;
+    const { filter: { searchBy } } = this.props;
 
     return (
       <div className='sorting'>
@@ -71,7 +67,7 @@ class Sorting extends React.PureComponent {
 }
 
 Sorting.propTypes = {
-  fetchDataMovies: PropTypes.func,
+  fetchMovies: PropTypes.func,
   isMoviePage: PropTypes.bool,
   list:  PropTypes.array,
   filter: PropTypes.shape({
@@ -81,18 +77,4 @@ Sorting.propTypes = {
   })
 };
 
-const mapStateToProps = (state, ownProps) => { 
-  const { list, filter } = state;
-
-  return { 
-    list, 
-    filter, 
-    isMoviePage: Boolean(ownProps.match.params.id) };
-};
-
-const mapDispatchToProps = dispatch => ({
-    fetchDataMovies: (config) => dispatch(fetchMovies(config))
-});
-
-export default withRouter( connect(mapStateToProps, mapDispatchToProps)(Sorting) );
 

@@ -10,7 +10,7 @@ export class Movie extends React.Component {
   componentDidMount() {
     getImage(this.props.movie.poster_path)
       .then((url) => this.setState({ source: url }))
-      .catch((error) => console.log(error));
+      .catch((error) => this.setState({ source:'https://via.placeholder.com/260x365/000000?text=Image+has+not+found'}));
   }
 
   render() {

@@ -1,21 +1,17 @@
-import rootReducer from './reducers/rootReducer';
 import { createStore, applyMiddleware } from 'redux';
-import thunk from "redux-thunk";
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import createSagaMiddleware, { END } from 'redux-saga';
 
-const persistConfig = {
-  key: 'root',
-  storage: storage
+import rootReducer from '../store/reducers/rootReducer';
+import { watchFetchMovies } from '../store/actions/movieActions';
+
+const sagaMiddleware = createSagaMiddleware();
+
+export default (initialState) => {
+  const store = createStore(rootReducer, initialState, applyMiddleware(sagaMiddleware));
+
+  sagaMiddleware.run(watchFetchMovies);
+  store.runSaga = () => sagaMiddleware.run(watchFetchMovies);
+  store.close = () => store.dispatch(END);
+
+  return store;
 };
-
-const pReducer = persistReducer(persistConfig, rootReducer);
-const middleware = applyMiddleware(thunk);
-const store = createStore(pReducer, middleware);
-const persistor = persistStore(store);
-
-export { persistor, store };
-
-
-
-

@@ -3,7 +3,7 @@ import { Header } from '../../components/Header';
 import { Main } from '../../components/Main';
 import { Toolbar } from '../../components/Toolbar';
 import { Sorting } from '../../components/Sorting';
-import { MoviesListContainer } from '../../components/Movies';
+import { MoviesList } from '../../components/Movies';
 import { Footer } from '../../components/Footer';
 
 export const MainPage = () => (
@@ -13,7 +13,7 @@ export const MainPage = () => (
     </Header>
     <Main>
       <Sorting />
-      <MoviesListContainer />
+      <MoviesList />
     </Main>
     <Footer />
   </>

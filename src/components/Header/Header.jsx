@@ -2,12 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Header.scss';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { clearMovies } from '../../store/actions/movieActions';
-import { clearFilter } from '../../store/actions/filterActions';
 
-const Header = (props) => {
-
+export const Header = (props) => {
   const handleClearMovies = () => {
     props.clearMoviesList();
     props.clearFilter();
@@ -27,16 +23,8 @@ const Header = (props) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  clearMoviesList: () => dispatch(clearMovies()),
-  clearFilter: () => dispatch(clearFilter())
-});
-
-
-export default connect(null, mapDispatchToProps)(Header);
-
 Header.propTypes = {
   children: PropTypes.node,
   clearMoviesList: PropTypes.func,
-  clearFilter: PropTypes.fuc
+  clearFilter: PropTypes.func
 };

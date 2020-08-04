@@ -1,5 +1,5 @@
 import React from 'react';
-import { MoviesItems, MoviesList, MoviesDataWrapper, MoviesListContainer } from './Movies';
+import { MoviesItems, MoviesList, MoviesDataWrapper, MoviesList } from './Movies';
 import { mount } from 'enzyme';
 import { getMovies } from '../../utils';
 import { Provider } from 'react-redux';
@@ -11,13 +11,13 @@ describe('Movies component', () => {
     const mockStore = configureStore();
     const mountWithStore = component => mount(<Provider store={store}> {component} </Provider>);
     let store, 
-        wrapperMoviesListContainer, 
+        wrapperMoviesList, 
         wrapperMoviesDataWrapper, 
         wrapperMoviesItems;
     
     beforeAll(()=>{
       store = mockStore(initialState);
-      wrapperMoviesListContainer = mountWithStore(<MoviesListContainer />);
+      wrapperMoviesList = mountWithStore(<MoviesList />);
       wrapperMoviesDataWrapper = mountWithStore(<MoviesDataWrapper render={MoviesList} />);
       wrapperMoviesItems =  mountWithStore(<MoviesItems list={movies.list} />);
     });
@@ -26,8 +26,8 @@ describe('Movies component', () => {
         expect(wrapperMoviesDataWrapper).toMatchSnapshot();
     }); 
 
-    it('should be render MoviesListContainer correctly', () => {
-        expect(wrapperMoviesListContainer).toMatchSnapshot();
+    it('should be render MoviesList correctly', () => {
+        expect(wrapperMoviesList).toMatchSnapshot();
     }); 
 
     it('should be render movies correctly', () => {
