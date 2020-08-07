@@ -12,11 +12,6 @@ const isDev = process.env.NODE_ENV === 'development';
 module.exports = {
   mode: modeName,
 
-   output: {
-    filename: 'js/[name].js',
-    path: path.resolve('./dist'),
-  },
-
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
@@ -26,7 +21,6 @@ module.exports = {
   
   plugins: [
     isDev ? new Webpack.NamedModulesPlugin() : new Webpack.HashedModuleIdsPlugin(),
-    new Webpack.optimize.ModuleConcatenationPlugin(),
   ].filter(Boolean),
 
   module: {

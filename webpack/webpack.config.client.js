@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+const Webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.config.common');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -19,9 +19,15 @@ module.exports = merge(common, {
     './src/clientRenderer.jsx',
   ].filter(Boolean),
 
+  output: {
+    filename: 'js/[name].js',
+    path: path.resolve('./dist'),
+  },
+
   plugins: [  
     !isDev && new CleanWebpackPlugin(),  
-    isDev && new webpack.HotModuleReplacementPlugin(),
+    isDev && new Webpack.HotModuleReplacementPlugin(),
+    new Webpack.optimize.ModuleConcatenationPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
     }),
@@ -41,4 +47,6 @@ module.exports = merge(common, {
       },
     ]
   }
+
+  
 });

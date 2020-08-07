@@ -6,7 +6,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development  node ./server",
     "prod": "cross-env NODE_ENV=production  node ./server",
-    "build": "cross-env NODE_ENV=production webpack --config ./webpack",
+    "build:server": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.server.js",
+    "build:client": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.client.js",
+    "build": "npm run build:client && npm run build:server",
     "test": "jest --coverage --updateSnapshot",
     "test:watch": "npm test -- --watch",
     "cypress": "cypress open"
@@ -26,6 +28,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.6.0",
     "react-hot-loader": "^4.8.4",
+    "react-loadable-ssr-addon": "^0.3.0",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^5.2.0",
