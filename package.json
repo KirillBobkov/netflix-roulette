@@ -2,9 +2,8 @@
   "name": "netflix-roulette",
   "version": "1.0.0",
   "description": "The idea is to create a single page application, which will allow users to\r search the Movies DB database.",
-  "main": "server/index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development  node ./server",
+    "start": "npm run build && cross-env NODE_ENV=development  node ./server",
     "prod": "cross-env NODE_ENV=production  node ./server",
     "build:server": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.server.js",
     "build:client": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.client.js",
@@ -20,6 +19,8 @@
   "author": "Kirill Bobkov",
   "license": "ISC",
   "dependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@hot-loader/react-dom": "^16.13.0",
     "axios": "^0.19.2",
     "express": "^4.17.1",
@@ -28,6 +29,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.6.0",
     "react-hot-loader": "^4.8.4",
+    "react-loadable": "^5.5.0",
     "react-loadable-ssr-addon": "^0.3.0",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
@@ -41,7 +43,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-transform-regenerator": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.10.4",
     "@babel/polyfill": "^7.10.1",

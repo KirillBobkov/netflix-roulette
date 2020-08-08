@@ -18,6 +18,24 @@ module.exports = {
       'react-dom': '@hot-loader/react-dom',
     },
   },
+
+  optimization: {
+    nodeEnv: 'development',
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+          minChunks: 2,
+        },
+        default: {
+          minChunks: 2,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
   
   plugins: [
     isDev ? new Webpack.NamedModulesPlugin() : new Webpack.HashedModuleIdsPlugin(),
@@ -37,7 +55,14 @@ module.exports = {
                 '@babel/preset-env'
               ],
               plugins: [
+                ["@babel/transform-runtime", {
+                   "regenerator": true
+                  }
+                ],
                 '@babel/plugin-proposal-class-properties',
+                '@babel/plugin-proposal-object-rest-spread',
+                '@babel/plugin-syntax-dynamic-import',
+                'react-loadable/babel'
               ]
             }
           },

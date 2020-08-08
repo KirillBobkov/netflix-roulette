@@ -7,10 +7,11 @@ module.exports = merge(common, {
   target: 'node',
   entry: './src/serverRenderer.js',
   externals: [nodeExternals()],
-  
   output: {
-    filename: 'js/[name].server.js',
+    publicPath: '/dist/',
+    filename: '[name].server.js',
     libraryTarget: 'commonjs2',
+    chunkFilename: '[name].chunk.server.js',
   },
 
   module: {

@@ -7,6 +7,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ReactLoadableSSRAddon = require('react-loadable-ssr-addon');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -20,8 +21,10 @@ module.exports = merge(common, {
   ].filter(Boolean),
 
   output: {
-    filename: 'js/[name].js',
+    filename: '[name].client.js',
     path: path.resolve('./dist'),
+    chunkFilename: '[name].chunk.client.js',
+    publicPath: '/dist/'
   },
 
   plugins: [  
@@ -29,8 +32,11 @@ module.exports = merge(common, {
     isDev && new Webpack.HotModuleReplacementPlugin(),
     new Webpack.optimize.ModuleConcatenationPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
+      filename: '[name].css'
     }),
+    new ReactLoadableSSRAddon({
+      filename: 'react-loadable-ssr-addon.json'
+    })
   ].filter(Boolean),
 
   module: {
