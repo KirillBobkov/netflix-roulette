@@ -6,19 +6,18 @@ import Sorting from '../../components/Sorting';
 import { Toolbar } from '../../components/Toolbar';
 import { Footer } from '../../components/Footer';
 
-export default function Searchpage() {
-  return (
-    <>
-      <Header>
-        <Toolbar />
-      </Header>
-      <Main>
-        <Sorting />
-        <MoviesList />
-      </Main>
-      <Footer />
-    </>);
-};
+export const SearchPage = () => (
+  <>
+    <Header>
+      <Toolbar />
+    </Header>
+    <Main>
+      <Sorting />
+      <MoviesList />
+    </Main>
+    <Footer />
+  </>
+);
 
 
 
