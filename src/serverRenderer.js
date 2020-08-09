@@ -13,14 +13,14 @@ export default function serverRenderer() {
     const store = configureStore();
     const context = {};
     
-    const modules = new Set();
+    const modules = [];
 
     store
       .runSaga()
       .toPromise()
       .then(() => {
         const htmlString = renderToString(
-          <Loadable.Capture report={moduleName => modules.add(moduleName)}>
+          <Loadable.Capture report={moduleName => modules.push(moduleName)}>
             <App
               context={context}
               location={req.url}
@@ -53,7 +53,7 @@ export default function serverRenderer() {
                window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
             </script>
             ${scripts.map(script => {
-              return `<script src="/${script.file}"></script>`
+              return `<script src="/${script.file}"></script>`;
             }).join('\n')}
           </body>
         </html>
@@ -63,12 +63,14 @@ export default function serverRenderer() {
 
     // Do first render, starts initial actions.
     renderToString(
-      <App
-        context={context}
-        location={req.url}
-        Router={StaticRouter}
-        store={store}
-      />);
+      <Loadable.Capture report={moduleName => modules.add(moduleName)}>
+        <App
+          context={context}
+          location={req.url}
+          Router={StaticRouter}
+          store={store}
+        />
+      </Loadable.Capture>);
 
 
 

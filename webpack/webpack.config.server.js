@@ -11,7 +11,7 @@ module.exports = merge(common, {
     publicPath: '/dist/',
     filename: '[name].server.js',
     libraryTarget: 'commonjs2',
-    chunkFilename: '[name].chunk.server.js',
+    chunkFilename: '[name].server.js',
   },
 
   module: {

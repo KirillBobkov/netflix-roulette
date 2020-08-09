@@ -8,6 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ReactLoadableSSRAddon = require('react-loadable-ssr-addon');
+const { ReactLoadablePlugin } = require('react-loadable/webpack'); 
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -22,9 +23,8 @@ module.exports = merge(common, {
 
   output: {
     filename: '[name].client.js',
-    path: path.resolve('./dist'),
-    chunkFilename: '[name].chunk.client.js',
-    publicPath: '/dist/'
+    chunkFilename: '[name].client.js',
+    publicPath: '/'
   },
 
   plugins: [  
@@ -36,7 +36,10 @@ module.exports = merge(common, {
     }),
     new ReactLoadableSSRAddon({
       filename: 'react-loadable-ssr-addon.json'
-    })
+    }),
+    new ReactLoadablePlugin({
+      filename: path.resolve(__dirname, 'dist', 'react-loadable.json')
+    }),
   ].filter(Boolean),
 
   module: {
