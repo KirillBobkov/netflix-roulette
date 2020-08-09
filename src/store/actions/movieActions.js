@@ -12,7 +12,7 @@ export const setMovies = (value) => ({ type: SET_MOVIES, payload: value });
 export const clearMovies = () => ({ type: CLEAR_MOVIES, payload: {} });
 
 export function* fetchMoviesAsync(action) {
-  yield put(setLoading());
+  yield put(setLoading(true));
  
   const response = yield call(getMovies, action.payload);
   const fetchedMovies = response.data.data;
@@ -20,7 +20,7 @@ export function* fetchMoviesAsync(action) {
 
   yield put(setMovies(fetchedMovies));
   yield put(setNewFilter(filterParams));
-  yield put(setLoading());
+  yield put(setLoading(false));
 };
 
 export function* watchFetchMovies() {
