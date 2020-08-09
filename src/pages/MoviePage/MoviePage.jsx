@@ -4,11 +4,13 @@ import { Header } from '../../components/Header';
 import { Main } from '../../components/Main';
 import { MoviesList } from '../../components/Movies';
 import { Footer } from '../../components/Footer';
-import { Sorting } from '../../components/Sorting';
+import Sorting from '../../components/Sorting';
 
 const MovieInfoLoadable = Loadable({
   loader: () => import('../../components/MovieInfo'),
-  loading: () => (<div>Loading...</div>)
+  loading: () => (<div>Loading...</div>),
+  modules: ['../../components/MovieInfo'],
+  webpack: () => [require.resolveWeak('../../components/MovieInfo')],
 });
 
 export const MoviePage = () => (

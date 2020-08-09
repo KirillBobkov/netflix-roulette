@@ -17,7 +17,7 @@ const getTemplate = (html, state, scripts, styles) => (
       ${styles.map(style => {
         return `<link href="/${style.file}" rel="stylesheet" />`;
       }).join('\n')}
-    </head>
+      </head>
     <body>
       <div id="root">${html}</div>
       <script>
@@ -31,18 +31,18 @@ const getTemplate = (html, state, scripts, styles) => (
 `
 );
 
-export const serverRenderer = () => {
+export default function serverRenderer() {
   return (req, res) => {
     const store = configureStore();
     const context = {};
-    const modules = [];
+    const modules = new Set();
 
     store
       .runSaga()
       .toPromise()
       .then(() => {
         const template = renderToString(
-          <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+          <Loadable.Capture report={moduleName => modules.add(moduleName)}>
             <App
               context={context}
               location={req.url}

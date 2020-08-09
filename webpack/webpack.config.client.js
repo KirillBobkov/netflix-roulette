@@ -37,9 +37,6 @@ module.exports = merge(common, {
     new ReactLoadableSSRAddon({
       filename: 'react-loadable-ssr-addon.json'
     }),
-    new ReactLoadablePlugin({
-      filename: path.resolve(__dirname, 'dist', 'react-loadable.json')
-    }),
   ].filter(Boolean),
 
   module: {
