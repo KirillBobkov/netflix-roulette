@@ -1,10 +1,24 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import './Movie.scss';
 import { getYear, getImage } from '../../utils';
 import { Link } from 'react-router-dom';
 
-export class Movie extends React.Component {
+type MovieProps = {
+ movie: {
+    poster_path: string,
+    title: string,
+    genres: Array<string>,
+    release_date: string,
+    id: number
+  }
+}
+
+type MovieState = {
+  source: string
+}
+
+export class Movie extends React.Component<MovieProps, MovieState> {
   state = { source: 'https://via.placeholder.com/260x365/000000?text=Image+has+not+loaded' }
 
   componentDidMount() {
@@ -46,13 +60,3 @@ export class Movie extends React.Component {
     );
   }
 }
-
-Movie.propTypes = {
-  movie: PropTypes.shape({
-    poster_path: PropTypes.string,
-    title: PropTypes.string,
-    genres: PropTypes.array,
-    release_date: PropTypes.string,
-    id: PropTypes.number
-  })
-};

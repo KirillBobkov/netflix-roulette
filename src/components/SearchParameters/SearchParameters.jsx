@@ -1,10 +1,19 @@
+// @flow
 import React from 'react';
 import { Button } from '../primitives';
-import PropTypes from 'prop-types';
 
-export class SearchParameters extends React.Component {
-  handleSearchBy = (event) => {
-    const searchBy = event.target.innerHTML.toLowerCase();
+type SearchParametersProps = {
+  setSearchBy: Function,
+  filter: {
+    sortBy: string,
+    searchBy: string,
+    search: string
+  }
+}
+
+export class SearchParameters extends React.PureComponent<SearchParametersProps> {
+  handleSearchBy = (event: SyntheticEvent<HTMLButtonElement>) => {
+    const searchBy = event.currentTarget.innerHTML.toLowerCase();
     const { setSearchBy } = this.props;
 
     setSearchBy(searchBy);
@@ -34,14 +43,6 @@ export class SearchParameters extends React.Component {
   }
 }
 
-SearchParameters.propTypes = {
-  setSearchBy: PropTypes.func,
-  filter: PropTypes.shape({
-    sortBy: PropTypes.string,
-    searchBy: PropTypes.string,
-    search: PropTypes.string
-  })
-};
 
 
 

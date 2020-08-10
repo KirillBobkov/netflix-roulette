@@ -1,9 +1,20 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Button } from '../primitives';
 import './Sorting.scss';
 
-export class Sorting extends React.PureComponent {
+type SortingProps = {
+  fetchMovies: Function,
+  isMoviePage: boolean,
+  list:  Array<Object>,
+  filter: {
+    sortBy: string,
+    searchBy: string,
+    search: string
+  }
+};
+
+export class Sorting extends React.PureComponent<SortingProps> {
   handleSortBy = () => {
     const { fetchMovies, filter: { searchBy, search, sortBy } } = this.props;
     let sortByParam = sortBy === "release_date" ? "vote_average" : "release_date";
@@ -66,15 +77,5 @@ export class Sorting extends React.PureComponent {
   }
 }
 
-Sorting.propTypes = {
-  fetchMovies: PropTypes.func,
-  isMoviePage: PropTypes.bool,
-  list:  PropTypes.array,
-  filter: PropTypes.shape({
-    sortBy: PropTypes.string,
-    searchBy: PropTypes.string,
-    search: PropTypes.string
-  })
-};
 
 

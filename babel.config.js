@@ -4,6 +4,7 @@ module.exports = {
           "useBuiltIns": "entry"
         }],
         '@babel/preset-react',
+        "@babel/preset-flow"
       ],
       env: {
           test: {
@@ -20,3 +21,4 @@ module.exports = {
           },
       }
 };
+

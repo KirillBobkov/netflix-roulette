@@ -1,10 +1,21 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { Input, Button } from '../primitives';
-import PropTypes from 'prop-types';
 
+type SearchAreaProps = {
+  fetchMovies: Function,
+  filter: Object,
+  match: Object,
+  isSearchPage: boolean,
+  history: Object
+}
 
-export class SearchArea extends React.PureComponent {
-  constructor(props) {
+type SearchAreaState = {
+  inputSearchValue: string
+}
+
+export class SearchArea extends React.PureComponent<SearchAreaProps, SearchAreaState> {
+  constructor(props : SearchAreaProps) {
     super(props);
     this.state = { inputSearchValue: '' };
 
@@ -20,7 +31,7 @@ export class SearchArea extends React.PureComponent {
     }
   }
 
-  handleSearchSubmit = (event) => {
+  handleSearchSubmit = (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const { inputSearchValue } = this.state;
     const { fetchMovies, filter: { searchBy, sortBy }, history } = this.props;
@@ -38,9 +49,9 @@ export class SearchArea extends React.PureComponent {
     }
   }
   
-  handleInputChange = (event) => {
-    const { value } = event.target;
-   
+  handleInputChange = (event: SyntheticEvent<HTMLButtonElement>) => {
+    const { value } = event.currentTarget;
+    
     this.setState({ inputSearchValue: value });
   }
 
@@ -81,13 +92,7 @@ export class SearchArea extends React.PureComponent {
   }
 }
 
-SearchArea.propTypes = {
-  fetchMovies: PropTypes.func,
-  filter: PropTypes.object,
-  match: PropTypes.object,
-  isSearchPage: PropTypes.bool,
-  history: PropTypes.object
-};
+
 
 
 

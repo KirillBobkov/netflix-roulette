@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import './App.scss';
 import { MainPage, MoviePage, SearchPage } from '../../pages';
@@ -16,7 +15,7 @@ const NotFoundLoadable = Loadable({
   webpack: () => [require.resolveWeak('../../pages/NotFound')],
 });
 
-const App = ({ Router, location, context, store }) => (
+const App = ({ Router, location, context, store }: Props) => (
   <Provider store={store}>
     <Router location={location} context={context}>
       <ErrorBoundary>

@@ -1,10 +1,26 @@
 /* eslint-disable react/jsx-indent */
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import './MovieInfo.scss';
 import { getYear, getImage } from '../../utils';
 
-export class MovieInfo extends React.PureComponent {
+type MovieInfoProps = {
+  movie: {
+    poster_path: string,
+    title: number,
+    tagline: string,
+    runtime: number,
+    vote_average: number,
+    overview: string,
+    release_date: string
+  }
+}
+
+type MovieInfoState = {
+  source: string
+}
+
+export class MovieInfo extends React.PureComponent<MovieInfoProps, MovieInfoState> {
   state = { source: 'https://via.placeholder.com/260x365/000000?text=Image+has+not+found' }
 
   componentDidMount() {
@@ -65,15 +81,3 @@ export class MovieInfo extends React.PureComponent {
   }
 };
 
-MovieInfo.propTypes = {
-  movie: PropTypes.shape({
-    poster_path: PropTypes.string,
-    title: PropTypes.string,
-    tagline: PropTypes.string,
-    runtime: PropTypes.number,
-    vote_average: PropTypes.number,
-    overview: PropTypes.string,
-    genres: PropTypes.array,
-    release_date: PropTypes.string
-  })
-};

@@ -1,9 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import * as React from 'react';
 import './Header.scss';
 import { Link } from 'react-router-dom';
 
-export const Header = (props) => {
+type HeaderProps = {
+    clearMoviesList: Function,
+    clearFilter: Function,
+    children? : React.Node
+}
+
+export const Header = (props : HeaderProps) => {
   const handleClearMovies = () => {
     props.clearMoviesList();
     props.clearFilter();
@@ -21,10 +27,4 @@ export const Header = (props) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  children: PropTypes.node,
-  clearMoviesList: PropTypes.func,
-  clearFilter: PropTypes.func
 };
