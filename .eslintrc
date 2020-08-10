@@ -3,7 +3,13 @@
   "extends": ["standard-react"],
   "rules": {
     "semi": [1, "always"],
-    "space-before-function-paren": 0
+    "space-before-function-paren": 0,
+      "import/prefer-default-export": "off",
+      "import/import/extensions": "off"
+  },
+  "globals": {
+    "window": true,
+    "document": true
   }
 }
 

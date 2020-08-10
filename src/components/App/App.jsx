@@ -1,12 +1,13 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import './App.scss';
-import { MainPage, MoviePage, SearchPage } from '../../pages';
-import { ErrorBoundary } from '../ErrorBoundary';
-import { Switch, Route } from "react-router-dom";
-import { Spinner } from '../Spinner';
+import { Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import Loadable from 'react-loadable';
+import { Spinner } from '../Spinner';
+import { ErrorBoundary } from '../ErrorBoundary';
+import { MainPage, MoviePage, SearchPage } from '../../pages';
 
 const NotFoundLoadable = Loadable({
   loader: () => import('../../pages/NotFound'),
@@ -15,7 +16,9 @@ const NotFoundLoadable = Loadable({
   webpack: () => [require.resolveWeak('../../pages/NotFound')],
 });
 
-const App = ({ Router, location, context, store }: Props) => (
+const App = ({
+  Router, location, context, store,
+}) => (
   <Provider store={store}>
     <Router location={location} context={context}>
       <ErrorBoundary>
@@ -25,12 +28,12 @@ const App = ({ Router, location, context, store }: Props) => (
           <Route path='/search/:query' component={SearchPage} />
           <Route component={NotFoundLoadable} />
         </Switch>
-   
+
         <Spinner />
       </ErrorBoundary>
     </Router>
   </Provider>
-  
-  );
 
-  export default hot(module)(App);
+);
+
+export default hot(module)(App);

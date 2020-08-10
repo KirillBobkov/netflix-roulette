@@ -6,7 +6,7 @@ import './Sorting.scss';
 type SortingProps = {
   fetchMovies: Function,
   isMoviePage: boolean,
-  list:  Array<Object>,
+  list: Array<Object>,
   filter: {
     sortBy: string,
     searchBy: string,
@@ -17,11 +17,11 @@ type SortingProps = {
 export class Sorting extends React.PureComponent<SortingProps> {
   handleSortBy = () => {
     const { fetchMovies, filter: { searchBy, search, sortBy } } = this.props;
-    let sortByParam = sortBy === "release_date" ? "vote_average" : "release_date";
+    const sortByParam = sortBy === 'release_date' ? 'vote_average' : 'release_date';
 
     fetchMovies({
       sortBy: sortByParam,
-      sortOrder: "asc",
+      sortOrder: 'asc',
       searchBy,
       search,
     });
@@ -41,7 +41,7 @@ export class Sorting extends React.PureComponent<SortingProps> {
 
   renderMainPageUI() {
     const { list, filter: { sortBy } } = this.props;
-    const sortByDate = sortBy === "release_date";
+    const sortByDate = sortBy === 'release_date';
     const dateClassName = sortByDate ? 'button--choosen' : '';
     const ratingClassName = !sortByDate ? 'button--choosen' : '';
 
@@ -70,12 +70,9 @@ export class Sorting extends React.PureComponent<SortingProps> {
 
   render() {
     const { isMoviePage } = this.props;
-  
+
     return isMoviePage
-    ? this.renderMoviePageUI()
-    : this.renderMainPageUI();
+      ? this.renderMoviePageUI()
+      : this.renderMainPageUI();
   }
 }
-
-
-

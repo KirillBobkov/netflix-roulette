@@ -1,1 +1,1 @@
-export * from  './MoviePage';
+export * from './MoviePage.jsx';

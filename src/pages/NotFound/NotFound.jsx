@@ -7,4 +7,4 @@ export default () => (
       Page not found!
     </span>
   </div>
-           );
+);

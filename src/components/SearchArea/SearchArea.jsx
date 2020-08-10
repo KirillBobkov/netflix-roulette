@@ -21,12 +21,12 @@ export class SearchArea extends React.PureComponent<SearchAreaProps, SearchAreaS
 
     if (this.props.isSearchPage) {
       this.state = { inputSearchValue: this.props.match.params.query };
-  
+
       this.props.fetchMovies({
-          sortBy:this.props.filter.sortBy,
-          sortOrder: "asc",
-          searchBy: this.props.filter.searchBy,
-          search:  this.props.match.params.query
+        sortBy: this.props.filter.sortBy,
+        sortOrder: 'asc',
+        searchBy: this.props.filter.searchBy,
+        search: this.props.match.params.query,
       });
     }
   }
@@ -37,62 +37,55 @@ export class SearchArea extends React.PureComponent<SearchAreaProps, SearchAreaS
     const { fetchMovies, filter: { searchBy, sortBy }, history } = this.props;
     const uri = encodeURI(inputSearchValue);
 
-    history.push('/search/'+ inputSearchValue);
+    history.push(`/search/${uri}`);
 
     if (inputSearchValue) {
-        fetchMovies({
-              sortBy,
-              sortOrder: "asc",
-              searchBy,
-              search: inputSearchValue
-        });
+      fetchMovies({
+        sortBy,
+        sortOrder: 'asc',
+        searchBy,
+        search: inputSearchValue,
+      });
     }
   }
-  
+
   handleInputChange = (event: SyntheticEvent<HTMLButtonElement>) => {
     const { value } = event.currentTarget;
-    
+
     this.setState({ inputSearchValue: value });
   }
 
   render() {
     const { inputSearchValue } = this.state;
     const { isSearchPage } = this.props;
-    let inputClassnames = isSearchPage 
-    ? 'toolbar__input toolbar__input--full-width' 
-    : 'toolbar__input';
+    const inputClassnames = isSearchPage
+      ? 'toolbar__input toolbar__input--full-width'
+      : 'toolbar__input';
 
     return (
-      <form 
-        className='toolbar__search' 
+      <form
+        className='toolbar__search'
         onSubmit={this.handleSearchSubmit}
       >
-        <Input  
+        <Input
           className={inputClassnames}
           placeholder='Search'
           onChange={this.handleInputChange}
           value={inputSearchValue}
         />
-        
-        {isSearchPage 
-          ? 
-            <Button 
-              type='submit'
-              className='button--search-icon'
-              text=''
+
+        {isSearchPage
+          ? <Button
+            type='submit'
+            className='button--search-icon'
+            text=''
             />
-          : 
-            <Button 
-              type='submit'
-              className='button--search'
-              text='Search'  
+          : <Button
+            type='submit'
+            className='button--search'
+            text='Search'
             />}
       </form>
     );
   }
 }
-
-
-
-
-

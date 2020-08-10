@@ -6,6 +6,6 @@ Loadable.preloadAll().then(() => {
   app.listen(port, () => {
     console.info(`Express listening on port ${port}`); // eslint-disable-line
   });
-}).catch(err => {
+}).catch((err) => {
   console.log(err);
 });

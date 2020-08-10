@@ -36,7 +36,7 @@ module.exports = {
       },
     },
   },
-  
+
   plugins: [
     isDev ? new Webpack.NamedModulesPlugin() : new Webpack.HashedModuleIdsPlugin(),
   ].filter(Boolean),
@@ -52,24 +52,24 @@ module.exports = {
             options: {
               presets: [
                 '@babel/preset-react',
-                '@babel/preset-env'
+                '@babel/preset-env',
               ],
               plugins: [
-                ["@babel/transform-runtime", {
-                   "regenerator": true
-                  }
+                ['@babel/transform-runtime', {
+                  regenerator: true,
+                },
                 ],
                 '@babel/plugin-proposal-class-properties',
                 '@babel/plugin-proposal-object-rest-spread',
                 '@babel/plugin-syntax-dynamic-import',
-                'react-loadable/babel'
-              ]
-            }
+                'react-loadable/babel',
+              ],
+            },
           },
           {
-            loader: 'eslint-loader'
-          }
-        ]
+            loader: 'eslint-loader',
+          },
+        ],
       },
       {
         test: /\.(ttf|woff|woff2)(\?.*)?$/,
@@ -78,7 +78,7 @@ module.exports = {
           name: '[name].[ext]',
           publicPath: '/fonts/',
           outputPath: 'fonts',
-        }
+        },
       },
       {
         test: /\.(ico|png|jpe?g|gif|svg|)$/i,
@@ -87,8 +87,8 @@ module.exports = {
           name: '[name].[ext]',
           publicPath: '/images/',
           outputPath: 'images',
-        }
-      }
-    ]
-  }
+        },
+      },
+    ],
+  },
 };

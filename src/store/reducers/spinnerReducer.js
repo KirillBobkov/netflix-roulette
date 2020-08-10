@@ -8,7 +8,7 @@ export const spinnerReducer = (state = initialState, action) => {
       return action.payload;
     }
 
-    default: 
+    default:
       return state;
   }
 };

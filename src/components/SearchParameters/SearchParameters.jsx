@@ -28,22 +28,17 @@ export class SearchParameters extends React.PureComponent<SearchParametersProps>
     return (
       <div className='toolbar__search-parameters'>
         <span className='toolbar__search-description'>Search By</span>
-        <Button 
+        <Button
           className={`${searchByTitleClassName} button--left-border`}
           text='Title'
           onClick={this.handleSearchBy}
         />
-        <Button 
+        <Button
           className={`${searchByGenreClassName} button--right-border`}
           text='Genres'
           onClick={this.handleSearchBy}
         />
       </div>
-      );
+    );
   }
 }
-
-
-
-
-

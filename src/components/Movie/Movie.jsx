@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import './Movie.scss';
-import { getYear, getImage } from '../../utils';
 import { Link } from 'react-router-dom';
+import { getYear, getImage } from '../../utils';
 
 type MovieProps = {
  movie: {
@@ -24,7 +24,7 @@ export class Movie extends React.Component<MovieProps, MovieState> {
   componentDidMount() {
     getImage(this.props.movie.poster_path)
       .then((url) => this.setState({ source: url }))
-      .catch((error) => this.setState({ source:'https://via.placeholder.com/260x365/000000?text=Image+has+not+found'}));
+      .catch(() => this.setState({ source: 'https://via.placeholder.com/260x365/000000?text=Image+has+not+found' }));
   }
 
   render() {
@@ -34,10 +34,10 @@ export class Movie extends React.Component<MovieProps, MovieState> {
       <li className='movies__item'>
         <Link to={`/film/${movie.id}`}>
           <p className='movies__poster'>
-            <img 
-              src={this.state.source} 
+            <img
+              src={this.state.source}
               width='260'
-              height='365' 
+              height='365'
               alt={movie.title}
             />
           </p>

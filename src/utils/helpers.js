@@ -1,5 +1,3 @@
 // @flow
 
-export const getYear = ((dateString : string) : number => {
-    return new Date(dateString).getFullYear();
-});
+export const getYear = ((dateString : string) : number => new Date(dateString).getFullYear());
