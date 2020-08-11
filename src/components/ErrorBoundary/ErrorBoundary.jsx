@@ -6,7 +6,12 @@ type ErrorBoundaryProps = {
     children? : React.Node
 }
 
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
+type ErrorBoundaryState = {
+    hasError: boolean,
+    message: string,
+}
+
+export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   static defaultProps = {
     children: null,
   };
@@ -16,7 +21,8 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
     message: 'Something went wrong',
   };
 
-  static getDerivedStateFromError({ message }) {
+  static getDerivedStateFromError(state : ErrorBoundaryState) {
+    const { message } = state;
     return { hasError: true, message };
   }
 
@@ -31,7 +37,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
     );
   }
 
-  render() {
+  render() : any {
     const { hasError } = this.state;
     const { children } = this.props;
 

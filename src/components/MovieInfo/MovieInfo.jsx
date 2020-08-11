@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-indent */
-/* eslint-disable camelcase */
 // @flow
 import React from 'react';
 import './MovieInfo.scss';

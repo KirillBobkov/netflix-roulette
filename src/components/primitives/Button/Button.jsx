@@ -1,8 +1,16 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import './Button.scss';
 
-export const Button = (props) =>  (
+type ButtonProps = {
+  type: string,
+  className: string,
+  text: string,
+  id: string,
+  onClick: Function
+};
+
+export const Button = (props : ButtonProps) =>  (
   <button
     type={`${props.type || 'button'}`}
     onClick={props.onClick}
@@ -13,10 +21,4 @@ export const Button = (props) =>  (
   </button>
 );
 
-Button.propTypes = {
-  type: PropTypes.string,
-  className: PropTypes.string,
-  text: PropTypes.string,
-  id: PropTypes.string,
-  onClick: PropTypes.func
-};
+

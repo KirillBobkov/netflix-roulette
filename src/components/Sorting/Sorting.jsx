@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '../primitives';
 import './Sorting.scss';
+import { getTotalMoviesLength } from '../../store/selectors/moviesSelectors';
 
 type SortingProps = {
   fetchMovies: Function,
@@ -13,6 +14,7 @@ type SortingProps = {
     search: string
   }
 };
+
 
 export class Sorting extends React.PureComponent<SortingProps> {
   handleSortBy = () => {
@@ -48,8 +50,7 @@ export class Sorting extends React.PureComponent<SortingProps> {
     return (
       <div className='sorting'>
         <div className='sorting__container'>
-          <span className='sorting__match-movies'>{list && list.length} movies found</span>
-
+          <span className='sorting__match-movies'>{getTotalMoviesLength(list)} movies found</span>
           <p>
             <span className='sorting__sort-description'>Sort by</span>
             <Button

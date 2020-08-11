@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
+//@flow
+import * as React from 'react';
 import './App.scss';
 import { Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
@@ -8,6 +8,13 @@ import Loadable from 'react-loadable';
 import { Spinner } from '../Spinner';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { MainPage, MoviePage, SearchPage } from '../../pages';
+
+type AppProps = {
+  Router: any,
+  location: any,
+  context: any,
+  store: any
+}
 
 const NotFoundLoadable = Loadable({
   loader: () => import('../../pages/NotFound'),
@@ -18,7 +25,7 @@ const NotFoundLoadable = Loadable({
 
 const App = ({
   Router, location, context, store,
-}) => (
+} : AppProps) => (
   <Provider store={store}>
     <Router location={location} context={context}>
       <ErrorBoundary>

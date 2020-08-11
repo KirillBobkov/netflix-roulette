@@ -1,8 +1,17 @@
+//@flow
 import './Input.scss';
 import React from 'react';
-import PropTypes from 'prop-types';
 
-export const Input = (props) => (
+type InputProps = {
+  type: string,
+  placeholder: string,
+  onChange: Function,
+  value: string,
+  className: string,
+  disabled: boolean
+};
+
+export const Input = (props: InputProps) => (
   <input
     type={props.type}
     className={`input ${props.className || ''}`}
@@ -12,14 +21,3 @@ export const Input = (props) => (
     disabled={props.disabled}
   />
 );
-
-Input.propTypes = {
-  type: PropTypes.string,
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func,
-  value: PropTypes.string,
-  className: PropTypes.string,
-  disabled: PropTypes.bool
-};
-
-
