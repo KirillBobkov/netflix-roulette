@@ -1,5 +1,8 @@
+import {
+  call, put, all, takeEvery,
+} from 'redux-saga/effects';
 import { getMovies } from '../../utils';
-import { setLoading } from '../actions/spinnerActions';
+import { setLoading } from './spinnerActions';
 import { setNewFilter } from './filterActions';
 import { call, put, all, takeEvery } from 'redux-saga/effects';
 
@@ -12,18 +15,17 @@ export const setMovies = (value) => ({ type: SET_MOVIES, payload: value });
 export const clearMovies = () => ({ type: CLEAR_MOVIES, payload: {} });
 
 export function* fetchMoviesAsync(action) {
-  yield put(setLoading());
- 
+  yield put(setLoading(true));
+
   const response = yield call(getMovies, action.payload);
   const fetchedMovies = response.data.data;
   const filterParams = response.config.params;
 
   yield put(setMovies(fetchedMovies));
   yield put(setNewFilter(filterParams));
-  yield put(setLoading());
-};
+  yield put(setLoading(false));
+}
 
 export function* watchFetchMovies() {
   yield takeEvery(FETCH_MOVIES, fetchMoviesAsync);
-};
-
+}

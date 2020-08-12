@@ -1,16 +1,35 @@
+// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../primitives';
-import './Sorting.scss';
+import { getTotalMoviesLength } from '../../store/selectors/moviesSelectors';
+import {
+  SortingWrapper,
+  SortingContainer,
+  SortingDescription,
+  SortingMatchMovies
+} from './Sorting.styles';
 
-export class Sorting extends React.PureComponent {
+type SortingProps = {
+  fetchMovies: Function,
+  isMoviePage: boolean,
+  list: Array<Object>,
+  filter: {
+    sortBy: string,
+    searchBy: string,
+    search: string
+  }
+};
+
+
+export class Sorting extends React.PureComponent<SortingProps> {
   handleSortBy = () => {
     const { fetchMovies, filter: { searchBy, search, sortBy } } = this.props;
-    let sortByParam = sortBy === "release_date" ? "vote_average" : "release_date";
+    const sortByParam = sortBy === 'release_date' ? 'vote_average' : 'release_date';
 
     fetchMovies({
       sortBy: sortByParam,
-      sortOrder: "asc",
+      sortOrder: 'asc',
       searchBy,
       search,
     });
@@ -20,61 +39,49 @@ export class Sorting extends React.PureComponent {
     const { filter: { searchBy } } = this.props;
 
     return (
-      <div className='sorting'>
-        <div className='sorting__container'>
+      <SortingWrapper>
+        <SortingContainer>
           <span className='sorting__match-movies'>Filtered by {searchBy}</span>
-        </div>
-      </div>
+        </SortingContainer>
+      </SortingWrapper>
     );
   }
 
   renderMainPageUI() {
     const { list, filter: { sortBy } } = this.props;
-    const sortByDate = sortBy === "release_date";
-    const dateClassName = sortByDate ? 'button--choosen' : '';
-    const ratingClassName = !sortByDate ? 'button--choosen' : '';
+    const sortByDate = sortBy === 'release_date';
 
     return (
-      <div className='sorting'>
-        <div className='sorting__container'>
-          <span className='sorting__match-movies'>{list && list.length} movies found</span>
-
+      <SortingWrapper>
+        <SortingContainer>
+          <SortingMatchMovies>
+            {getTotalMoviesLength(list)} movies found
+          </SortingMatchMovies>
           <p>
-            <span className='sorting__sort-description'>Sort by</span>
+            <SortingDescription>Sort by</SortingDescription>
             <Button
-              className={`${dateClassName} button--left-border`}
+              leftBorder
+              choosen={sortByDate}
               text='Release date'
               onClick={this.handleSortBy}
             />
             <Button
-              className={`${ratingClassName} button--right-border`}
+              rightBorder
+              choosen={!sortByDate}
               text='Rating'
               onClick={this.handleSortBy}
             />
           </p>
-        </div>
-      </div>
+        </SortingContainer>
+      </SortingWrapper>
     );
   }
 
   render() {
     const { isMoviePage } = this.props;
-  
+
     return isMoviePage
-    ? this.renderMoviePageUI()
-    : this.renderMainPageUI();
+      ? this.renderMoviePageUI()
+      : this.renderMainPageUI();
   }
 }
-
-Sorting.propTypes = {
-  fetchMovies: PropTypes.func,
-  isMoviePage: PropTypes.bool,
-  list:  PropTypes.array,
-  filter: PropTypes.shape({
-    sortBy: PropTypes.string,
-    searchBy: PropTypes.string,
-    search: PropTypes.string
-  })
-};
-
-

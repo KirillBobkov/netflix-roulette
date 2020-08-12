@@ -12,21 +12,33 @@ const isDev = process.env.NODE_ENV === 'development';
 module.exports = {
   mode: modeName,
 
-   output: {
-    filename: 'js/[name].js',
-    path: path.resolve('./dist'),
-  },
-
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
     },
   },
-  
+
+  optimization: {
+    nodeEnv: 'development',
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+          minChunks: 2,
+        },
+        default: {
+          minChunks: 2,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
+
   plugins: [
     isDev ? new Webpack.NamedModulesPlugin() : new Webpack.HashedModuleIdsPlugin(),
-    new Webpack.optimize.ModuleConcatenationPlugin(),
   ].filter(Boolean),
 
   module: {
@@ -40,17 +52,25 @@ module.exports = {
             options: {
               presets: [
                 '@babel/preset-react',
-                '@babel/preset-env'
+                '@babel/preset-env',
               ],
               plugins: [
+                ['@babel/transform-runtime', {
+                  regenerator: true,
+                },
+                ],
+                ["styled-components", { "ssr": true, "displayName": true, "preprocess": false } ],
                 '@babel/plugin-proposal-class-properties',
-              ]
-            }
+                '@babel/plugin-proposal-object-rest-spread',
+                '@babel/plugin-syntax-dynamic-import',
+                'react-loadable/babel',
+              ],
+            },
           },
           {
-            loader: 'eslint-loader'
-          }
-        ]
+            loader: 'eslint-loader',
+          },
+        ],
       },
       {
         test: /\.(ttf|woff|woff2)(\?.*)?$/,
@@ -59,7 +79,7 @@ module.exports = {
           name: '[name].[ext]',
           publicPath: '/fonts/',
           outputPath: 'fonts',
-        }
+        },
       },
       {
         test: /\.(ico|png|jpe?g|gif|svg|)$/i,
@@ -68,8 +88,8 @@ module.exports = {
           name: '[name].[ext]',
           publicPath: '/images/',
           outputPath: 'images',
-        }
-      }
-    ]
-  }
+        },
+      },
+    ],
+  },
 };

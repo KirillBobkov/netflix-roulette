@@ -5,10 +5,10 @@ const initialState = false;
 export const spinnerReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_LOADING: {
-      return !state;
+      return action.payload;
     }
 
-    default: 
+    default:
       return state;
   }
 };

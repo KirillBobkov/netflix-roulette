@@ -1,42 +1,48 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './ErrorBoundary.scss';
+// @flow
+import * as React from 'react';
+import { Error, ErrorMessage } from './ErrorBoundary.styles';
 
-export class ErrorBoundary extends React.Component {
+type ErrorBoundaryProps = {
+    children? : React.Node
+}
+
+type ErrorBoundaryState = {
+    hasError: boolean,
+    message: string,
+}
+
+export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   static defaultProps = {
-    children: null
+    children: null,
   };
 
   state = {
-      hasError: false,
-      message: 'Something went wrong'
-  };   
+    hasError: false,
+    message: 'Something went wrong',
+  };
 
-  static getDerivedStateFromError({ message }) {
+  static getDerivedStateFromError(state : ErrorBoundaryState) {
+    const { message } = state;
     return { hasError: true, message };
   }
 
   renderFallbackUI = () => {
-           const {message} = this.state;
-           return (
-             <div className='error'>
-               <span className='error__message'>
-                 {message}
-               </span>
-             </div>
-           );
-       }
+    const { message } = this.state;
+    return (
+      <Error>
+        <ErrorMessage>
+          {message}
+        </ErrorMessage>
+      </Error>
+    );
+  }
 
-  render() {
-     const { hasError } = this.state;
-     const { children } = this.props;
+  render() : any {
+    const { hasError } = this.state;
+    const { children } = this.props;
 
-     return hasError
-          ? this.renderFallbackUI()
-          : children;
-  };
+    return hasError
+      ? this.renderFallbackUI()
+      : children;
+  }
 }
-
-ErrorBoundary.propTypes = {
-  children: PropTypes.node
-};

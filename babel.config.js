@@ -1,32 +1,26 @@
 module.exports = {
   plugins: [
-    ["@babel/transform-runtime", {
-      "regenerator": true
-    }]
+    ["styled-components", { "ssr": true, "displayName": true, "preprocess": false } ]
   ],
-  
-    presets: [
-        ["@babel/preset-env", {
-          "useBuiltIns": "entry"
-        }],
+  presets: [
+    ['@babel/preset-env', {
+      useBuiltIns: 'entry',
+    }],
+    '@babel/preset-react',
+    '@babel/preset-flow',
+  ],
+  env: {
+    test: {
+      presets: [
+        '@babel/preset-env',
         '@babel/preset-react',
       ],
-      env: {
-          test: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react',
-            ],
-            plugins: [
-              '@babel/plugin-proposal-class-properties',
-              'babel-plugin-transform-es2015-modules-commonjs',
-              'babel-plugin-dynamic-import-node',
-              ["@babel/plugin-transform-runtime",
-                {
-                  "regenerator": true
-                }
-              ]
-            ],
-          },
-      }
+      plugins: [
+        '@babel/plugin-proposal-class-properties',
+        'babel-plugin-transform-es2015-modules-commonjs',
+        '@babel/plugin-syntax-dynamic-import',
+        'react-loadable/babel',
+      ],
+    },
+  },
 };

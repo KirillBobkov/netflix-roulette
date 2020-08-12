@@ -1,28 +1,20 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import './Spinner.scss';
+import { SpinnerWrapper, SpinnerLoader } from './Spinner.styles';
 
-export const Spinner = ({ isOpen }) => {
-    return (
-        isOpen && (
-          <div className='spinner'>
-            <div className='spinner__loader' />
-          </div>
-        )
-    );
-};
+export const Spinner = ({ isOpen }) => (
+  isOpen && (
+    <SpinnerWrapper>
+      <SpinnerLoader />
+    </SpinnerWrapper>
+  )
+);
 
-
-const mapStateToProps = state => ({ isOpen: state.spinner });
+const mapStateToProps = (state) => ({ isOpen: state.spinner });
 
 export default connect(mapStateToProps, null)(Spinner);
 
-Spinner.propTypes = {
-    isOpen: PropTypes.bool
-};
-
 Spinner.defaultProps = {
-    isOpen: false
+  isOpen: false,
 };

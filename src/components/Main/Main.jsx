@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './Main.scss';
+// @flow
+import * as React from 'react';
+import { MainWrapper } from './Main.styles';
 
-export const Main = (props) => <main className='main'>{props.children}</main>;
+type MainProps = {
+  children?: React.Node
+}
 
-Main.propTypes = {
-    children: PropTypes.node
-};
+export const Main = (props : MainProps) => <MainWrapper>{props.children}</MainWrapper>;

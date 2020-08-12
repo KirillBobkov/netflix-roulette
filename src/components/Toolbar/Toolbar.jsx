@@ -1,16 +1,12 @@
 import React from 'react';
 import { SearchArea } from '../SearchArea';
 import { SearchParameters } from '../SearchParameters';
-import './Toolbar.scss';
+import { ToolbarTitle } from './Toolbar.styles';
 
-export class Toolbar extends React.Component {
-  render() {
-    return (
-      <div className='toolbar'>
-        <h2 className='toolbar__title'>Find your movie</h2>
-        <SearchArea />
-        <SearchParameters />
-      </div>
-    );
-  }
-}
+export const Toolbar = () => (
+  <>
+    <ToolbarTitle>Find your movie</ToolbarTitle>
+    <SearchArea />
+    <SearchParameters />
+  </>
+);

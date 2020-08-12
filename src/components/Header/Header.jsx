@@ -1,30 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './Header.scss';
+// @flow
+import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { 
+  HeaderWrapper,
+  HeaderContainer,
+  HeaderTitle,
+  HeaderTitleContent,
+} from './Header.styles';
 
-export const Header = (props) => {
+type HeaderProps = {
+    clearMoviesList: Function,
+    clearFilter: Function,
+    children? : React.Node
+}
+
+export const Header = (props : HeaderProps) => {
   const handleClearMovies = () => {
     props.clearMoviesList();
     props.clearFilter();
   };
 
   return (
-    <header className='header'>
-      <div className='header__container'>
+    <HeaderWrapper>
+      <HeaderContainer>
         <Link to='/movies'>
-          <h1 className='header__title' onClick={handleClearMovies}>
-            <span className='header__title--bold'>netflix</span>roulette
-          </h1>
+          <HeaderTitle onClick={handleClearMovies}>
+            <HeaderTitleContent>netflix</HeaderTitleContent>roulette
+          </HeaderTitle>
         </Link>
         {props.children}
-      </div>
-    </header>
+      </HeaderContainer>
+    </HeaderWrapper>
   );
-};
-
-Header.propTypes = {
-  children: PropTypes.node,
-  clearMoviesList: PropTypes.func,
-  clearFilter: PropTypes.func
 };

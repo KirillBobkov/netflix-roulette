@@ -8,8 +8,10 @@ module.exports = merge(common, {
   entry: './src/serverRenderer.js',
   externals: [nodeExternals()],
   output: {
-    filename: 'js/serverRenderer.js',
+    publicPath: '/dist/',
+    filename: '[name].server.js',
     libraryTarget: 'commonjs2',
+    chunkFilename: '[name].server.js',
   },
 
   module: {
@@ -24,7 +26,7 @@ module.exports = merge(common, {
               modules: true,
             },
           },
-          'sass-loader'
+          'sass-loader',
         ],
       },
     ],

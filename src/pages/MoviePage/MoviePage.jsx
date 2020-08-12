@@ -1,15 +1,22 @@
 import React from 'react';
+import Loadable from 'react-loadable';
 import { Header } from '../../components/Header';
 import { Main } from '../../components/Main';
 import { MoviesList } from '../../components/Movies';
 import { Footer } from '../../components/Footer';
-import { Sorting } from '../../components/Sorting';
-import { MovieInfo } from '../../components/MovieInfo';
+import Sorting from '../../components/Sorting';
 
-export const MoviePage = (props) => (
+const MovieInfoLoadable = Loadable({
+  loader: () => import('../../components/MovieInfo'),
+  loading: () => (<div>Loading...</div>),
+  modules: ['../../components/MovieInfo'],
+  webpack: () => [require.resolveWeak('../../components/MovieInfo')],
+});
+
+export const MoviePage = () => (
   <>
     <Header>
-      <MovieInfo />
+      <MovieInfoLoadable />
     </Header>
     <Main>
       <Sorting />
@@ -18,6 +25,7 @@ export const MoviePage = (props) => (
     <Footer />
   </>
 );
+
 
 
 
