@@ -1,10 +1,7 @@
-import {
-  call, put, all, takeEvery,
-} from 'redux-saga/effects';
 import { getMovies } from '../../utils';
 import { setLoading } from './spinnerActions';
 import { setNewFilter } from './filterActions';
-import { call, put, all, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
 export const SET_MOVIES = 'SET_MOVIE';
 export const CLEAR_MOVIES = 'CLEAR_MOVIES';
