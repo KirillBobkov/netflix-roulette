@@ -1,6 +1,10 @@
 // @flow
 import React from 'react';
 import { Button } from '../primitives';
+import { 
+  SearchParametersDescription, 
+  SearchParametersWrapper 
+} from './SearchParameters.styles';
 
 type SearchParametersProps = {
   setSearchBy: Function,
@@ -22,23 +26,23 @@ export class SearchParameters extends React.PureComponent<SearchParametersProps>
   render() {
     const { filter: { searchBy } } = this.props;
     const searchByTitleMode = searchBy === 'title';
-    const searchByTitleClassName = searchByTitleMode ? 'button--choosen' : '';
-    const searchByGenreClassName = !searchByTitleMode ? 'button--choosen' : '';
 
     return (
-      <div className='toolbar__search-parameters'>
-        <span className='toolbar__search-description'>Search By</span>
+      <SearchParametersWrapper>
+        <SearchParametersDescription>Search By</SearchParametersDescription>
         <Button
-          className={`${searchByTitleClassName} button--left-border`}
+          leftBorder
+          choosen={searchByTitleMode}
           text='Title'
           onClick={this.handleSearchBy}
         />
         <Button
-          className={`${searchByGenreClassName} button--right-border`}
+          rightBorder
+          choosen={!searchByTitleMode}
           text='Genres'
           onClick={this.handleSearchBy}
         />
-      </div>
+      </SearchParametersWrapper>
     );
   }
 }

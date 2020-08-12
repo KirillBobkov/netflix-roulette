@@ -1,7 +1,12 @@
 // @flow
 import * as React from 'react';
-import './Header.scss';
 import { Link } from 'react-router-dom';
+import { 
+  HeaderWrapper,
+  HeaderContainer,
+  HeaderTitle,
+  HeaderTitleContent,
+} from './Header.styles';
 
 type HeaderProps = {
     clearMoviesList: Function,
@@ -16,15 +21,15 @@ export const Header = (props : HeaderProps) => {
   };
 
   return (
-    <header className='header'>
-      <div className='header__container'>
+    <HeaderWrapper>
+      <HeaderContainer>
         <Link to='/movies'>
-          <h1 className='header__title' onClick={handleClearMovies}>
-            <span className='header__title--bold'>netflix</span>roulette
-          </h1>
+          <HeaderTitle onClick={handleClearMovies}>
+            <HeaderTitleContent>netflix</HeaderTitleContent>roulette
+          </HeaderTitle>
         </Link>
         {props.children}
-      </div>
-    </header>
+      </HeaderContainer>
+    </HeaderWrapper>
   );
 };

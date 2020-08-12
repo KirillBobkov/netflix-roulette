@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import './ErrorBoundary.scss';
+import { Error, ErrorMessage } from './ErrorBoundary.styles';
 
 type ErrorBoundaryProps = {
     children? : React.Node
@@ -29,11 +29,11 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   renderFallbackUI = () => {
     const { message } = this.state;
     return (
-      <div className='error'>
-        <span className='error__message'>
+      <Error>
+        <ErrorMessage>
           {message}
-        </span>
-      </div>
+        </ErrorMessage>
+      </Error>
     );
   }
 

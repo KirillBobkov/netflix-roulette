@@ -1,20 +1,20 @@
 //@flow
-import './Input.scss';
 import React from 'react';
+import { InputInnerWrapper } from './Input.styles';
 
 type InputProps = {
   type: string,
   placeholder: string,
   onChange: Function,
   value: string,
-  className: string,
-  disabled: boolean
+  disabled: boolean,
+  fullWidth: boolean
 };
 
 export const Input = (props: InputProps) => (
-  <input
+  <InputInnerWrapper
     type={props.type}
-    className={`input ${props.className || ''}`}
+    fullWidth={props.fullWidth}
     placeholder={props.placeholder}
     value={props.value}
     onChange={props.onChange}

@@ -1,8 +1,13 @@
 // @flow
 import React from 'react';
 import { Button } from '../primitives';
-import './Sorting.scss';
 import { getTotalMoviesLength } from '../../store/selectors/moviesSelectors';
+import {
+  SortingWrapper,
+  SortingContainer,
+  SortingDescription,
+  SortingMatchMovies
+} from './Sorting.styles';
 
 type SortingProps = {
   fetchMovies: Function,
@@ -33,39 +38,41 @@ export class Sorting extends React.PureComponent<SortingProps> {
     const { filter: { searchBy } } = this.props;
 
     return (
-      <div className='sorting'>
-        <div className='sorting__container'>
+      <SortingWrapper>
+        <SortingContainer>
           <span className='sorting__match-movies'>Filtered by {searchBy}</span>
-        </div>
-      </div>
+        </SortingContainer>
+      </SortingWrapper>
     );
   }
 
   renderMainPageUI() {
     const { list, filter: { sortBy } } = this.props;
     const sortByDate = sortBy === 'release_date';
-    const dateClassName = sortByDate ? 'button--choosen' : '';
-    const ratingClassName = !sortByDate ? 'button--choosen' : '';
 
     return (
-      <div className='sorting'>
-        <div className='sorting__container'>
-          <span className='sorting__match-movies'>{getTotalMoviesLength(list)} movies found</span>
+      <SortingWrapper>
+        <SortingContainer>
+          <SortingMatchMovies>
+            {getTotalMoviesLength(list)} movies found
+          </SortingMatchMovies>
           <p>
-            <span className='sorting__sort-description'>Sort by</span>
+            <SortingDescription>Sort by</SortingDescription>
             <Button
-              className={`${dateClassName} button--left-border`}
+              leftBorder
+              choosen={sortByDate}
               text='Release date'
               onClick={this.handleSortBy}
             />
             <Button
-              className={`${ratingClassName} button--right-border`}
+              rightBorder
+              choosen={!sortByDate}
               text='Rating'
               onClick={this.handleSortBy}
             />
           </p>
-        </div>
-      </div>
+        </SortingContainer>
+      </SortingWrapper>
     );
   }
 

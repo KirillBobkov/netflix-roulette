@@ -1,10 +1,10 @@
 import React from 'react';
-import './NotFound.scss';
+import { NotFound, NotFoundMessage } from './NotFound.styles';
 
 export default () => (
-  <div className='not-found'>
-    <span className='not-found__message'>
+  <NotFound>
+    <NotFoundMessage>
       Page not found!
-    </span>
-  </div>
+    </NotFoundMessage>
+  </NotFound>
 );

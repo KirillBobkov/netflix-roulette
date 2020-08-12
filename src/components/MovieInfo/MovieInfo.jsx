@@ -1,8 +1,19 @@
 /* eslint-disable react/jsx-indent */
 // @flow
 import React from 'react';
-import './MovieInfo.scss';
 import { getYear, getImage } from '../../utils';
+import {
+  HeaderMovieWrapper,
+  HeaderMoviePoster,
+  HeaderMovieTitle,
+  HeaderMovieNomination,
+  HeaderMovieInfo,
+  HeaderMovieRating,
+  HeaderMovieYear,
+  HeaderMovieLength,
+  HeaderMovieDetails,
+  HeaderMovieDescription
+} from './MovieInfo.styles';
 
 type MovieInfoProps = {
   movie: {
@@ -44,39 +55,39 @@ export class MovieInfo extends React.PureComponent<MovieInfoProps, MovieInfoStat
     const year = getYear(movie.release_date);
 
     return (
-      <div className='header__movie'>
-        <p className='header__movie-poster'>
+      <HeaderMovieWrapper>
+        <HeaderMoviePoster>
           <img
             src={this.state.source}
             width='260'
             height='365'
             alt={movie.title}
           />
-        </p>
-        <div className='header__movie-info'>
-          <h1 className='header__movie-title'>{movie.title}
-            <span className='header__movie-rating'>{movie.vote_average}</span>
-          </h1>
+        </HeaderMoviePoster>
+        <HeaderMovieInfo>
+          <HeaderMovieTitle>{movie.title}
+            <HeaderMovieRating>{movie.vote_average}</HeaderMovieRating>
+          </HeaderMovieTitle>
 
-          <p className='header__movie-nomination'>{movie.tagline}</p>
-          <p className='header__movie-details'>
+          <HeaderMovieNomination>{movie.tagline}</HeaderMovieNomination>
+          <HeaderMovieDetails>
             {year
               ? <span>
-                <span className='header__movie-year'>{year}&nbsp;</span>year &emsp;
+                <HeaderMovieYear>{year}&nbsp;</HeaderMovieYear>year &emsp;
                 </span>
               : null}
 
             {movie.runtime
               ? <span>
-                <span className='header__movie-length'>{movie.runtime}&nbsp;</span>min
+                <HeaderMovieLength>{movie.runtime}&nbsp;</HeaderMovieLength>min
                 </span>
               : null}
-          </p>
-          <p className='header__movie-description'>
+          </HeaderMovieDetails>
+          <HeaderMovieDescription>
             {movie.overview}
-          </p>
-        </div>
-      </div>
+          </HeaderMovieDescription>
+        </HeaderMovieInfo>
+      </HeaderMovieWrapper>
     );
   }
 }

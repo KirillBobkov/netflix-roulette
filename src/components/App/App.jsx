@@ -1,6 +1,5 @@
 //@flow
 import * as React from 'react';
-import './App.scss';
 import { Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import { Provider } from 'react-redux';
@@ -8,6 +7,7 @@ import Loadable from 'react-loadable';
 import { Spinner } from '../Spinner';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { MainPage, MoviePage, SearchPage } from '../../pages';
+import '../../assets/styles/globalStyles.scss';
 
 type AppProps = {
   Router: any,

@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import './Spinner.scss';
+import { SpinnerWrapper, SpinnerLoader } from './Spinner.styles';
 
 export const Spinner = ({ isOpen }) => (
   isOpen && (
-    <div className='spinner'>
-      <div className='spinner__loader' />
-    </div>
+    <SpinnerWrapper>
+      <SpinnerLoader />
+    </SpinnerWrapper>
   )
 );
 

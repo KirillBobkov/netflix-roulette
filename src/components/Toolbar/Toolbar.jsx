@@ -1,12 +1,12 @@
 import React from 'react';
 import { SearchArea } from '../SearchArea';
 import { SearchParameters } from '../SearchParameters';
-import './Toolbar.scss';
+import { ToolbarTitle } from './Toolbar.styles';
 
 export const Toolbar = () => (
-  <div className='toolbar'>
-    <h2 className='toolbar__title'>Find your movie</h2>
+  <>
+    <ToolbarTitle>Find your movie</ToolbarTitle>
     <SearchArea />
     <SearchParameters />
-  </div>
+  </>
 );

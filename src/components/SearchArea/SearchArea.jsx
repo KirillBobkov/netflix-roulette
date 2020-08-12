@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Input, Button } from '../primitives';
+import { SearchAreaForm } from './SearchArea.styles';
 
 type SearchAreaProps = {
   fetchMovies: Function,
@@ -58,17 +59,11 @@ export class SearchArea extends React.PureComponent<SearchAreaProps, SearchAreaS
   render() {
     const { inputSearchValue } = this.state;
     const { isSearchPage } = this.props;
-    const inputClassnames = isSearchPage
-      ? 'toolbar__input toolbar__input--full-width'
-      : 'toolbar__input';
 
     return (
-      <form
-        className='toolbar__search'
-        onSubmit={this.handleSearchSubmit}
-      >
+      <SearchAreaForm onSubmit={this.handleSearchSubmit}>
         <Input
-          className={inputClassnames}
+          fullWidth={isSearchPage}
           placeholder='Search'
           onChange={this.handleInputChange}
           value={inputSearchValue}
@@ -77,15 +72,15 @@ export class SearchArea extends React.PureComponent<SearchAreaProps, SearchAreaS
         {isSearchPage
           ? <Button
             type='submit'
-            className='button--search-icon'
+            searchIcon
             text=''
             />
           : <Button
             type='submit'
-            className='button--search'
+            search
             text='Search'
             />}
-      </form>
+      </SearchAreaForm>
     );
   }
 }

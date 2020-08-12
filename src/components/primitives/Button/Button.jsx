@@ -1,24 +1,35 @@
 // @flow
 import React from 'react';
-import './Button.scss';
+import { ButtonInnerWrapper } from './Button.styles';
 
 type ButtonProps = {
   type: string,
-  className: string,
   text: string,
   id: string,
-  onClick: Function
+  onClick: Function,
+  reset: any,
+  search: any,
+  rightBorder: any,
+  searchIcon: any,
+  choosen: any,
+  leftBorder: any
 };
 
-export const Button = (props : ButtonProps) =>  (
-  <button
+export const Button = (props : ButtonProps) => (
+  <ButtonInnerWrapper
+    choosen={props.choosen}
+    reset={props.reset}
+    leftBorder={props.leftBorder}
+    rightBorder={props.rightBorder}
+    search={props.search}
+    searchIcon={props.searchIcon}
     type={`${props.type || 'button'}`}
     onClick={props.onClick}
-    className={'button ' + `${props.className || ''}`}
     id={`${props.id || ''}`}
   >
     {props.text}
-  </button>
+  </ButtonInnerWrapper>
 );
+
 
 

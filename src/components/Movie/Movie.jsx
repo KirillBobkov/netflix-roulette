@@ -1,8 +1,15 @@
 // @flow
 import React from 'react';
-import './Movie.scss';
 import { Link } from 'react-router-dom';
 import { getYear, getImage } from '../../utils';
+import {
+  MovieItem,
+  MoviePoster,
+  MovieTitle,
+  MovieDescription,
+  MovieGenre,
+  MovieYear,
+} from './Movie.styles';
 
 type MovieProps = {
  movie: {
@@ -31,32 +38,32 @@ export class Movie extends React.Component<MovieProps, MovieState> {
     const { movie } = this.props;
 
     return (
-      <li className='movies__item'>
+      <MovieItem>
         <Link to={`/film/${movie.id}`}>
-          <p className='movies__poster'>
+          <MoviePoster>
             <img
               src={this.state.source}
               width='260'
               height='365'
               alt={movie.title}
             />
-          </p>
+          </MoviePoster>
 
-          <p className='movies__description'>
-            <span className='movies__title'>
+          <MovieDescription>
+            <MovieTitle>
               {movie.title}
-            </span>
+            </MovieTitle>
 
-            <span className='movies__gengre'>
+            <MovieGenre>
               {movie.genres.length && movie.genres.join(', ')}
-            </span>
+            </MovieGenre>
 
-            <span className='movies__year'>
+            <MovieYear>
               {getYear(movie.release_date)}
-            </span>
-          </p>
+            </MovieYear>
+          </MovieDescription>
         </Link>
-      </li>
+      </MovieItem>
     );
   }
 }

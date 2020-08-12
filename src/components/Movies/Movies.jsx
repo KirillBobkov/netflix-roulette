@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Movie } from '../Movie';
-import './Movies.scss';
+import { MoviesError, MoviesWrapper } from './Movies.styles';
 
 type MoviesItemsProps = {
   list: Array<Object>
@@ -20,12 +20,12 @@ export const MoviesList = ({ list } : MoviesListProps) => {
   const hasMovies = Boolean(list && Array.isArray(list) && list.length);
 
   return (
-    <div className='movies'>
-      <ul className='movies__container'>
+    <>
+      <MoviesWrapper>
         {hasMovies
           ? <MoviesItems list={list} />
-          : <li className='movies__error'>No movies found!</li>}
-      </ul>
-    </div>
+          : <MoviesError>No movies found!</MoviesError>}
+      </MoviesWrapper>
+    </>
   );
 };
