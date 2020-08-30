@@ -21,23 +21,26 @@ type SortingProps = {
   }
 };
 
-
-export class Sorting extends React.PureComponent<SortingProps> {
-  handleSortBy = () => {
-    const { fetchMovies, filter: { searchBy, search, sortBy } } = this.props;
+export const Sorting = ({ 
+  list, 
+  isMoviePage, 
+  fetchMovies, 
+  filter: { searchBy, search, sortBy }
+}: SortingProps) => {
+  const handleSortBy = () => {
+    console.log(search);
+    if (search) {
     const sortByParam = sortBy === 'release_date' ? 'vote_average' : 'release_date';
-
     fetchMovies({
-      sortBy: sortByParam,
-      sortOrder: 'asc',
-      searchBy,
-      search,
-    });
-  }
+        sortBy: sortByParam,
+        sortOrder: 'asc',
+        searchBy,
+        search,
+      });
+    }
+  };
 
-  renderMoviePageUI() {
-    const { filter: { searchBy } } = this.props;
-
+  if (isMoviePage) {
     return (
       <SortingWrapper>
         <SortingContainer>
@@ -47,41 +50,30 @@ export class Sorting extends React.PureComponent<SortingProps> {
     );
   }
 
-  renderMainPageUI() {
-    const { list, filter: { sortBy } } = this.props;
-    const sortByDate = sortBy === 'release_date';
+  const sortByDate = sortBy === 'release_date';
 
-    return (
-      <SortingWrapper>
-        <SortingContainer>
-          <SortingMatchMovies>
-            {getTotalMoviesLength(list)} movies found
-          </SortingMatchMovies>
-          <p>
-            <SortingDescription>Sort by</SortingDescription>
-            <Button
-              leftBorder
-              choosen={sortByDate}
-              text='Release date'
-              onClick={this.handleSortBy}
-            />
-            <Button
-              rightBorder
-              choosen={!sortByDate}
-              text='Rating'
-              onClick={this.handleSortBy}
-            />
-          </p>
-        </SortingContainer>
-      </SortingWrapper>
-    );
-  }
-
-  render() {
-    const { isMoviePage } = this.props;
-
-    return isMoviePage
-      ? this.renderMoviePageUI()
-      : this.renderMainPageUI();
-  }
-}
+  return (
+    <SortingWrapper>
+      <SortingContainer>
+        <SortingMatchMovies>
+          {getTotalMoviesLength(list)} movies found
+        </SortingMatchMovies>
+        <p>
+          <SortingDescription>Sort by</SortingDescription>
+          <Button
+            leftBorder
+            choosen={sortByDate}
+            text='Release date'
+            onClick={handleSortBy}
+          />
+          <Button
+            rightBorder
+            choosen={!sortByDate}
+            text='Rating'
+            onClick={handleSortBy}
+          />
+        </p>
+      </SortingContainer>
+    </SortingWrapper>
+  );
+};

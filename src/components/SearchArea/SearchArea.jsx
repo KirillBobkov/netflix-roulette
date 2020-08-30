@@ -11,76 +11,68 @@ type SearchAreaProps = {
   history: Object
 }
 
-type SearchAreaState = {
-  inputSearchValue: string
-}
+export const SearchArea = ({
+  fetchMovies,
+  filter,
+  match,
+  isSearchPage,
+  history,
+}: SearchAreaProps) => {
+  const [inputValue, setInputValue] = React.useState('');
 
-export class SearchArea extends React.PureComponent<SearchAreaProps, SearchAreaState> {
-  constructor(props : SearchAreaProps) {
-    super(props);
-    this.state = { inputSearchValue: '' };
-
-    if (this.props.isSearchPage) {
-      this.state = { inputSearchValue: this.props.match.params.query };
-
-      this.props.fetchMovies({
-        sortBy: this.props.filter.sortBy,
-        sortOrder: 'asc',
-        searchBy: this.props.filter.searchBy,
-        search: this.props.match.params.query,
-      });
-    }
-  }
-
-  handleSearchSubmit = (event: SyntheticEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    const { inputSearchValue } = this.state;
-    const { fetchMovies, filter: { searchBy, sortBy }, history } = this.props;
-    const uri = encodeURI(inputSearchValue);
-
-    history.push(`/search/${uri}`);
-
-    if (inputSearchValue) {
+  React.useEffect(() => {
+    if (isSearchPage) {
+      setInputValue(match.params.query);
       fetchMovies({
-        sortBy,
+        sortBy: filter.sortBy,
         sortOrder: 'asc',
-        searchBy,
-        search: inputSearchValue,
+        searchBy: filter.searchBy,
+        search: match.params.query,
       });
     }
-  }
+  }, []);
 
-  handleInputChange = (event: SyntheticEvent<HTMLButtonElement>) => {
+  const handleSearchSubmit = (event: SyntheticEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const uri = encodeURI(inputValue);
+
+    if (inputValue) {
+      history.push(`/search/${uri}`);
+
+      fetchMovies({
+        sortBy: filter.sortBy,
+        sortOrder: 'asc',
+        searchBy: filter.searchBy,
+        search: inputValue,
+      });
+    }
+  };
+
+  const handleInputChange = (event: SyntheticEvent<HTMLButtonElement>) => {
     const { value } = event.currentTarget;
+    setInputValue(value);
+  };
 
-    this.setState({ inputSearchValue: value });
-  }
+  return (
+    <SearchAreaForm onSubmit={handleSearchSubmit}>
+      <Input
+        fullWidth={isSearchPage}
+        placeholder='Search'
+        onChange={handleInputChange}
+        value={inputValue}
+      />
 
-  render() {
-    const { inputSearchValue } = this.state;
-    const { isSearchPage } = this.props;
-
-    return (
-      <SearchAreaForm onSubmit={this.handleSearchSubmit}>
-        <Input
-          fullWidth={isSearchPage}
-          placeholder='Search'
-          onChange={this.handleInputChange}
-          value={inputSearchValue}
-        />
-
-        {isSearchPage
-          ? <Button
-            type='submit'
-            searchIcon
-            text=''
-            />
-          : <Button
-            type='submit'
-            search
-            text='Search'
-            />}
-      </SearchAreaForm>
-    );
-  }
-}
+      {isSearchPage
+        ? <Button
+          type='submit'
+          searchIcon
+          text=''
+          />
+        : <Button
+          type='submit'
+          search
+          text='Search'
+          />}
+    </SearchAreaForm>
+  );
+};

@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-indent */
 // @flow
+
 import React from 'react';
 import { getYear, getImage } from '../../utils';
 import {
@@ -27,67 +28,51 @@ type MovieInfoProps = {
   }
 }
 
-type MovieInfoState = {
-  source: string
-}
+export const MovieInfo = ({ movie }: MovieInfoProps) => {
+  const [movieUrl, setMovieUrl] = React.useState('https://via.placeholder.com/260x365/000000?text=Image+has+not+found');
 
-export class MovieInfo extends React.PureComponent<MovieInfoProps, MovieInfoState> {
-  state = { source: 'https://via.placeholder.com/260x365/000000?text=Image+has+not+found' }
-
-  componentDidMount() {
+  React.useEffect(() => {
     window.scrollTo(0, 0);
-    const { movie: { poster_path } } = this.props;
-    getImage(poster_path)
-      .then((url) => this.setState({ source: url }))
-      .catch(() => this.setState({ source: 'https://via.placeholder.com/260x365/000000?text=Image+has+not+found' }));
-  }
+    getImage(movie.poster_path)
+      .then((url) => setMovieUrl(url))
+      .catch(() => setMovieUrl('https://via.placeholder.com/260x365/000000?text=Image+has+not+found'));
+  }, []);
 
-  componentDidUpdate() {
-    window.scrollTo(0, 0);
-    const { movie: { poster_path } } = this.props;
-    getImage(poster_path)
-      .then((url) => this.setState({ source: url }))
-      .catch(() => this.setState({ source: 'https://via.placeholder.com/260x365/000000?text=Image+has+not+found' }));
-  }
+  const year = getYear(movie.release_date);
 
-  render() {
-    const { movie } = this.props;
-    const year = getYear(movie.release_date);
+  return (
+    <HeaderMovieWrapper>
+      <HeaderMoviePoster>
+        <img
+          src={movieUrl}
+          width='260'
+          height='365'
+          alt={movie.title}
+        />
+      </HeaderMoviePoster>
+      <HeaderMovieInfo>
+        <HeaderMovieTitle>{movie.title}
+          <HeaderMovieRating>{movie.vote_average}</HeaderMovieRating>
+        </HeaderMovieTitle>
 
-    return (
-      <HeaderMovieWrapper>
-        <HeaderMoviePoster>
-          <img
-            src={this.state.source}
-            width='260'
-            height='365'
-            alt={movie.title}
-          />
-        </HeaderMoviePoster>
-        <HeaderMovieInfo>
-          <HeaderMovieTitle>{movie.title}
-            <HeaderMovieRating>{movie.vote_average}</HeaderMovieRating>
-          </HeaderMovieTitle>
+        <HeaderMovieNomination>{movie.tagline}</HeaderMovieNomination>
+        <HeaderMovieDetails>
+          {year
+            ? <span>
+              <HeaderMovieYear>{year}&nbsp;</HeaderMovieYear>year &emsp;
+              </span>
+            : null}
 
-          <HeaderMovieNomination>{movie.tagline}</HeaderMovieNomination>
-          <HeaderMovieDetails>
-            {year
-              ? <span>
-                <HeaderMovieYear>{year}&nbsp;</HeaderMovieYear>year &emsp;
-                </span>
-              : null}
-
-            {movie.runtime
-              ? <span>
-                <HeaderMovieLength>{movie.runtime}&nbsp;</HeaderMovieLength>min
-                </span>
-              : null}
-          </HeaderMovieDetails>
-          <HeaderMovieDescription>
-            {movie.overview}
-          </HeaderMovieDescription>
-        </HeaderMovieInfo>
-      </HeaderMovieWrapper>
-    );
-  }
-}
+          {movie.runtime
+            ? <span>
+              <HeaderMovieLength>{movie.runtime}&nbsp;</HeaderMovieLength>min
+              </span>
+            : null}
+        </HeaderMovieDetails>
+        <HeaderMovieDescription>
+          {movie.overview}
+        </HeaderMovieDescription>
+      </HeaderMovieInfo>
+    </HeaderMovieWrapper>
+  );
+};
