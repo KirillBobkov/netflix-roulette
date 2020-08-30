@@ -1,29 +1,44 @@
 import React from 'react';
+import * as movieActions from './movieActions';
+import { movies } from '../../mocks/testData';
 
-import {
-  FILL_STORE,
-  SORT_BY_DATE,
-  SORT_BY_RATING,
-  SEARCH_MOVIES_BY_TITLE,
-  SEARCH_MOVIES_BY_GENRE,
-  RESET_ALL_PARAMETERS,
-} from './movieActions';
+describe('movie actions', () => {
+  it('should create an action to fetch movies', () => {
+    const expectedAction = {
+      type: 'FETCH_MOVIES', 
+      payload: {
+        sortBy: 'release_date',
+        sortOrder: 'asc',
+        searchBy: 'title',
+        search: '',
+      }
+    };
 
-import {
-  setMovies,
-  sortByDate,
-  sortByRating,
-  searchMoviesByTitle,
-  searchMoviesByGenre,
-  resetAllParameters,
-} from '../store';
+    const value = {
+      sortBy: 'release_date',
+      sortOrder: 'asc',
+      searchBy: 'title',
+      search: '',
+    };
 
-import { getMovies } from '../utils';
-import { movies } from '../utils/testData';
+    expect(movieActions.fetchMovies(value)).toEqual(expectedAction);
+  });
 
-describe('actions', () => {
-  it('should create an action to fill the store', () => {
-    expect.assertions(1);
-    expect(setMovies(movies).payload.list.length).toBeGreaterThan(5);
+  it('should create an action to set movies', () => {
+    const expectedAction = {
+      type: 'SET_MOVIES', 
+      payload: movies.list
+    };
+
+    expect(movieActions.setMovies(movies.list)).toEqual(expectedAction);
+  });
+
+  it('should create an action to clear movies', () => {
+    const expectedAction = {
+      type: 'CLEAR_MOVIES', 
+      payload: {}
+    };
+
+    expect(movieActions.clearMovies()).toEqual(expectedAction);
   });
 });

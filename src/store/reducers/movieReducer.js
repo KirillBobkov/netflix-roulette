@@ -8,8 +8,7 @@ export const movieReducer = (state = initialState, action) => {
       return state;
 
     case SET_MOVIES: {
-      const newState = [...action.payload];
-      return newState;
+      return [...action.payload];
     }
 
     case CLEAR_MOVIES: {

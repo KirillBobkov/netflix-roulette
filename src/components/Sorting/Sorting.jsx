@@ -28,7 +28,6 @@ export const Sorting = ({
   filter: { searchBy, search, sortBy }
 }: SortingProps) => {
   const handleSortBy = () => {
-    console.log(search);
     if (search) {
     const sortByParam = sortBy === 'release_date' ? 'vote_average' : 'release_date';
     fetchMovies({

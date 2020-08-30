@@ -3,7 +3,7 @@ import { setLoading } from './spinnerActions';
 import { setNewFilter } from './filterActions';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-export const SET_MOVIES = 'SET_MOVIE';
+export const SET_MOVIES = 'SET_MOVIES';
 export const CLEAR_MOVIES = 'CLEAR_MOVIES';
 export const FETCH_MOVIES = 'FETCH_MOVIES';
 
