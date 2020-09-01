@@ -36,7 +36,7 @@ export const MovieInfo = ({ movie }: MovieInfoProps) => {
     getImage(movie.poster_path)
       .then((url) => setMovieUrl(url))
       .catch(() => setMovieUrl('https://via.placeholder.com/260x365/000000?text=Image+has+not+found'));
-  }, []);
+  });
 
   const year = getYear(movie.release_date);
 

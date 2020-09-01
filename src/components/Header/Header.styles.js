@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import background from '../../assets/images/headerBackground.png';
 
 export const HeaderWrapper = styled.header`
-    background-image: url('../../assets/images/headerBackground.png');
+    background-image: url(${background});
 `;
 
 export const HeaderContainer = styled.div`

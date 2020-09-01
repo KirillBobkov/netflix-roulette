@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import background from '../../assets/images/headerBackground.png';
 
 export const NotFound = styled.div`
     position: absolute;
@@ -6,7 +7,7 @@ export const NotFound = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('../../assets/images/headerBackground.png');
+    background-image: url(${background});
     background-size: cover;
     display: flex;
     justify-content: center;

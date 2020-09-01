@@ -6,7 +6,7 @@ module.exports = {
     '.+\\.(css|styl|less|sass|scss)$': 'jest-css-modules-transform',
   },
   collectCoverageFrom: [
-    '**/src/**/*.(js|jsx|ts)',
+    '**/src/**/*.test.(js|jsx|ts)',
     '!**/src/**/*index.(js|jsx|ts)',
     '!**/node_modules/**',
     '!**/vendor/**',
