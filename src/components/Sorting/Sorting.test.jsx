@@ -1,14 +1,22 @@
 import React from 'react';
-import Sorting from './Sorting';
-import { getMovies } from '../../utils';
+import Sorting from './SortingContainer';
 import { Provider } from 'react-redux';
-import { movies } from '../../utils/testData';
+import { movies } from '../../mocks/testData';
 import configureStore from 'redux-mock-store';
-import { shallow, mount } from 'enzyme';
-
+import { mount } from 'enzyme';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('Sorting component', () => {
-    const initialState = movies;
+    const initialState = {
+        filter: {
+            sortBy: 'release_date',
+            sortOrder: 'asc',
+            searchBy: 'title',
+            search: '',
+        },
+        list: movies
+    };
+
     const mockStore = configureStore();
     const mountWithStore = component => mount(<Provider store={store}> {component} </Provider>);
     let store, 
@@ -16,20 +24,11 @@ describe('Sorting component', () => {
     
     beforeAll(()=>{
       store = mockStore(initialState);
-      wrapperSorting = mountWithStore(<Sorting />);
+      wrapperSorting = mountWithStore(<Router><Sorting /></Router>);
     });
     
     it('should be render correctly', () => {
         expect(wrapperSorting).toMatchSnapshot();
-    });
-
-    it('should render title of Sorting', () => {
-        expect(wrapperSorting.exists('.button')).toEqual(true);
-    }); 
-
-    it('should render sorting description', () => {
-        const sortDescription = wrapperSorting.find('.sorting__sort-description');
-        expect(sortDescription.text()).toEqual('Sort by');
     });
 });    
 

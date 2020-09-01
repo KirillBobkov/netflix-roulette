@@ -1,20 +1,31 @@
 import React from 'react';
-import { SearchParameters } from './SearchParameters';
-import { shallow, mount } from 'enzyme';
+import SearchParameters from './SearchParametersContainer';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 
 describe('SearchParameters component', () => {
-    let componentShallowed, componentMounted;
+    const initialState = {
+        filter: {
+            sortBy: 'release_date',
+            sortOrder: 'asc',
+            searchBy: 'title',
+            search: '',
+        }
+    };
+      
+    const mockStore = configureStore();
+    const mountWithStore = component => mount(<Provider store={store}> {component} </Provider>);
+    let store, 
+        wrapperSearchParameters;
 
-    beforeAll(() => {
-        componentShallowed = shallow(<SearchParameters />);
-        componentMounted = mount(<SearchParameters />);
-    });
+    beforeAll(()=>{
+        store = mockStore(initialState);
+        wrapperSearchParameters = mountWithStore(<SearchParameters />);
+      });
+
 
     it('should be render correctly', () => {
-        expect(componentShallowed).toMatchSnapshot();
-    });
-
-    it('should check that title of SearchParameters is rendered', () => {
-        expect(componentMounted.exists('.button')).toEqual(true);
+        expect(wrapperSearchParameters).toMatchSnapshot();
     });
 });

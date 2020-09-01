@@ -1,10 +1,10 @@
 import React from 'react';
-import { MoviesItems, MoviesList, MoviesDataWrapper, MoviesList } from './Movies';
+import { MoviesItems, MoviesList } from './Movies';
 import { mount } from 'enzyme';
-import { getMovies } from '../../utils';
 import { Provider } from 'react-redux';
-import { movies } from '../../utils/testData';
+import { movies } from '../../mocks/testData';
 import configureStore from 'redux-mock-store';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('Movies component', () => {
     const initialState = movies;
@@ -12,19 +12,13 @@ describe('Movies component', () => {
     const mountWithStore = component => mount(<Provider store={store}> {component} </Provider>);
     let store, 
         wrapperMoviesList, 
-        wrapperMoviesDataWrapper, 
         wrapperMoviesItems;
     
     beforeAll(()=>{
       store = mockStore(initialState);
-      wrapperMoviesList = mountWithStore(<MoviesList />);
-      wrapperMoviesDataWrapper = mountWithStore(<MoviesDataWrapper render={MoviesList} />);
-      wrapperMoviesItems =  mountWithStore(<MoviesItems list={movies.list} />);
+      wrapperMoviesList = mountWithStore(<Router><MoviesList list={movies.list} /></Router>);
+      wrapperMoviesItems =  mountWithStore(<Router><MoviesItems list={movies.list} /></Router>);
     });
-    
-    it('should be render MoviesDataWrapper correctly', () => {
-        expect(wrapperMoviesDataWrapper).toMatchSnapshot();
-    }); 
 
     it('should be render MoviesList correctly', () => {
         expect(wrapperMoviesList).toMatchSnapshot();

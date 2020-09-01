@@ -1,13 +1,21 @@
 import React from 'react';
-import { getMovies } from '../../utils';
 import { Provider } from 'react-redux';
-import { movies } from '../../utils/testData';
+import { movies } from '../../mocks/testData';
 import configureStore from 'redux-mock-store';
 import { shallow, mount } from 'enzyme';
-import Toolbar from './Toolbar';
+import { Toolbar } from './Toolbar';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('Toolbar component', () => {
-    const initialState = movies;
+    const initialState = {
+        filter: {
+            sortBy: 'release_date',
+            sortOrder: 'asc',
+            searchBy: 'title',
+            search: '',
+        }
+    };
+
     const mockStore = configureStore();
     
     let store, 
@@ -17,16 +25,11 @@ describe('Toolbar component', () => {
     beforeAll(()=>{
       store = mockStore(initialState);
       mountWithStore = component => mount(<Provider store={store}> {component} </Provider>);
-      wrapperToolbar = mountWithStore(<Toolbar />);
+      wrapperToolbar = mountWithStore(<Router><Toolbar /></Router>);
     });
     
     it('should be render correctly', () => {
         expect(wrapperToolbar).toMatchSnapshot();
-    });
-
-    it('should render Toolbar title', () => {
-        const sortDescription = wrapperToolbar.find('.toolbar__title');
-        expect(sortDescription.text()).toEqual('Find your movie');
     });
 });    
 

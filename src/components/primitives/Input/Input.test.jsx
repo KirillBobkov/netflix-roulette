@@ -23,10 +23,6 @@ describe('Input component', () => {
         expect(componentShallowed).toMatchSnapshot();
     });
 
-    it('should check that rendered html is correct', () => {
-        expect(componentMounted.html()).toBe('<input class=\"input toolbar__input\" placeholder=\"Search\" value=\"Kill Bill\">');
-    });
-
     it('should be call onClick', () => {
         componentMounted.simulate('change');
         expect(handleChange).toHaveBeenCalled();

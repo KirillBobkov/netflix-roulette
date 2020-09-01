@@ -1,21 +1,31 @@
 import React from 'react';
-import { SearchArea } from './SearchArea';
+import SearchArea from './SearchAreaContainer';
 import { shallow, mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('SearchArea component', () => {
-    let componentShallowed, componentMounted;
+    const initialState = {
+        filter: {
+            sortBy: 'release_date',
+            sortOrder: 'asc',
+            searchBy: 'title',
+            search: '',
+        }
+    };
 
-    beforeAll(() => {
-        componentShallowed = shallow(<SearchArea />);
-        componentMounted = mount(<SearchArea />);
+    const mockStore = configureStore();
+    const mountWithStore = component => mount(<Provider store={store}> {component} </Provider>);
+    let store, 
+    wrapperSearchArea;
+    
+    beforeAll(()=>{
+      store = mockStore(initialState);
+      wrapperSearchArea = mountWithStore(<Router><SearchArea /></Router>);
     });
 
     it('should be render correctly', () => {
-        expect(componentShallowed).toMatchSnapshot();
-    });
-
-    it('should check that  SearchArea contains input and button', () => {
-        expect(componentMounted.exists('.input')).toEqual(true);
-        expect(componentMounted.exists('.button')).toEqual(true);
+        expect(wrapperSearchArea).toMatchSnapshot();
     });
 });

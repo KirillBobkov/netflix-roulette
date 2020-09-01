@@ -25,29 +25,10 @@ describe('Movie component', () => {
             ],
             runtime: 129
          };    
-         componentMovie = mount(<Movie key={movie.id} movie={movie} />);
+         componentMovie = shallow(<Movie key={movie.id} movie={movie} />);
     });
 
     it('should be render correctly', () => {
         expect(componentMovie).toMatchSnapshot();
-    });
-
-    it('should be render correctly with childs', () => {
-        expect(componentMovie).toMatchSnapshot();
-    });
-
-    it('should render a year of movie', () => {
-        const year = componentMovie.find('.movies__year');
-        expect(year.text()).toEqual('2017');
-    });
-
-    it('should render a gengre of movie', () => {
-        const genre = componentMovie.find('.movies__gengre');
-        expect(genre.text()).toEqual('Family, Fantasy, Romance');
-    });
-
-    it('should render a title of movie', () => {
-        const title = componentMovie.find('.movies__title');
-        expect(title.text()).toEqual('Beauty and the Beast');
     });
 });

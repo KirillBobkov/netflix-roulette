@@ -1,22 +1,16 @@
 import React from 'react';
 import { Header } from './Header';
 import { shallow, mount } from 'enzyme';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('Header component', () => {
-    let componentShallowed,
-        componentMounted;
+    let componentMounted;
 
     beforeAll(() => {
-        componentShallowed = shallow(<Header /> );
-        componentMounted = mount(<Header /> );
+        componentMounted = mount(<Router><Header /></Router>);
     });
 
     it('should be render correctly', () => {
-        expect(componentShallowed).toMatchSnapshot();
-    });
-
-    it('should render title of Header', () => {
-        const footer = componentMounted.find('.header__title');
-        expect(footer.text()).toEqual('netflixroulette');
+        expect(componentMounted).toMatchSnapshot();
     });
 });

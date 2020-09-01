@@ -8,14 +8,9 @@ describe('Main component', () => {
     
     beforeAll(() => {
         componentShallowed = shallow(<Main /> );
-        componentMounted = mount(<Main /> );
     });
 
     it('should be render correctly', () => {
         expect(componentShallowed).toMatchSnapshot();
-    });
-
-    it('should check that Component contains class ".main"', () => {
-        expect(componentMounted.exists('.main')).toEqual(true);
     });
 });

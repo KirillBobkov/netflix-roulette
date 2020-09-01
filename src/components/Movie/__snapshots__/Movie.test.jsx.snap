@@ -1,5 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Movie component should be render correctly 1`] = `ReactWrapper {}`;
-
-exports[`Movie component should be render correctly with childs 1`] = `ReactWrapper {}`;
+exports[`Movie component should be render correctly 1`] = `ShallowWrapper {}`;
