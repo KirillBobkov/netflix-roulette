@@ -30,12 +30,11 @@ const App = ({
     <Router location={location} context={context}>
       <ErrorBoundary>
         <Switch>
-          <Route exact path='/movies' component={MainPage} />
+          <Route exact path='/' component={MainPage} />
           <Route path='/film/:id' component={MoviePage} />
           <Route path='/search/:query' component={SearchPage} />
-          <Route component={NotFoundLoadable} />
+          <Route path='*' component={NotFoundLoadable} />
         </Switch>
-
         <Spinner />
       </ErrorBoundary>
     </Router>

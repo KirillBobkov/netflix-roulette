@@ -23,7 +23,7 @@ export const Header = (props : HeaderProps) => {
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <Link to='/movies'>
+        <Link to='/'>
           <HeaderTitle onClick={handleClearMovies}>
             <HeaderTitleContent>netflix</HeaderTitleContent>roulette
           </HeaderTitle>
