@@ -11,7 +11,7 @@ To start project:
 To build project: 
 1)  open terminal and type "npm run build"
 
-<table>
+<table width="100" >
   <tr>
     <th>Company</th>
     <th>Contact</th>
