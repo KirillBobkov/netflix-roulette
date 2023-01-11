@@ -11,7 +11,7 @@ To start project:
 To build project: 
 1)  open terminal and type "npm run build"
 
-<table width="100" >
+<table>
   <tr>
     <th>Company</th>
     <th>Contact</th>
@@ -28,3 +28,14 @@ To build project:
     <td style="color: blue;">Mexico</td>
   </tr>
 </table>
+
+ <details>
+    <summary><code>Mexico</code></summary>
+    <table>
+      <tr>
+        <td style="color: red;">Centro comercial Moctezuma</td>
+        <td>Francisco Chang</td>
+        <td><code>Mexico</code></td>
+        </tr>
+    </table>
+</details>
