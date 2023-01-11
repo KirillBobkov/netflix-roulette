@@ -13,7 +13,7 @@ To build project:
 
 <table>
   <tr>
-    <th>Company</th>
+    <th align="center">Company</th>
     <th>Contact</th>
     <th>Country</th>
   </tr>
